@@ -17,13 +17,6 @@ O sistema consiste em uma plataforma de food delivery desenvolvida em PHP utiliz
 - Gerenciamento do Restaurante: O restaurante pode cadastrar e gerenciar seu menu na plataforma.
 - Painel Administrativo: Os administradores têm acesso a um painel onde podem gerenciar usuários, pedidos, entregadores e receita local.
 
-## Tecnologias Utilizadas
-
-- **PHP**: Linguagem de programação utilizada no desenvolvimento do sistema.
-- **CodeIgniter**: Framework PHP utilizado para estruturar e facilitar o desenvolvimento.
-- **MySQL**: Banco de dados utilizado para armazenar informações sobre usuários, pedidos e menu do restaurante.
-- **HTML/CSS/JavaScript**: Tecnologias front-end utilizadas para desenvolver a interface do usuário.
-
 ## Funcionalidades Adicionais
 
 - Opções de Pagamento: Os clientes podem escolher entre diferentes métodos de pagamento, como cartão de crédito, débito ou dinheiro na entrega.
@@ -31,6 +24,13 @@ O sistema consiste em uma plataforma de food delivery desenvolvida em PHP utiliz
 - Notificações em Tempo Real: Os clientes recebem notificações sobre o status do pedido em tempo real, desde a confirmação até a entrega.
 - Promoções e Descontos: O restaurante pode oferecer promoções e descontos especiais para atrair mais clientes.
 - Relatórios de Desempenho: O painel administrativo fornece relatórios detalhados sobre as vendas, pedidos e clientes.
+
+## Tecnologias Utilizadas
+
+- **PHP**: Linguagem de programação utilizada no desenvolvimento do sistema.
+- **CodeIgniter**: Framework PHP utilizado para estruturar e facilitar o desenvolvimento.
+- **MySQL**: Banco de dados utilizado para armazenar informações sobre usuários, pedidos e menu do restaurante.
+- **HTML/CSS/JavaScript**: Tecnologias front-end utilizadas para desenvolver a interface do usuário.
 
 ## Requisitos do Sistema
 
