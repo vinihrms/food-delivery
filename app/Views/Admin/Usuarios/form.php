@@ -19,7 +19,7 @@
 
     <div class="form-group col-md-3">
         <label for="email">E-mail</label>
-        <input type="email" class="form-control" id="email" placeholder="email" name="email"
+        <input type="email" class="form-control" id="email" placeholder="E-mail" name="email"
             value="<?php echo old('email', esc($usuario->email)); ?>">
     </div>
 

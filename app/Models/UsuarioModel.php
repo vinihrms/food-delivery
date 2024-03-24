@@ -19,7 +19,7 @@ class UsuarioModel extends Model
         'nome'     => 'required|max_length[120]|alpha_numeric_space|min_length[4]',
         'telefone'     => 'required',
         'email'        => 'required|max_length[254]|valid_email|is_unique[usuarios.email]',
-        'cpf'        => 'required|exact_length[14]|is_unique[usuarios.cpf]',
+        'cpf'        => 'required|exact_length[14]|is_unique[usuarios.cpf]|validaCpf',
         'password'     => 'required|max_length[255]|min_length[6]',
         'password_confirmation' => 'required_with[password]|max_length[255]|matches[password]',
     ];
