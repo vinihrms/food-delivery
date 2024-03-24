@@ -1,5 +1,4 @@
 # Sistema de Food Delivery - Trabalho de Conclusão de Curso
-## Em desenvolvimento...
 
 ## Descrição
 
@@ -12,7 +11,7 @@ O sistema consiste em uma plataforma de food delivery desenvolvida em PHP utiliz
 - Registro e Login de Usuários: Os clientes podem se cadastrar e fazer login em suas contas.
 - Navegação de Menus: Os clientes podem visualizar o menu do restaurante cadastrado.
 - Realização de Pedidos: Os clientes podem adicionar itens ao carrinho e realizar pedidos.
-- Customização de pedidos: Os clientes podem personalizar seus pedidos
+- Customização de pedidos: Os clientes podem personalizar seus pedidos.
 - Rastreamento de Pedidos: Os clientes podem acompanhar o status de seus pedidos.
 - Gerenciamento do Restaurante: O restaurante pode cadastrar e gerenciar seu menu na plataforma.
 - Painel Administrativo: Os administradores têm acesso a um painel onde podem gerenciar usuários, pedidos, entregadores e receita local.
@@ -31,6 +30,7 @@ O sistema consiste em uma plataforma de food delivery desenvolvida em PHP utiliz
 - **CodeIgniter**: Framework PHP utilizado para estruturar e facilitar o desenvolvimento.
 - **MySQL**: Banco de dados utilizado para armazenar informações sobre usuários, pedidos e menu do restaurante.
 - **HTML/CSS/JavaScript**: Tecnologias front-end utilizadas para desenvolver a interface do usuário.
+- **Bootstrap**: Utilizado para estilização da interface do usuário.
 
 ## Requisitos do Sistema
 
