@@ -40,7 +40,7 @@ class App extends BaseConfig
      * something else. If you have configured your web server to remove this file
      * from your site URIs, set this variable to an empty string.
      */
-    public string $indexPage = 'index.php';
+    public string $indexPage = '';
 
     /**
      * --------------------------------------------------------------------------
@@ -69,7 +69,7 @@ class App extends BaseConfig
      * strings (like currency markers, numbers, etc), that your program
      * should run under for this request.
      */
-    public string $defaultLocale = 'en';
+    public string $defaultLocale = 'pt-BR';
 
     /**
      * --------------------------------------------------------------------------
