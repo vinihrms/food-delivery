@@ -9,11 +9,16 @@ class UsuarioModel extends Model
     protected $table = 'usuarios';
     protected $returnType = 'App\Entities\Usuario';
     protected $allowedFields = ["nome", "email", "telefone"];
-    protected $useSoftDeletes = true;
+
+    //dates
     protected $useTimestamps = true;
     protected $createdField = 'criado_em';
     protected $updatedField = 'atualizado_em';
+    protected $dateFormat = 'datetime'; //uso com o useSoftDeletes
+    protected $useSoftDeletes = true;
     protected $deletedField = 'deletado_em';
+
+    
 
     protected $validationRules = [
         'nome'     => 'required|max_length[120]|alpha_numeric_space|min_length[4]',
@@ -79,5 +84,11 @@ class UsuarioModel extends Model
             
         }
         return $data;
+    }
+
+    public function desfazerexclusao(int $id){
+        return $this->protect(false)->where('id', $id)
+                                    ->set('deletado_em', null)
+                                    ->update();
     }
 }
