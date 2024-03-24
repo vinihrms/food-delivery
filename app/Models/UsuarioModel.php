@@ -38,8 +38,11 @@ class UsuarioModel extends Model
             'required' => 'O cpf é obrigatório.',
             'is_unique' => 'Desculpe. Este cpf já está cadastrado.',
         ],
-
     ];
+
+    //eventos callback
+    protected $beforeInsert = ['hashPassword'];
+    protected $beforeUpdate = ['hashPassword'];
 
 
     public function procurar($term) {
@@ -56,5 +59,17 @@ class UsuarioModel extends Model
     public function desabilitaValidacaoSenha() {
         unset($this->validationRules['password']);
         unset($this->validationRules['password_confirmation']);
+    }
+
+    protected function hashPassword(array $data) {
+
+        if(isset($data['data']['password'])){
+            $data['data']['password_hash'] = password_hash($data['data']['password'], PASSWORD_DEFAULT);
+
+            unset($data['data']['password']);
+            unset($data['data']['password_confirmation']);
+            
+        }
+        return $data;
     }
 }
