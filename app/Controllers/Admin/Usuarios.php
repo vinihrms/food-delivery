@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\UsuarioModel;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Entities\Usuario;
 
 class Usuarios extends BaseController
 {
@@ -49,6 +50,39 @@ class Usuarios extends BaseController
         };
 
         return $this->response->setJSON($retorno);
+    }
+
+    public function criar() {
+
+        $usuario = new Usuario();
+
+        $data = [
+            'titulo' => "Criando novo usuário",
+            'usuario' => $usuario,
+        ];
+
+        return view('Admin/Usuarios/criar', $data);
+        
+    }
+
+    public function cadastrar(){
+        if($this->request->getMethod() === 'post'){
+            $usuario = new Usuario($this->request->getPost());
+
+
+            if($this->usuarioModel->protect(false)->save($usuario)){
+                return redirect()->to(site_url("admin/usuarios/show/".$this->usuarioModel->getInsertID()))
+                                ->with('sucesso', "O usuário $usuario->nome foi cadastrado com sucesso.");
+            } else {
+                return redirect()->back()->with('errors_model', $this->usuarioModel->errors())
+                                ->with('atencao', 'Por favor, verifique os errors abaixo')
+                                ->withInput();
+            }
+        }
+        else{
+            /* nao é post */
+            return redirect()->back();
+        }
     }
 
     public function show($id = null) {

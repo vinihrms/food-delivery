@@ -32,7 +32,7 @@
         <input type="password" class="form-control" id="password" name="password" placeholder="Senha">
     </div>
     <div class="form-group col-md-3">
-        <label for="password">Confirmação de senha</label>
+        <label for="password_confirmation">Confirmação de senha</label>
         <input type="password" class="form-control" name="password_confirmation" id="password_confirmation"
             placeholder="Confirmação de senha">
     </div>
@@ -63,8 +63,3 @@
     <i class="mdi mdi-check btn-icon-prepend"></i>
     Salvar
 </button>
-<a href="<?php echo site_url("admin/usuarios/show/$usuario->id"); ?>"
-    class="btn btn-light btn-sm btn-icon-tex btn-icon-prepend">
-    <i class="mdi mdi-keyboard-backspace btn-icon-prepend"></i>
-    Voltar
-</a>

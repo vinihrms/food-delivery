@@ -21,7 +21,7 @@ class UsuarioModel extends Model
         'email'        => 'required|max_length[254]|valid_email|is_unique[usuarios.email]',
         'cpf'        => 'required|exact_length[14]|is_unique[usuarios.cpf]',
         'password'     => 'required|max_length[255]|min_length[6]',
-        'confirm_password' => 'required_with[password]|max_length[255]|matches[password]',
+        'password_confirmation' => 'required_with[password]|max_length[255]|matches[password]',
     ];
     protected $validationMessages = [
         'nome' => [
@@ -38,6 +38,14 @@ class UsuarioModel extends Model
             'required' => 'O cpf é obrigatório.',
             'is_unique' => 'Desculpe. Este cpf já está cadastrado.',
         ],
+        'password_confirmation' => [
+            'matches' => 'As senhas devem ser iguais.',
+            'required_with' => 'A confirmação de senha é obrigatória.'
+        ],
+        'password' => [
+            'required' => 'A senha é obrigatoria.',
+        ],
+        
     ];
 
     //eventos callback
