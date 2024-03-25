@@ -19,7 +19,8 @@ class Usuarios extends BaseController
     {
         $data = [
             'titulo' => 'Listando os usuários',
-            'usuarios' => $this->usuarioModel->withDeleted()->findAll()
+            'usuarios' => $this->usuarioModel->withDeleted()->paginate(2),
+            'pager' => $this->usuarioModel->pager,
 
         ];
 
@@ -35,7 +36,7 @@ class Usuarios extends BaseController
     public function procurar(){
 
         if (!$this->request->isAJAX()) {
-            exit('Página não encontrada');
+            exit('Página não encontrada.');
         };
 
         $usuarios = $this->usuarioModel->procurar($this->request->getGet('term'));
@@ -75,7 +76,7 @@ class Usuarios extends BaseController
                                 ->with('sucesso', "O usuário $usuario->nome foi cadastrado com sucesso.");
             } else {
                 return redirect()->back()->with('errors_model', $this->usuarioModel->errors())
-                                ->with('atencao', 'Por favor, verifique os errors abaixo')
+                                ->with('atencao', 'Por favor, verifique os errors abaixo:')
                                 ->withInput();
             }
         }
@@ -102,6 +103,10 @@ class Usuarios extends BaseController
 
         $usuario = $this->buscaUsuarioOu404($id);
 
+        if($usuario->deletado_em != null) {
+            return redirect()->back()->with('info', "O usuário $usuario->nome encontra-se excluído. Portanto, não é possível editá-lo.");
+        }
+
         $data = [
             'titulo' => "Editando o usuário $usuario->nome",
             'usuario' => $usuario,
@@ -116,6 +121,9 @@ class Usuarios extends BaseController
         if($this->request->getMethod() === 'post'){
             $usuario = $this->buscaUsuarioOu404($id);
 
+            if($usuario->deletado_em != null) {
+                return redirect()->back()->with('info', "O usuário $usuario->nome encontra-se excluído. Portanto, não é possível editá-lo.");
+            }
 
             $post = $this->request->getPost();
 
@@ -128,7 +136,7 @@ class Usuarios extends BaseController
             $usuario->fill($post);
 
             if(!$usuario->hasChanged()) {
-                return redirect()->back()->with('info', 'Não há dados para atualizar');
+                return redirect()->back()->with('info', 'Não há dados para atualizar.');
             }
 
             if($this->usuarioModel->protect(false)->save($usuario)){
@@ -136,7 +144,7 @@ class Usuarios extends BaseController
                                 ->with('sucesso', "O usuário $usuario->nome foi atualizado com sucesso.");
             } else {
                 return redirect()->back()->with('errors_model', $this->usuarioModel->errors())
-                                ->with('atencao', 'Por favor, verifique os errors abaixo')
+                                ->with('atencao', 'Por favor, verifique os errors abaixo:')
                                 ->withInput();
             }
         }
@@ -149,6 +157,10 @@ class Usuarios extends BaseController
     public function excluir($id = null) {
 
         $usuario = $this->buscaUsuarioOu404($id);
+
+        if($usuario->deletado_em != null) {
+            return redirect()->back()->with('info', "O usuário $usuario->nome já encontra-se excluído.");
+        }
 
         if ($usuario->is_admin){
             return redirect()->back()->with('info', 'Não é possivel excluir um usuário <b>administrador</b>');

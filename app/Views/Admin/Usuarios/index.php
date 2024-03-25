@@ -22,7 +22,8 @@
             </div>
 
             <a href="<?php echo site_url("admin/usuarios/criar"); ?>"
-                class="btn btn-success btn-icon-tex btn-icon-prepend float-right mb-5">
+                class="btn btn-success btn-icon-tex btn-icon-prepend float-right mb-5"
+                data-toggle="tooltip" data-placement="top" title="Cadastrar usuário">
                 <i class="mdi mdi-plus btn-icon-prepend"></i>
                 Cadastrar
             </a>
@@ -57,7 +58,8 @@
                                 <?php echo ($usuario->deletado_em == null ? '<label class="badge badge-success">Disponível</label>' : '<label class="badge badge-danger">Excluído</label>'); ?>
                                 <?php if($usuario->deletado_em != null): ?>
                                 <a href="<?php echo site_url("admin/usuarios/desfazerexclusao/$usuario->id"); ?>"
-                                    class="badge badge-dark ml-4">
+                                    class="badge badge-dark ml-4"
+                                    data-toggle="tooltip" data-placement="top" title="Recuperar usuário">
                                     <i class="mdi mdi-undo btn-icon-prepend"></i>
                                     Recuperar
                                 </a>
@@ -68,6 +70,10 @@
 
                     </tbody>
                 </table>
+
+                <div class="mt-3">
+                    <?php echo $pager->links(); ?>
+                </div>
             </div>
         </div>
 
