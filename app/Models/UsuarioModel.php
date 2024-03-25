@@ -91,4 +91,13 @@ class UsuarioModel extends Model
                                     ->set('deletado_em', null)
                                     ->update();
     }
+
+    /**
+        *reotrna obj usuario
+        *pelo email
+
+     */
+    public function buscaUsuarioPorEmail(string $email) {
+        return $this->when('email', $email)->first();
+    }
 }
