@@ -34,19 +34,19 @@ O sistema consiste em uma plataforma de food delivery desenvolvida em PHP utiliz
 
 ## Requisitos do Sistema
 
+- XAMPP (ou equivalente) com Apache e MySQL em execução.
 - PHP 7.0 ou superior
-- Servidor web (Apache, Nginx, etc.)
 - MySQL 5.6 ou superior
 - Navegador Web moderno (Chrome, Firefox, etc.)
 
-## Instalação e Configuração (pode sofrer alterações)
+## Instalação e Configuração
 
-1. Clone este repositório em sua máquina local.
-2. Configure o ambiente PHP e MySQL em sua máquina.
+1. Clone este repositório na pasta `htdocs` do seu XAMPP.
+2. Certifique-se de que o XAMPP com Apache e MySQL está em execução.
 3. Importe o arquivo de banco de dados fornecido (`database.sql`) para criar a estrutura do banco de dados.
-4. Configure as credenciais do banco de dados no arquivo `application/config/database.php`.
-5. Navegue até o diretório do projeto e inicie o servidor PHP usando o comando `php -S localhost:8000`.
-6. Abra seu navegador e acesse `http://localhost:8000` para usar o sistema.
+4. Renomeie o arquivo `.env.example` para `.env` e atualize as variáveis de ambiente conforme necessário.
+5. Execute o servidor PHP usando o comando `php spark serve`.
+6. Abra seu navegador e acesse `http://localhost:8080` para usar o sistema.
 
 ## Contribuição
 
