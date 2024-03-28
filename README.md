@@ -48,6 +48,16 @@ O sistema consiste em uma plataforma de food delivery desenvolvida em PHP utiliz
 5. Execute o servidor PHP usando o comando `php spark serve`.
 6. Abra seu navegador e acesse `http://localhost:8080` para usar o sistema.
 
+## Importando o arquivo database.sql (a cada nova modificação farei o update aqui)
+
+1. Certifique-se de ter um servidor de banco de dados MySQL ou MariaDB em execução localmente.
+2. Abra seu cliente de banco de dados (por exemplo, phpMyAdmin).
+3. Crie um novo banco de dados (se ainda não tiver um).
+4. Selecione o banco de dados recém-criado na barra lateral esquerda.
+5. No menu, procure uma opção para importar arquivos SQL.
+6. Selecione o arquivo `database.sql` do seu projeto e importe-o para o banco de dados.
+7. Após a importação, as tabelas e estruturas de banco de dados necessárias devem estar disponíveis no seu banco de dados local.
+
 ## Contribuição
 
 Este projeto é resultado de um trabalho acadêmico e, portanto, contribuições diretas podem não ser aceitas. No entanto, você é livre para bifurcar o repositório, fazer alterações e enviar solicitações pull. Todas as contribuições serão devidamente creditadas.
