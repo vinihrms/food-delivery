@@ -7,4 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
-$routes->get('/login', 'Login::novo');
+// busca filtro visitante para a rota de LOGIN 
+// só deixa acessar URL de login para visitantes (nao logados)
+$routes->get('/login', 'Login::novo', ['filter' => 'visitante']); 
+
