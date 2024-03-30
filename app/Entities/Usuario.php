@@ -9,6 +9,6 @@ class Usuario extends Entity
     protected $dates   = ['criado_em', 'atualizado_em', 'deletado_em'];
 
     public function verificaPassword(string $password){
-        return password_verify($password, $hash, $this->password_hash);
+        return password_verify($password, $this->password_hash);
     }
 }

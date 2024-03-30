@@ -198,7 +198,7 @@ class Usuarios extends BaseController
         
     }
 
-
+    
     /**
      * recebe id
      * retorna objeto usuario
@@ -209,6 +209,5 @@ class Usuarios extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Não encontramos o usuário $id");
         }
         return $usuario;
-
     }
 }

@@ -98,6 +98,6 @@ class UsuarioModel extends Model
 
      */
     public function buscaUsuarioPorEmail(string $email) {
-        return $this->when('email', $email)->first();
+        return $this->where('email', $email)->first();
     }
 }

@@ -24,6 +24,8 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'login'         => \App\Filters\LoginFilter::class, //filtro de login
+        'admin'         => \App\Filters\AdminFilter::class, //filtro de admin
     ];
 
     /**
@@ -65,5 +67,16 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    public array $filters = [];
+    public array $filters = [
+        'login' => [
+            'before' => [
+                'admin/*' //nao deixa que usuarios deslogados acesse qualquer area sob o namespace de ADMIN.
+            ]
+        ],
+        'admin' => [
+            'before' => [
+                'admin/*' //areas sob o namespace admin só podem ser acessadas por admin
+            ]
+        ],
+    ];
 }
