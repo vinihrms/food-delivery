@@ -40,6 +40,9 @@
     <script src="<?php echo site_url("admin/"); ?>js/hoverable-collapse.js"></script>
     <script src="<?php echo site_url("admin/"); ?>js/template.js"></script>
     <!-- endinject -->
+
+    <!-- essa section renderiza os scripts especificos da view que estender esse layout -->
+    <?php echo $this->renderSection('scripts') ?>
 </body>
 
 </html>

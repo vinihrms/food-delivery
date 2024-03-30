@@ -4,11 +4,13 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+use App\Libraries\Token;
+
 class UsuarioModel extends Model
 {
     protected $table = 'usuarios';
     protected $returnType = 'App\Entities\Usuario';
-    protected $allowedFields = ["nome", "email", "telefone"];
+    protected $allowedFields = ['nome', 'email', 'telefone', 'cpf', 'password', 'reset_hash', 'reset_expira_em'];
 
     //dates
     protected $useTimestamps = true;
@@ -31,6 +33,7 @@ class UsuarioModel extends Model
     protected $validationMessages = [
         'nome' => [
             'required' => 'O nome é obrigatório.',
+            'min_length' => 'O nome deve ter no mínimo 4 caracteres.',
         ],
         'telefone' => [
             'required' => 'O telefone é obrigatório.',
@@ -43,14 +46,14 @@ class UsuarioModel extends Model
             'required' => 'O cpf é obrigatório.',
             'is_unique' => 'Desculpe. Este cpf já está cadastrado.',
         ],
+        'password' => [
+            'required' => 'A senha é obrigatoria.',
+            'min_length' => 'A senha deve ter no mínimo 6 caracteres.'
+        ],
         'password_confirmation' => [
             'matches' => 'As senhas devem ser iguais.',
             'required_with' => 'A confirmação de senha é obrigatória.'
         ],
-        'password' => [
-            'required' => 'A senha é obrigatoria.',
-        ],
-        
     ];
 
     //eventos callback
@@ -95,9 +98,29 @@ class UsuarioModel extends Model
     /**
         *reotrna obj usuario
         *pelo email
-
      */
     public function buscaUsuarioPorEmail(string $email) {
         return $this->where('email', $email)->first();
+    }
+
+    public function buscaUsuarioParaResetarSenha(string $token){
+
+        $token = new Token($token);
+
+        $tokenHash = $token->getHash();
+
+        $usuario = $this->where('reset_hash', $tokenHash)->first();
+
+        if($usuario != null){
+            
+            if($usuario->reset_expira_em < date('Y-m-d H:i:s')){
+
+                $usuario = null;
+            }
+
+            return $usuario;
+
+        }
+
     }
 }

@@ -58,32 +58,34 @@
                     <div class="brand-logo">
                         <img src="<?php echo site_url('admin/') ?>images/logo.svg" alt="logo">
                     </div>
-                    <h4>Olá. Seja bem vindo(a)!</h4>
-                    <h6 class="font-weight-light mb-4">Faça o login para continuar.</h6>
+                    <h4>Recuperando a senha!</h4>
+                    <h6 class="font-weight-light mb-4"> <?php echo $titulo; ?> </h6>
 
-                    <?php echo form_open('login/criar'); ?>
+                    <?php echo form_open("password/processareset/$token"); ?>
+
                     <div class="form-group">
-                        <input type="email" name="email" value="<?php echo old('email') ?>"
-                            class="form-control form-control-lg" id="exampleInputEmail1"
-                            placeholder="Digite o seu e-mail">
+                        <label for="password">Nova senha</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Senha">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"
-                            name="password" placeholder="Digite a sua senha">
+                        <label for="password_confirmation">Confirmação da nova senha</label>
+                        <input type="password" class="form-control" name="password_confirmation"
+                            id="password_confirmation" placeholder="Confirmação de senha">
                     </div>
+
+                    <?php if(session()->has('errors_model')): ?>
+                    <ul>
+                        <?php foreach (session('errors_model') as $error): ?>
+                        <li class="text-danger"><?php echo $error; ?></li>
+                        <?php endforeach?>
+                    </ul>
+                    <?php endif;?>
+
                     <div class="mt-3">
-                        <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-                            href="../../index.html"> ENTRAR </button>
-                    </div>
-                    <!-- TODO: esqueceu a senha -->
-                    <div class="my-2 d-flex justify-content-between align-items-center">
-                        <a href="<?php echo site_url('password/esqueci'); ?>" class="auth-link text-black">Esqueceu a senha?</a>
+                        <input type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                            value="Redefinir senha">
                     </div>
 
-                    <div class="text-center mt-4 font-weight-light">
-                        Ainda não tem uma conta? <a href="<?php echo site_url('registrar');?>"
-                            class="text-primary">Criar conta</a>
-                    </div>
                     <?php echo form_close()?>
 
                 </div>
@@ -98,4 +100,5 @@
 
 <?php echo $this->section('scripts'); ?>
 <!-- envia script -->
+
 <?php echo $this->endSection(); ?>
