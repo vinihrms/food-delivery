@@ -27,6 +27,7 @@ class Filters extends BaseConfig
         'login'         => \App\Filters\LoginFilter::class, //filtro de login
         'admin'         => \App\Filters\AdminFilter::class, //filtro de admin
         'visitante'         => \App\Filters\VisitanteFilter::class, //filtro de visitante
+        'throttle' => \App\Filters\ThrottleFilter::class, //filtro de prevencao de ataques de forca bruta
     ];
 
     /**
@@ -59,7 +60,9 @@ class Filters extends BaseConfig
      * permits any HTTP method to access a controller. Accessing the controller
      * with a method you don't expect could bypass the filter.
      */
-    public array $methods = [];
+    public array $methods = [
+        'post' => ['throttle'],
+    ];
 
     /**
      * List of filter aliases that should run on any
