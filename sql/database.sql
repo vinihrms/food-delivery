@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 28/03/2024 às 15:29
+-- Tempo de geração: 05/04/2024 às 01:30
 -- Versão do servidor: 10.4.27-MariaDB
 -- Versão do PHP: 7.4.33
 
@@ -37,6 +37,13 @@ CREATE TABLE `migrations` (
   `batch` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Despejando dados para a tabela `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
+(1, '2024-03-23-192306', 'App\\Database\\Migrations\\CriaTabelaUsuarios', 'default', 'App', 1711221864, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -59,6 +66,13 @@ CREATE TABLE `usuarios` (
   `atualizado_em` datetime DEFAULT NULL,
   `deletado_em` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `cpf`, `telefone`, `is_admin`, `ativo`, `password_hash`, `ativacao_hash`, `reset_hash`, `reset_expira_em`, `criado_em`, `atualizado_em`, `deletado_em`) VALUES
+(1, 'admin', 'admin@admin.com', '625.865.820-20', '(45) 99999-9999', 1, 1, '$2y$10$J9.NIxV5UGpGcond7IGeqOBDNdHklslCKaBPsEVNdRFFyWOq5UjtC', NULL, NULL, NULL, '2024-03-11 11:28:24', '2024-04-04 20:30:05', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -88,13 +102,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

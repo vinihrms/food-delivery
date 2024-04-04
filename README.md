@@ -58,6 +58,15 @@ O sistema consiste em uma plataforma de food delivery desenvolvida em PHP utiliz
 6. Selecione o arquivo `database.sql` do seu projeto e importe-o para o banco de dados.
 7. Após a importação, as tabelas e estruturas de banco de dados necessárias devem estar disponíveis no seu banco de dados local.
 
+### Informações de Acesso
+
+O arquivo `database.sql` já contém um usuário administrador pré-configurado para facilitar o acesso inicial ao sistema. As credenciais de acesso são:
+
+- **E-mail:** admin@admin.com
+- **Senha:** 123456
+
+É altamente recomendado que você acesse o sistema utilizando estas credenciais assim que iniciar o projeto e proceda imediatamente à alteração da senha e outras configurações necessárias para garantir a segurança do sistema.
+
 ## Contribuição
 
 Este projeto é resultado de um trabalho acadêmico e, portanto, contribuições diretas podem não ser aceitas. No entanto, você é livre para bifurcar o repositório, fazer alterações e enviar solicitações pull. Todas as contribuições serão devidamente creditadas.
