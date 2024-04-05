@@ -19,7 +19,7 @@ class Usuarios extends BaseController
     {
         $data = [
             'titulo' => 'Listando os usuários',
-            'usuarios' => $this->usuarioModel->withDeleted()->paginate(2),
+            'usuarios' => $this->usuarioModel->withDeleted()->paginate(8),
             'pager' => $this->usuarioModel->pager,
 
         ];

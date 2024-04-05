@@ -60,23 +60,6 @@ class UsuarioModel extends Model
     protected $beforeInsert = ['hashPassword'];
     protected $beforeUpdate = ['hashPassword'];
 
-
-    public function procurar($term) {
-        if($term === null){
-            return [];
-        };
-
-        return $this->select('id, nome')
-                ->like('nome', $term)
-                ->get()
-                ->getResult();
-    }
-
-    public function desabilitaValidacaoSenha() {
-        unset($this->validationRules['password']);
-        unset($this->validationRules['password_confirmation']);
-    }
-
     protected function hashPassword(array $data) {
 
         if(isset($data['data']['password'])){
@@ -88,6 +71,24 @@ class UsuarioModel extends Model
         }
         return $data;
     }
+    
+    public function procurar($term) {
+        if($term === null){
+            return [];
+        };
+
+        return $this->select('id, nome')
+                ->like('nome', $term)
+                ->withDeleted(true)
+                ->get()
+                ->getResult();
+    }
+
+    public function desabilitaValidacaoSenha() {
+        unset($this->validationRules['password']);
+        unset($this->validationRules['password_confirmation']);
+    }
+
 
     public function desfazerexclusao(int $id){
         return $this->protect(false)->where('id', $id)
