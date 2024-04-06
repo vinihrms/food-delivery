@@ -58,7 +58,7 @@ class Usuarios extends BaseController
         $usuario = new Usuario();
 
         $data = [
-            'titulo' => "Criando novo usuário",
+            'titulo' => "Cadastrando novo usuário",
             'usuario' => $usuario,
         ];
 
@@ -98,7 +98,19 @@ class Usuarios extends BaseController
         return view('Admin/Usuarios/show', $data);
         
     }
+    /**
+     * recebe id
+     * retorna objeto usuario
+     */
 
+    private function buscaUsuarioOu404(int $id = null) {
+        if(!$id || !$usuario = $this->usuarioModel->withDeleted(true)->where('id', $id)->first()){
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Não encontramos o usuário $id");
+        }
+        return $usuario;
+    }
+
+    
     public function editar($id = null) {
 
         $usuario = $this->buscaUsuarioOu404($id);
@@ -198,16 +210,4 @@ class Usuarios extends BaseController
         
     }
 
-    
-    /**
-     * recebe id
-     * retorna objeto usuario
-     */
-
-    private function buscaUsuarioOu404(int $id = null) {
-        if(!$id || !$usuario = $this->usuarioModel->withDeleted(true)->where('id', $id)->first()){
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Não encontramos o usuário $id");
-        }
-        return $usuario;
-    }
 }

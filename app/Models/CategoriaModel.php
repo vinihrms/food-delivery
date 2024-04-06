@@ -24,7 +24,7 @@ class CategoriaModel extends Model
 
     // Callbacks
     protected $validationRules = [
-        'nome'     => 'required|max_length[120]|alpha_numeric_space|min_length[4]|is_unique[categorias.nome]',
+        'nome'     => 'required|max_length[120]|min_length[4]|is_unique[categorias.nome]',
 
     ];
     protected $validationMessages = [
@@ -59,6 +59,12 @@ class CategoriaModel extends Model
                 ->withDeleted(true)
                 ->get()
                 ->getResult();
+    }
+
+    public function desfazerexclusao(int $id){
+        return $this->protect(false)->where('id', $id)
+                                    ->set('deletado_em', null)
+                                    ->update();
     }
 
 }
