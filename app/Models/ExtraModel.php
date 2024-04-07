@@ -26,6 +26,7 @@ class ExtraModel extends Model
     // Validation
     protected $validationRules = [
         'nome'     => 'required|max_length[120]|min_length[4]|is_unique[extras.nome]',
+        'preco'     => 'required|max_length[6]',
 
     ];
     protected $validationMessages = [
@@ -33,6 +34,10 @@ class ExtraModel extends Model
             'required' => 'O nome é obrigatório.',
             'min_length' => 'O nome deve ter no mínimo 4 caracteres.',
             'is_unique' => 'Esse extra já está cadastrado.'
+        ],
+        'preco' => [
+            'required' => 'O preço de venda é obrigatório.',
+            'max_length' => 'O preço de venda pode ter no máximo 5 digitos.'
         ],
     ];
 

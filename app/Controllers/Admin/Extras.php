@@ -112,4 +112,82 @@ class Extras extends BaseController
             return redirect()->back();
         }
     }
+
+    public function criar() {
+
+        $extra = new Extra();
+
+        $data = [
+            'titulo' => "Criando novo extra",
+            'extra' => $extra,
+        ];
+
+        return view('Admin/Extras/criar', $data);
+        
+    }
+
+    public function cadastrar(){
+        if($this->request->getMethod() === 'post'){
+            
+
+            $extra = new Extra($this->request->getPost());
+
+            if($this->extraModel->save($extra)){
+                return redirect()->to(site_url("admin/extras/show/".$this->extraModel->getInsertID()))
+                                ->with('sucesso', "O extra $extra->nome foi criado com sucesso.");
+            } else {
+                return redirect()->back()->with('errors_model', $this->extraModel->errors())
+                                ->with('atencao', 'Por favor, verifique os errors abaixo:')
+                                ->withInput();
+            }
+        }
+        else{
+            /* nao é post */
+            return redirect()->back();
+        }
+    }
+
+    public function excluir($id = null) {
+
+        $extra = $this->buscaExtraOu404($id);
+
+        if($extra->deletado_em != null) {
+            return redirect()->back()->with('info', "O extra $extra->nome já encontra-se excluído.");
+        }
+
+        if ($extra->is_admin){
+            return redirect()->back()->with('info', 'Não é possivel excluir um extra <b>administrador</b>');
+        }
+
+        if($this->request->getMethod() === 'post'){
+            $this->extraModel->delete($id);
+            return redirect()->to(site_url('admin/extras'))->with('sucesso', "Extra $extra->nome excluído com sucesso.");
+        }
+
+        $data = [
+            'titulo' => "Excluindo o extra $extra->nome",
+            'extra' => $extra,
+        ];
+
+        return view('Admin/Extras/excluir', $data);
+        
+    }
+
+    public function desfazerExclusao($id = null) {
+
+        $extra = $this->buscaExtraOu404($id);
+
+        if($extra->deletado_em == null){
+            return redirect()->back()->with('info', 'Apenas extras deletados podem ser recuperados.');
+        }
+
+        if($this->extraModel->desfazerexclusao($id)){
+            return redirect()->back()->with('sucesso', 'Extra recuperado com sucesso.');
+        } else {
+            return redirect()->back()->with('errors_model', $this->extraModel->errors())
+                                ->with('atencao', 'Por favor, verifique os errors abaixo')
+                                ->withInput();
+        }
+        
+    }
 }

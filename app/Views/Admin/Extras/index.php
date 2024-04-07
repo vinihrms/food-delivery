@@ -24,7 +24,7 @@
             <a href="<?php echo site_url("admin/extras/criar"); ?>"
                 class="btn btn-success btn-icon-tex btn-icon-prepend float-right mb-5"
                 data-toggle="tooltip" data-placement="top" title="Cadastrar usuário">
-                <i class="mdi mdi-account-plus btn-icon-prepend"></i>
+                <i class="mdi mdi-plus btn-icon-prepend"></i>
                 Criar
             </a>
 

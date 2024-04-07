@@ -199,7 +199,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo site_url('admin/extras')?>">
-                            <i class="mdi mdi-box-shadow menu-icon"></i>
+                            <i class="mdi mdi-plus-box menu-icon"></i>
                             <span class="menu-title">Extras</span>
                         </a>
                     </li>

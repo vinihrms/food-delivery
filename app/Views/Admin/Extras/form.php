@@ -7,7 +7,7 @@
 
     <div class="form-group col-md-6">
         <label for="preco">Preço de venda</label>
-        <input type="text" class="money form-control" id="preco" name="preco" placeholder="Preço"
+        <input maxlength="6" type="text" class="money form-control" id="preco" name="preco" placeholder="Preço"
             value="<?php echo old('preco', esc($extra->preco)); ?>">
     </div>
 
