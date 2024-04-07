@@ -4,12 +4,14 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CategoriaModel extends Model
+class ExtraModel extends Model
 {
-    protected $table            = 'categorias';
-    protected $returnType       = 'App\Entities\Categoria';
+    protected $table            = 'extras';
+    protected $primaryKey       = 'id';
+    protected $useAutoIncrement = true;
+    protected $returnType       = 'App\Entities\Extra';
     protected $useSoftDeletes   = true;
-    protected $allowedFields    = ['nome', 'ativo', 'slug'];
+    protected $allowedFields    = ['nome', 'slug', 'ativo', 'preco', 'descicao'];
 
     protected bool $allowEmptyInserts = false;
 
@@ -21,17 +23,17 @@ class CategoriaModel extends Model
     protected $deletedField  = 'deletado_em';
 
     // Validation
+    // Validation
     protected $validationRules = [
-        'nome'     => 'required|max_length[120]|min_length[4]|is_unique[categorias.nome]',
+        'nome'     => 'required|max_length[120]|min_length[4]|is_unique[extras.nome]',
 
     ];
     protected $validationMessages = [
         'nome' => [
             'required' => 'O nome é obrigatório.',
             'min_length' => 'O nome deve ter no mínimo 4 caracteres.',
-            'is_unique' => 'Essa categoria já está cadastrada.'
+            'is_unique' => 'Esse extra já está cadastrado.'
         ],
-        
     ];
 
     //eventos callback
