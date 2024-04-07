@@ -31,13 +31,17 @@ O sistema consiste em uma plataforma de food delivery desenvolvida em PHP utiliz
 - **MySQL**: Banco de dados utilizado para armazenar informações sobre usuários, pedidos e menu do restaurante.
 - **HTML/CSS/JavaScript**: Tecnologias front-end utilizadas para desenvolver a interface do usuário.
 - **Bootstrap**: Utilizado para estilização da interface do usuário.
+- **jQuery**: Biblioteca JavaScript utilizada para simplificar a manipulação do DOM.
+- **Ajax**: Tecnologia utilizada para realizar requisições assíncronas no navegador.
+
 
 ## Requisitos do Sistema
 
-- XAMPP (ou equivalente) com Apache e MySQL em execução.
+- XAMPP (ou equivalente) com Apache e MySQL em execução para testes em localhost.
 - PHP 7.0 ou superior
 - MySQL 5.6 ou superior
 - Navegador Web moderno (Chrome, Firefox, etc.)
+
 
 ## Instalação e Configuração
 

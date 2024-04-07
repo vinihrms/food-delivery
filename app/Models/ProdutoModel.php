@@ -61,15 +61,17 @@ class ProdutoModel extends Model
                                     ->update();
     }
     
-    
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+
+    //eventos callback
+    protected $beforeInsert = ['criaSlug'];
+    protected $beforeUpdate = ['criaSlug'];
+
+    protected function criaSlug(array $data) {
+
+        if(isset($data['data']['nome'])){
+            $data['data']['slug'] = mb_url_title($data['data']['nome'], '-', true);
+            
+        }
+        return $data;
+    }
 }
