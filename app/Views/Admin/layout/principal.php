@@ -209,6 +209,12 @@
                             <span class="menu-title">Medidas</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo site_url('admin/produtos')?>">
+                            <i class="mdi mdi-silverware menu-icon"></i>
+                            <span class="menu-title">Produtos</span>
+                        </a>
+                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo site_url('admin/usuarios')?>">
