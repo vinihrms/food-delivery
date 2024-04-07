@@ -59,6 +59,7 @@ class Categorias extends BaseController
         return view('Admin/Categorias/show', $data);
         
     }
+
     public function criar() {
 
         $categoria = new Categoria();
@@ -119,16 +120,45 @@ class Categorias extends BaseController
         
     }
 
+    public function atualizar($id = null){
+        if($this->request->getMethod() === 'post'){
+            $categoria = $this->buscaCategoriaOu404($id);
+
+            if($categoria->deletado_em != null) {
+                return redirect()->back()->with('info', "A categoria $categoria->nome encontra-se excluíd. Portanto, não é possível editá-la.");
+            }
+
+            $categoria->fill($this->request->getPost());
+
+            if(!$categoria->hasChanged()) {
+                return redirect()->back()->with('info', 'Não há dados para atualizar.');
+            }
+
+            if($this->categoriaModel->save($categoria)){
+                return redirect()->to(site_url("admin/categorias/show/$categoria->id"))
+                                ->with('sucesso', "A categoria $categoria->nome foi atualizada com sucesso.");
+            } else {
+                return redirect()->back()->with('errors_model', $this->categoriaModel->errors())
+                                ->with('atencao', 'Por favor, verifique os errors abaixo:')
+                                ->withInput();
+            }
+        }
+        else{
+            /* nao é post */
+            return redirect()->back();
+        }
+    }
+
     public function excluir($id = null) {
 
         $categoria = $this->buscaCategoriaOu404($id);
 
         if($categoria->deletado_em != null) {
-            return redirect()->back()->with('info', "A categoria $categoria->nome já encontra-se excluído.");
+            return redirect()->back()->with('info', "A categoria $categoria->nome já encontra-se excluída.");
         }
 
         if ($categoria->is_admin){
-            return redirect()->back()->with('info', 'Não é possivel excluir um usuário <b>administrador</b>');
+            return redirect()->back()->with('info', 'Não é possivel excluir uma categoria <b>administrador</b>');
         }
 
         if($this->request->getMethod() === 'post'){
