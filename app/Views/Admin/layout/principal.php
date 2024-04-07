@@ -199,8 +199,14 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo site_url('admin/extras')?>">
-                            <i class="mdi mdi-plus-box menu-icon"></i>
+                            <i class="mdi mdi-ruler menu-icon"></i>
                             <span class="menu-title">Extras</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo site_url('admin/medidas')?>">
+                            <i class="mdi mdi-plus-box menu-icon"></i>
+                            <span class="menu-title">Medidas</span>
                         </a>
                     </li>
 

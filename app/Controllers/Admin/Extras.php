@@ -71,11 +71,11 @@ class Extras extends BaseController
         $extra = $this->buscaExtraOu404($id);
 
         if($extra->deletado_em != null) {
-            return redirect()->back()->with('info', "A extra $extra->nome encontra-se excluída. Portanto, não é possível editá-la.");
+            return redirect()->back()->with('info', "O extra $extra->nome encontra-se excluído. Portanto, não é possível editá-lo.");
         }
 
         $data = [
-            'titulo' => "Editando a extra $extra->nome",
+            'titulo' => "Editando o extra $extra->nome",
             'extra' => $extra,
         ];
 

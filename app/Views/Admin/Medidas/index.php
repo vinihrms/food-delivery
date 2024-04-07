@@ -18,12 +18,12 @@
             <h4 class="card-title"><?php echo $titulo; ?></h4>
 
             <div class="ui-widget">
-                <input placeholder="Pesquise por um extra" id="query" name="query" class="form-control bg-light mb-5">
+                <input placeholder="Pesquise por uma medida de produto" id="query" name="query" class="form-control bg-light mb-5">
             </div>
 
-            <a href="<?php echo site_url("admin/extras/criar"); ?>"
+            <a href="<?php echo site_url("admin/medidas/criar"); ?>"
                 class="btn btn-success btn-icon-tex btn-icon-prepend float-right mb-5"
-                data-toggle="tooltip" data-placement="top" title="Cadastrar extra">
+                data-toggle="tooltip" data-placement="top" title="Cadastrar medida">
                 <i class="mdi mdi-plus btn-icon-prepend"></i>
                 Criar
             </a>
@@ -34,7 +34,6 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Preço de venda</th>
                             <th>Data de criação</th>
                             <th>Ativo</th>
                             <th>Situação</th>
@@ -43,21 +42,20 @@
                     <tbody>
                         <tr>
 
-                            <?php foreach ($extras as $extra) : ?>
+                            <?php foreach ($medidas as $medida) : ?>
 
                             <td>
-                                <a href="<?php echo site_url("admin/extras/show/$extra->id"); ?>">
-                                    <?php echo $extra->nome; ?>
+                                <a href="<?php echo site_url("admin/medidas/show/$medida->id"); ?>">
+                                    <?php echo $medida->nome; ?>
                                 </a>
                             </td>
-                            <td>R$&nbsp;<?php echo esc(number_format($extra->preco, 2)) ?></td>
-                            <td><?php echo $extra->criado_em->humanize(); ?></td>
-                            <td><?php echo ($extra->ativo && $extra->deletado_em == null ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>'); ?>
+                            <td><?php echo $medida->criado_em->humanize(); ?></td>
+                            <td><?php echo ($medida->ativo && $medida->deletado_em == null ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>'); ?>
                             <td>
 
-                                <?php echo ($extra->deletado_em == null ? '<label class="badge badge-success">Disponível</label>' : '<label class="badge badge-danger">Excluído</label>'); ?>
-                                <?php if($extra->deletado_em != null): ?>
-                                <a href="<?php echo site_url("admin/extras/desfazerexclusao/$extra->id"); ?>"
+                                <?php echo ($medida->deletado_em == null ? '<label class="badge badge-success">Disponível</label>' : '<label class="badge badge-danger">Excluído</label>'); ?>
+                                <?php if($medida->deletado_em != null): ?>
+                                <a href="<?php echo site_url("admin/medidas/desfazerexclusao/$medida->id"); ?>"
                                     class="badge badge-dark ml-4"
                                     data-toggle="tooltip" data-placement="top" title="Recuperar usuário">
                                     <i class="mdi mdi-undo btn-icon-prepend"></i>
@@ -91,7 +89,7 @@ $(function() {
     $("#query").autocomplete({
         source: function(request, response) {
             $.ajax({
-                url: "<?php echo site_url('admin/extras/procurar') ?>",
+                url: "<?php echo site_url('admin/medidas/procurar') ?>",
                 dataType: "json",
                 data: {
                     term: request.term
@@ -99,7 +97,7 @@ $(function() {
                 success: function(data) {
                     if (data.length < 1) {
                         var data = [{
-                            label: "Extra não encontrado",
+                            label: "Medida não encontrada",
                             value: -1
                         }];
                     }
@@ -113,7 +111,7 @@ $(function() {
                 $(this).val("");
                 return false
             } else {
-                window.location.href = '<?php echo site_url('admin/extras/show/'); ?>' + ui.item
+                window.location.href = '<?php echo site_url('admin/medidas/show/'); ?>' + ui.item
                     .id;
             }
         }

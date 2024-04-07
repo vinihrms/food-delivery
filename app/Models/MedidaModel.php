@@ -4,16 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ExtraModel extends Model
+class MedidaModel extends Model
 {
-    protected $table            = 'extras';
+    protected $table            = 'medidas';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'App\Entities\Extra';
+    protected $returnType       = 'App\Entities\Medida';
     protected $useSoftDeletes   = true;
-    protected $allowedFields    = ['nome', 'slug', 'ativo', 'preco', 'descricao'];
-
-    protected bool $allowEmptyInserts = false;
+    protected $protectFields    = true;
+    protected $allowedFields    = ['nome', 'ativo', 'descricao'];
 
     // Dates
     protected $useTimestamps = true;
@@ -24,34 +23,17 @@ class ExtraModel extends Model
 
     // Validation
     protected $validationRules = [
-        'nome'     => 'required|max_length[120]|min_length[4]|is_unique[extras.nome]',
-        'preco'     => 'required|max_length[6]',
+        'nome'     => 'required|max_length[120]|min_length[4]|is_unique[medidas.nome]',
 
     ];
     protected $validationMessages = [
         'nome' => [
             'required' => 'O nome é obrigatório.',
             'min_length' => 'O nome deve ter no mínimo 4 caracteres.',
-            'is_unique' => 'Esse extra já está cadastrado.'
+            'is_unique' => 'Essa medida já está cadastrada.'
         ],
-        'preco' => [
-            'required' => 'O preço de venda é obrigatório.',
-            'max_length' => 'O preço de venda pode ter no máximo 5 digitos.'
-        ],
+
     ];
-
-    //eventos callback
-    protected $beforeInsert = ['criaSlug'];
-    protected $beforeUpdate = ['criaSlug'];
-
-    protected function criaSlug(array $data) {
-
-        if(isset($data['data']['nome'])){
-            $data['data']['slug'] = mb_url_title($data['data']['nome'], '-', true);
-            
-        }
-        return $data;
-    }
 
     public function procurar($term) {
         if($term === null){
@@ -64,11 +46,10 @@ class ExtraModel extends Model
                 ->get()
                 ->getResult();
     }
-
+    
     public function desfazerexclusao(int $id){
         return $this->protect(false)->where('id', $id)
                                     ->set('deletado_em', null)
                                     ->update();
     }
-
 }
