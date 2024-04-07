@@ -21,6 +21,8 @@ class CategoriaModel extends Model
     protected $deletedField  = 'deletado_em';
 
     // Validation
+
+    // Callbacks
     protected $validationRules = [
         'nome'     => 'required|max_length[120]|min_length[4]|is_unique[categorias.nome]',
 
