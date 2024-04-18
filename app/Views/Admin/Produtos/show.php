@@ -21,7 +21,7 @@
 
             <div class="text-center">
                 <?php if($produto->imagem):?>
-                <img class="card-img-top w-75 mb-4" src="..." alt="Card image cap">
+                <img class="card-img-top w-75 mb-4" src="<?php echo site_url("admin/produtos/imagem/$produto->imagem"); ?>" alt="<?php echo esc($produto->nome); ?>">
     
                 <?php else :?>
                 <img class="card-img-top w-75 mb-4" src="<?php echo site_url('admin/images/sem-imagem.jpg')?>"

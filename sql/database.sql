@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/04/2024 às 01:30
+-- Tempo de geração: 18/04/2024 às 16:41
 -- Versão do servidor: 10.4.27-MariaDB
 -- Versão do PHP: 7.4.33
 
@@ -24,6 +24,56 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `categorias`
+--
+
+CREATE TABLE `categorias` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `nome` varchar(128) NOT NULL,
+  `slug` varchar(128) NOT NULL,
+  `ativo` tinyint(1) NOT NULL DEFAULT 1,
+  `criado_em` datetime DEFAULT NULL,
+  `atualizado_em` datetime DEFAULT NULL,
+  `deletado_em` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `extras`
+--
+
+CREATE TABLE `extras` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `nome` varchar(128) NOT NULL,
+  `slug` varchar(128) NOT NULL,
+  `preco` decimal(10,2) NOT NULL,
+  `descricao` text NOT NULL,
+  `ativo` tinyint(1) NOT NULL DEFAULT 1,
+  `criado_em` datetime DEFAULT NULL,
+  `atualizado_em` datetime DEFAULT NULL,
+  `deletado_em` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `medidas`
+--
+
+CREATE TABLE `medidas` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `nome` varchar(128) NOT NULL,
+  `descricao` text NOT NULL,
+  `ativo` tinyint(1) NOT NULL DEFAULT 1,
+  `criado_em` datetime DEFAULT NULL,
+  `atualizado_em` datetime DEFAULT NULL,
+  `deletado_em` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `migrations`
 --
 
@@ -37,12 +87,24 @@ CREATE TABLE `migrations` (
   `batch` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Despejando dados para a tabela `migrations`
+-- Estrutura para tabela `produtos`
 --
 
-INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
-(1, '2024-03-23-192306', 'App\\Database\\Migrations\\CriaTabelaUsuarios', 'default', 'App', 1711221864, 1);
+CREATE TABLE `produtos` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `categoria_id` int(5) UNSIGNED NOT NULL,
+  `nome` varchar(128) NOT NULL,
+  `slug` varchar(128) NOT NULL,
+  `ingredientes` text NOT NULL,
+  `ativo` tinyint(1) NOT NULL DEFAULT 1,
+  `imagem` varchar(200) NOT NULL,
+  `criado_em` datetime DEFAULT NULL,
+  `atualizado_em` datetime DEFAULT NULL,
+  `deletado_em` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -79,10 +141,39 @@ INSERT INTO `usuarios` (`id`, `nome`, `email`, `cpf`, `telefone`, `is_admin`, `a
 --
 
 --
+-- Índices de tabela `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nome` (`nome`);
+
+--
+-- Índices de tabela `extras`
+--
+ALTER TABLE `extras`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nome` (`nome`);
+
+--
+-- Índices de tabela `medidas`
+--
+ALTER TABLE `medidas`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nome` (`nome`);
+
+--
 -- Índices de tabela `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `produtos`
+--
+ALTER TABLE `produtos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nome` (`nome`),
+  ADD KEY `produtos_categoria_id_foreign` (`categoria_id`);
 
 --
 -- Índices de tabela `usuarios`
@@ -99,16 +190,50 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de tabela `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `extras`
+--
+ALTER TABLE `extras`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `medidas`
+--
+ALTER TABLE `medidas`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `produtos`
+--
+ALTER TABLE `produtos`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `produtos`
+--
+ALTER TABLE `produtos`
+  ADD CONSTRAINT `produtos_categoria_id_foreign` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

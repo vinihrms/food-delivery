@@ -170,8 +170,54 @@ class Produtos extends BaseController
             return redirect()->back()->with('atencao', 'A imagem não pode ser menor que 400x400 pixels.');
         }
 
-        dd($imagem);
+        //------------------------ A PARTIR DAQUI FAZEMOS O STORE DA IMAGEM
 
+        
+        $imagemCaminho = $imagem->store('produtos');
+
+        $imagemCaminho = WRITEPATH . 'uploads/' . $imagemCaminho;
+        
+        //resize da mesma imagem 
+        service('image')
+            ->withFile($imagemCaminho)
+            ->fit(400, 400, 'center')
+            ->save($imagemCaminho);
+
+        $imagemAntiga = $produto->imagem;
+
+        $produto->imagem = $imagem->getName();
+
+        $this->produtoModel->save($produto);
+
+        $caminhoImagem = WRITEPATH.'uploads/produtos/'.$imagemAntiga;
+
+        if(is_file($caminhoImagem)){
+
+            unlink($caminhoImagem);
+        
+        }
+
+        return redirect()->to(site_url("admin/produtos/show/$produto->id"))->with('sucesso', 'Imagem alterada com sucesso.');
+    }
+
+    public function imagem(string $imagem = null){
+
+        if($imagem){
+            
+            $caminhoImagem = WRITEPATH.'uploads/produtos/'.$imagem;
+
+            $infoImagem = new \finfo(FILEINFO_MIME);
+
+            $tipoImagem = $infoImagem->file($caminhoImagem);
+
+            header("Content-Type: $tipoImagem");
+
+            header("Content-Length: ".filesize($caminhoImagem));
+
+            readfile($caminhoImagem);
+
+            exit;
+        }
     }
 
     public function criar() {
