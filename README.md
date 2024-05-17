@@ -33,6 +33,7 @@ O sistema consiste em uma plataforma de food delivery desenvolvida em PHP utiliz
 - **Bootstrap**: Utilizado para estilização da interface do usuário.
 - **jQuery**: Biblioteca JavaScript utilizada para simplificar a manipulação do DOM.
 - **Ajax**: Tecnologia utilizada para realizar requisições assíncronas no navegador.
+- **Select2**: Biblioteca JavaScript utilizada para melhorar a experiência do usuário em campos de seleção, oferecendo recursos como busca, carregamento dinâmico e múltipla seleção.
 
 
 ## Requisitos do Sistema
