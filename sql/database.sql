@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18/04/2024 às 16:41
+-- Tempo de geração: 23/05/2024 às 14:27
 -- Versão do servidor: 10.4.27-MariaDB
 -- Versão do PHP: 7.4.33
 
@@ -109,6 +109,18 @@ CREATE TABLE `produtos` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `produtos_extras`
+--
+
+CREATE TABLE `produtos_extras` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `produto_id` int(5) UNSIGNED NOT NULL,
+  `extra_id` int(5) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `usuarios`
 --
 
@@ -176,6 +188,14 @@ ALTER TABLE `produtos`
   ADD KEY `produtos_categoria_id_foreign` (`categoria_id`);
 
 --
+-- Índices de tabela `produtos_extras`
+--
+ALTER TABLE `produtos_extras`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `produtos_extras_produto_id_foreign` (`produto_id`),
+  ADD KEY `produtos_extras_extra_id_foreign` (`extra_id`);
+
+--
 -- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -220,10 +240,16 @@ ALTER TABLE `produtos`
   MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `produtos_extras`
+--
+ALTER TABLE `produtos_extras`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restrições para tabelas despejadas
@@ -234,6 +260,13 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `produtos`
   ADD CONSTRAINT `produtos_categoria_id_foreign` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`);
+
+--
+-- Restrições para tabelas `produtos_extras`
+--
+ALTER TABLE `produtos_extras`
+  ADD CONSTRAINT `produtos_extras_extra_id_foreign` FOREIGN KEY (`extra_id`) REFERENCES `extras` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `produtos_extras_produto_id_foreign` FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
