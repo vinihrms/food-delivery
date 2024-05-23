@@ -11,7 +11,7 @@
 
 <?php echo $this->section('conteudo'); ?>
 
-<div class="col-lg-4 grid-margin stretch-card">
+<div class="col-lg-6 grid-margin stretch-card">
     <div class="card">
         <div class="card-header bg-primary pb-0 pt-4">
             <h4 class="card-title text-white "><?php echo esc($titulo); ?></h4>
@@ -89,6 +89,12 @@
                     data-placement="top" title="Editar usuário">
                     <i class="mdi mdi-lead-pencil btn-icon-prepend"></i>
                     Editar
+                </a>
+                <a href="<?php echo site_url("admin/produtos/extras/$produto->id"); ?>"
+                    class="btn btn-outline-success btn-sm btn-icon-tex btn-icon-prepend btn-icon-text mr-2" data-toggle="tooltip"
+                    data-placement="top" title="Editar usuário">
+                    <i class="mdi mdi-box-cutter btn-icon-prepend"></i>
+                    Extras
                 </a>
                 <a href="<?php echo site_url("admin/produtos/excluir/$produto->id"); ?>"
                     class="btn btn-danger btn-sm btn-icon-tex btn-icon-prepend mr-2" data-toggle="tooltip"
