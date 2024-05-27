@@ -11,7 +11,7 @@
 
 <?php echo $this->section('conteudo'); ?>
 
-<div class="col-lg-6 grid-margin stretch-card">
+<div class="col-lg-7 grid-margin stretch-card">
     <div class="card">
         <div class="card-header bg-primary pb-0 pt-4">
             <h4 class="card-title text-white "><?php echo esc($titulo); ?></h4>
@@ -20,7 +20,7 @@
 
 
             <div class="text-center">
-                <?php if($produto->imagem):?>
+                <?php if($produto->imagem  && $produto->deletado_em == null):?>
                 <img class="card-img-top w-75 mb-4" src="<?php echo site_url("admin/produtos/imagem/$produto->imagem"); ?>" alt="<?php echo esc($produto->nome); ?>">
     
                 <?php else :?>
@@ -30,13 +30,15 @@
                 <?php endif?>
             </div>
 
-            <a href="<?php echo site_url("admin/produtos/editarimagem/$produto->id"); ?>"
+            <?php if($produto->deletado_em == null): ?>
+                <a href="<?php echo site_url("admin/produtos/editarimagem/$produto->id"); ?>"
                     class="btn btn-outline-primary btn-sm mb-2" data-toggle="tooltip"
                     data-placement="top" title="Editar">
                     <i class="mdi mdi-image btn-icon-prepend"></i>
                     Editar
                 </a>
-            <hr>
+                <hr>
+            <?php endif; ?>
 
             <p class="card-text">
                 <span class="font-weight-bold">Nome: </span>
@@ -95,6 +97,12 @@
                     data-placement="top" title="Editar usuário">
                     <i class="mdi mdi-box-cutter btn-icon-prepend"></i>
                     Extras
+                </a>
+                <a href="<?php echo site_url("admin/produtos/especificacoes/$produto->id"); ?>"
+                    class="btn btn-outline-warning btn-sm btn-icon-tex btn-icon-prepend btn-icon-text mr-2" data-toggle="tooltip"
+                    data-placement="top" title="Editar usuário">
+                    <i class="mdi mdi-stack-overflow btn-icon-prepend"></i>
+                    Especificacoes
                 </a>
                 <a href="<?php echo site_url("admin/produtos/excluir/$produto->id"); ?>"
                     class="btn btn-danger btn-sm btn-icon-tex btn-icon-prepend mr-2" data-toggle="tooltip"

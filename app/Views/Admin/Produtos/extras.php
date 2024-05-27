@@ -5,8 +5,33 @@
 <?php echo $this->endSection(); ?>
 
 <?php echo $this->section('estilos'); ?>
-<link rel="stylesheet" href="<?php echo	site_url('admin/vendors/select2/select2.min.css'); ?>"
+<link rel="stylesheet" href="<?php echo	site_url('admin/vendors/select2/select2.min.css'); ?>"/>
+<style>
 
+    .select2-container .select2-selection--single {
+        display: block;
+        width: 100%;
+        height: 2.875rem;
+        padding: 0.875rem 1.375rem;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1;
+        color: #495057;
+        background-color: #ffffff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 2px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 18px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        top: 80%;
+    }
+
+</style>
 
 <?php echo $this->endSection(); ?>
 
@@ -66,7 +91,7 @@
             <div class="form-row mt-5">
 
             <div class="col-md-12">
-                            <?php if(empty($produtosExtras)): ?>
+                            <?php if(empty($produtoExtras)): ?>
                                 
                                 <p> Esse produto não possui extras no momento. </p>
 
@@ -86,7 +111,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($produtosExtras as $extraProduto): ?>
+                                        <?php foreach($produtoExtras as $extraProduto): ?>
 
                                             <tr>
                                                 <td><?php echo esc($extraProduto->extra); ?></td>
