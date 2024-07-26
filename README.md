@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Este projeto é o resultado do Trabalho de Conclusão de Curso (TCC) desenvolvido por Vinicius Almeida Hermes e Eduardo Moritz como parte do curso Técnico em Informática integrado ao ensino médio do Colegio Cívico Militar Amâncio Moro, com o objetivo de obtenção da certificação no referido curso.
+Este projeto é o resultado do Trabalho de Conclusão de Curso (TCC) desenvolvido por Vinicius Almeida Hermes como parte do curso Técnico em Informática integrado ao ensino médio do Colegio Cívico Militar Amâncio Moro, com o objetivo de obtenção da certificação no referido curso.
 
 O sistema consiste em uma plataforma de food delivery desenvolvida em PHP utilizando o framework CodeIgniter. Ele permite que usuários se cadastrem, tenham acesso ao menu e realizem seus pedidos online de alimentos do restaurante.
 
