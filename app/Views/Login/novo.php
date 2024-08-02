@@ -54,10 +54,10 @@
                     </div>
                     <?php endif ?>
 
-
+<!-- 
                     <div class="brand-logo">
-                        <img src="<?php echo site_url('admin/') ?>images/logo.svg" alt="logo">
-                    </div>
+                        <img src="<?php echo site_url('admin/') ?>images/" alt="logo">
+                    </div> -->
                     <h4>Olá. Seja bem vindo(a)!</h4>
                     <h6 class="font-weight-light mb-4">Faça o login para continuar.</h6>
 
