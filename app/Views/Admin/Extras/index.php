@@ -59,7 +59,7 @@
                                 <?php if($extra->deletado_em != null): ?>
                                 <a href="<?php echo site_url("admin/extras/desfazerexclusao/$extra->id"); ?>"
                                     class="badge badge-dark ml-4"
-                                    data-toggle="tooltip" data-placement="top" title="Recuperar usuário">
+                                    data-toggle="tooltip" data-placement="top" title="Recuperar extra">
                                     <i class="mdi mdi-undo btn-icon-prepend"></i>
                                     Recuperar
                                 </a>

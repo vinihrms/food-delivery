@@ -49,7 +49,6 @@
                                     <?php echo $forma->nome; ?>
                                 </a>
                             </td>
-                            <td>R$&nbsp;<?php echo esc(number_format($forma->preco, 2)) ?></td>
                             <td><?php echo $forma->criado_em->humanize(); ?></td>
                             <td><?php echo ($forma->ativo && $forma->deletado_em == null ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>'); ?>
                             <td>
@@ -58,7 +57,7 @@
                                 <?php if($forma->deletado_em != null): ?>
                                 <a href="<?php echo site_url("admin/formas/desfazerexclusao/$forma->id"); ?>"
                                     class="badge badge-dark ml-4"
-                                    data-toggle="tooltip" data-placement="top" title="Recuperar usuário">
+                                    data-toggle="tooltip" data-placement="top" title="Recuperar forma de pagamento">
                                     <i class="mdi mdi-undo btn-icon-prepend"></i>
                                     Recuperar
                                 </a>
@@ -90,7 +89,7 @@ $(function() {
     $("#query").autocomplete({
         source: function(request, response) {
             $.ajax({
-                url: "<?php echo site_url('admin/formas/procurar') ?>",
+                url: "<?php echo site_url('admin/formaspagamento/procurar') ?>",
                 dataType: "json",
                 data: {
                     term: request.term

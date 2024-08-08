@@ -11,7 +11,7 @@
 
 <?php echo $this->section('conteudo'); ?>
 
-<div class="col-lg-6 grid-margin stretch-card">
+<div class="col-lg-4     grid-margin stretch-card">
     <div class="card">
         <div class="card-header bg-primary pb-0 pt-4">
             <h4 class="card-title text-white "><?php echo esc($titulo); ?></h4>
@@ -27,11 +27,11 @@
             <?php endif;?>
 
 
-            <?php echo form_open("admin/extras/cadastrar"); ?>
+            <?php echo form_open("admin/formas/cadastrar"); ?>
 
-            <?php echo $this->include('Admin/Extras/form'); ?>
+            <?php echo $this->include('Admin/FormasPagamento/form'); ?>
 
-            <a href="<?php echo site_url("admin/extras"); ?>"
+            <a href="<?php echo site_url("admin/formas"); ?>"
                 class="btn btn-light btn-sm btn-icon-tex btn-icon-prepend">
                 <i class="mdi mdi-keyboard-backspace btn-icon-prepend"></i>
                 Voltar

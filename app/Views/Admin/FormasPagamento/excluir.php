@@ -27,10 +27,10 @@
             <?php endif;?>
 
 
-            <?php echo form_open("admin/extras/excluir/$extra->id"); ?>
+            <?php echo form_open("admin/formas/excluir/$forma->id"); ?>
 
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Atenção!</strong> Tem certeza da exclusão da extra <strong> <?php echo esc($extra->nome); ?>? </strong>
+                <strong>Atenção!</strong> Tem certeza da exclusão da forma de pagamento <strong> <?php echo esc($forma->nome); ?>? </strong>
                 </button>
             </div>
 
@@ -39,7 +39,7 @@
                 Excluir
             </button>
 
-            <a href="<?php echo site_url("admin/extras/show/$extra->id"); ?>"
+            <a href="<?php echo site_url("admin/formas/show/$forma->id"); ?>"
                 class="btn btn-light btn-sm btn-icon-tex btn-icon-prepend">
                 <i class="mdi mdi-keyboard-backspace btn-icon-prepend"></i>
                 Voltar

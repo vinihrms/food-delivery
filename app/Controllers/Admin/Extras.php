@@ -155,9 +155,6 @@ class Extras extends BaseController
             return redirect()->back()->with('info', "O extra $extra->nome já encontra-se excluído.");
         }
 
-        if ($extra->is_admin){
-            return redirect()->back()->with('info', 'Não é possivel excluir um extra <b>administrador</b>');
-        }
 
         if($this->request->getMethod() === 'post'){
             $this->extraModel->delete($id);
