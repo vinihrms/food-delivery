@@ -192,34 +192,40 @@
                     
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo site_url('admin/categorias')?>">
-                            <i class="mdi mdi-box-shadow menu-icon"></i>
+                            <i class="mdi mdi-format-list-bulleted-type menu-icon"></i>
                             <span class="menu-title">Categorias</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo site_url('admin/extras')?>">
-                            <i class="mdi mdi-ruler menu-icon"></i>
+                            <i class="mdi mdi-plus-box menu-icon"></i>
                             <span class="menu-title">Extras</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo site_url('admin/medidas')?>">
-                            <i class="mdi mdi-plus-box menu-icon"></i>
+                            <i class="mdi mdi-ruler menu-icon"></i>
                             <span class="menu-title">Medidas</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo site_url('admin/produtos')?>">
-                            <i class="mdi mdi-silverware menu-icon"></i>
+                            <i class="mdi mdi-food menu-icon"></i>
                             <span class="menu-title">Produtos</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo site_url('admin/formas')?>">
-                            <i class="mdi mdi-silverware menu-icon"></i>
+                            <i class="mdi mdi-credit-card-multiple menu-icon"></i>
                             <span class="menu-title">Formas de Pagamento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo site_url('admin/entregadores')?>">
+                            <i class="mdi mdi-motorbike menu-icon"></i>
+                            <span class="menu-title">Entregadores</span>
                         </a>
                     </li>
 
