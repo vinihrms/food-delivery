@@ -21,8 +21,10 @@
                 <input placeholder="Pesquise por um entregador" id="query" name="query" class="form-control bg-light mb-5">
             </div>
 
-            <a href="<?php echo site_url("admin/entregadores/criar"); ?>" class="btn btn-success btn-icon-tex btn-icon-prepend float-right mb-5" data-toggle="tooltip" data-placement="top" title="Cadastrar usuário">
-                <i class="mdi mdi-account-plus btn-icon-prepend"></i>
+            <a href="<?php echo site_url("admin/entregadores/criar"); ?>"
+                class="btn btn-success btn-icon-tex btn-icon-prepend float-right mb-5"
+                data-toggle="tooltip" data-placement="top" title="Cadastrar entregador">
+                <i class="mdi mdi-plus btn-icon-prepend"></i>
                 Cadastrar
             </a>
 
@@ -35,6 +37,7 @@
                             <th>Nome</th>
                             <th>Telefone</th>
                             <th>Placa</th>
+                            <th>Data de criação</th>
                             <th>Ativo</th>
                             <th>Situação</th>
                         </tr>
@@ -42,24 +45,35 @@
                     <tbody>
                         <tr>
 
-                            <?php foreach ($entregadores as $entregadores) : ?>
+                            <?php foreach ($entregadores as $entregador) : ?>
 
                                 <td class="py-1">
-                                    <img src="<?php echo site_url('admin/')?>images/faces/face1.jpg" alt="image" />
+
+                                    <?php if($entregador->imagem): ?>
+                                        <img src="<?php echo site_url("admin/entregadores/imagem/$entregador->imagem")?>" alt="<?php echo esc($entregador->nome) ?>" />
+
+                                        <?php else: ?>
+                                            <img src="<?php echo site_url("admin/images/entregador-sem-foto.png")?>" alt="Entregador sem foto" />
+
+                                        <?php endif ?>
+
                                 </td>
                                 <td>
-                                    <a href="<?php echo site_url("admin/entregadores/show/$entregadores->id"); ?>">
-                                        <?php echo $entregadores->nome; ?>
+                                    <a href="<?php echo site_url("admin/entregadores/show/$entregador->id"); ?>">
+                                        <?php echo $entregador->nome; ?>
                                     </a>
                                 </td>
-                                <td><?php echo $entregadores->telefone; ?></td>
-                                <td><?php echo $entregadores->placa; ?></td>
-                                <td><?php echo ($entregadores->ativo && $entregadores->deletado_em == null ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>'); ?>
+                                <td><?php echo $entregador->telefone ?></td>
+                                <td><?php echo $entregador->placa ?></td>
+                                <td><?php echo $entregador->criado_em->humanize(); ?></td>
+                                <td><?php echo ($entregador->ativo && $entregador->deletado_em == null ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>'); ?>
                                 <td>
 
-                                    <?php echo ($entregadores->deletado_em == null ? '<label class="badge badge-success">Disponível</label>' : '<label class="badge badge-danger">Excluído</label>'); ?>
-                                    <?php if ($entregadores->deletado_em != null) : ?>
-                                        <a href="<?php echo site_url("admin/entregadores/desfazerexclusao/$entregadores->id"); ?>" class="badge badge-dark ml-4" data-toggle="tooltip" data-placement="top" title="Recuperar entregador">
+                                    <?php echo ($entregador->deletado_em == null ? '<label class="badge badge-success">Disponível</label>' : '<label class="badge badge-danger">Excluído</label>'); ?>
+                                    <?php if ($entregador->deletado_em != null): ?>
+                                        <a href="<?php echo site_url("admin/entregadores/desfazerexclusao/$entregador->id"); ?>"
+                                            class="badge badge-dark ml-4"
+                                            data-toggle="tooltip" data-placement="top" title="Recuperar entregador">
                                             <i class="mdi mdi-undo btn-icon-prepend"></i>
                                             Recuperar
                                         </a>
@@ -99,7 +113,7 @@
                     success: function(data) {
                         if (data.length < 1) {
                             var data = [{
-                                label: "Usuário não encontrado",
+                                label: "Entregador não encontrado",
                                 value: -1
                             }];
                         }

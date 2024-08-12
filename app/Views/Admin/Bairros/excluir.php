@@ -11,7 +11,7 @@
 
 <?php echo $this->section('conteudo'); ?>
 
-<div class="col-lg-12 grid-margin stretch-card">
+<div class="col-lg-6 grid-margin stretch-card">
     <div class="card">
         <div class="card-header bg-primary pb-0 pt-4">
             <h4 class="card-title text-white "><?php echo esc($titulo); ?></h4>
@@ -26,11 +26,20 @@
             </ul>
             <?php endif;?>
 
-            <?php echo form_open("admin/entregadores/atualizar/$entregador->id"); ?>
 
-            <?php echo $this->include('Admin/entregadores/form'); ?>
+            <?php echo form_open("admin/extras/excluir/$extra->id"); ?>
 
-            <a href="<?php echo site_url("admin/entregadores/show/$entregador->id"); ?>"
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Atenção!</strong> Tem certeza da exclusão da extra <strong> <?php echo esc($extra->nome); ?>? </strong>
+                </button>
+            </div>
+
+            <button type="submit" class="btn btn-danger mr-2">
+                <i class="mdi mdi-delete btn-icon-prepend"></i>
+                Excluir
+            </button>
+
+            <a href="<?php echo site_url("admin/extras/show/$extra->id"); ?>"
                 class="btn btn-light btn-sm btn-icon-tex btn-icon-prepend">
                 <i class="mdi mdi-keyboard-backspace btn-icon-prepend"></i>
                 Voltar

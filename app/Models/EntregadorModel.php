@@ -38,9 +38,9 @@ class EntregadorModel extends Model
         'cpf'        => 'required|exact_length[14]|is_unique[entregadores.cpf]|validaCpf',
         'cnh'        => 'required|exact_length[11]|is_unique[entregadores.cpf]',
         'telefone'        => 'required|exact_length[15]|is_unique[entregadores.telefone]',
-        'endereco'        => 'required|max_lenght[230]',
-        'veiculo'        => 'required|max_lenght[230]',
-        'placa'        => 'required|min_lenght[7]|max_lenght[8]is_unique[entregadores.placa]',
+        'endereco'        => 'required|max_length[230]',
+        'veiculo'        => 'required|max_length[230]',
+        'placa'        => 'required|max_length[7]|max_length[8]|is_unique[entregadores.placa]',
 
     ];  
     protected $validationMessages = [

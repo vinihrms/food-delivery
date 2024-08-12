@@ -1,7 +1,7 @@
 $(function () {
     $('.money').mask('#,##0.00', {reverse: true});
     $('.cep').mask('00000-000');
-    $('.cnh').mask('00000000000'); // Criado quando trabalhamos no módulo Entregadores
+    $('.cnh').mask('00000000000'); 
     $('.cpf').mask('000.000.000-00', {reverse: true});
     $('.pis').mask('000.00000.00-0', {reverse: true});
     $('.phone_with_ddd').mask('(00) 0000-0000');
@@ -19,7 +19,6 @@ $(function () {
 
     $('.sp_celphones').mask(SPMaskBehavior, spOptions);
 
-    /*----------------------------Daqui para baixo Criado quando trabalhamos no módulo Entregadores */
     $(document).ready(function () {
         maskMercosul('.placa');
     });

@@ -27,10 +27,10 @@
             <?php endif;?>
 
 
-            <?php echo form_open("admin/usuarios/excluir/$usuario->id"); ?>
+            <?php echo form_open("admin/entregadores/excluir/$entregador->id"); ?>
 
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Atenção!</strong> Tem certeza da exclusão do usuario <strong> <?php echo esc($usuario->nome); ?>? </strong>
+                <strong>Atenção!</strong> Tem certeza da exclusão do entregador <strong> <?php echo esc($entregador->nome); ?>? </strong>
                 </button>
             </div>
 
@@ -39,7 +39,7 @@
                 Excluir
             </button>
 
-            <a href="<?php echo site_url("admin/usuarios/show/$usuario->id"); ?>"
+            <a href="<?php echo site_url("admin/entregadores/show/$entregador->id"); ?>"
                 class="btn btn-light btn-sm btn-icon-tex btn-icon-prepend">
                 <i class="mdi mdi-keyboard-backspace btn-icon-prepend"></i>
                 Voltar

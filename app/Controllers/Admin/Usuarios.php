@@ -86,18 +86,18 @@ class Usuarios extends BaseController
         }
     }
 
-    public function show($id = null) {
+        public function show($id = null) {
 
-        $usuario = $this->buscaUsuarioOu404($id);
+            $usuario = $this->buscaUsuarioOu404($id);
 
-        $data = [
-            'titulo' => "Detalhando o usuário $usuario->nome",
-            'usuario' => $usuario,
-        ];
+            $data = [
+                'titulo' => "Detalhando o usuário $usuario->nome",
+                'usuario' => $usuario,
+            ];
 
-        return view('Admin/Usuarios/show', $data);
-        
-    }
+            return view('Admin/Usuarios/show', $data);
+            
+        }
     /**
      * recebe id
      * retorna objeto usuario

@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<div class="form-check form-check-flat form-check-primary mb-2">
+<div class="form-check form-check-flat form-check-primary mb-4">
     <label for="ativo" class="form-check-label">
         <input type="hidden" value="0" name="ativo">
 

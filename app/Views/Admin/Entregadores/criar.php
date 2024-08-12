@@ -27,11 +27,11 @@
             <?php endif;?>
 
 
-            <?php echo form_open("admin/usuarios/cadastrar"); ?>
+            <?php echo form_open("admin/entregadores/cadastrar"); ?>
 
-            <?php echo $this->include('Admin/Usuarios/form'); ?>
+            <?php echo $this->include('Admin/entregadores/form'); ?>
 
-            <a href="<?php echo site_url("admin/usuarios"); ?>"
+            <a href="<?php echo site_url("admin/entregadores"); ?>"
                 class="btn btn-light btn-sm btn-icon-tex btn-icon-prepend">
                 <i class="mdi mdi-keyboard-backspace btn-icon-prepend"></i>
                 Voltar
