@@ -26,11 +26,11 @@
             </ul>
             <?php endif;?>
 
-            <?php echo form_open("admin/extras/atualizar/$extra->id"); ?>
+            <?php echo form_open("admin/bairros/atualizar/$bairro->id"); ?>
 
-            <?php echo $this->include('Admin/Extras/form'); ?>
+            <?php echo $this->include('Admin/Bairros/form'); ?>
 
-            <a href="<?php echo site_url("admin/extras/show/$extra->id"); ?>"
+            <a href="<?php echo site_url("admin/bairros/show/$bairro->id"); ?>"
                 class="btn btn-light btn-sm btn-icon-tex btn-icon-prepend">
                 <i class="mdi mdi-keyboard-backspace btn-icon-prepend"></i>
                 Voltar

@@ -22,19 +22,25 @@ class BairroModel extends Model
 
     // Validation
     protected $validationRules = [
-        'nome'     => 'required|max_length[120]|min_length[4]|is_unique[bairros.nome]',
+        'nome'     => 'required|max_length[120]|min_length[2]|is_unique[bairros.nome]',
+        'cidade'     => 'required|equals[Corbélia]',
         'valor_entrega'     => 'required',
-        'cep'     => 'required|exact_length[9]',
 
     ];
     protected $validationMessages = [
         'nome' => [
             'required' => 'O nome é obrigatório.',
-            'min_length' => 'O nome deve ter no mínimo 4 caracteres.',
+            'min_length' => 'O nome deve ter no mínimo 2 caracteres.',
             'is_unique' => 'Essa bairro já está cadastrado.'
+        ],
+        'cidade' => [
+            'required' => 'A cidade é obrigatório.',
+            'equals' => 'Essa aplicação ainda não aceita outra cidades. Se você deseja adicionar esta opção, contate o suporte técnico.',
         ],
         'valor_entrega' => [
             'required' => 'O valor de entrega é obrigatório.',
+            'max_length' => 'O valor deve ter no máximo 6 caracteres.',
+
         ],
     ];
 

@@ -61,7 +61,7 @@ class Extras extends BaseController
 
     private function buscaExtraOu404(int $id = null) {
         if(!$id || !$extra = $this->extraModel->withDeleted(true)->where('id', $id)->first()){
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Não encontramos a extra $id");
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Não encontramos o extra $id");
         }
         return $extra;
     }
@@ -118,7 +118,7 @@ class Extras extends BaseController
         $extra = new Extra();
 
         $data = [
-            'titulo' => "Criando novo extra",
+            'titulo' => "Cadastrando novo extra",
             'extra' => $extra,
         ];
 

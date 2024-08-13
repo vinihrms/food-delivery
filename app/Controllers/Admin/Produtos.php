@@ -292,7 +292,7 @@ class Produtos extends BaseController
         $produto = new Produto();
 
         $data = [
-            'titulo' => "Criando novo produto",
+            'titulo' => "Cadastrando novo produto",
             'produto' => $produto,
             'categorias' => $this->categoriaModel->where('ativo', true)->findAll()
         ];

@@ -162,7 +162,7 @@ class Medidas extends BaseController
         $medida = new Medida();
 
         $data = [
-            'titulo' => "Criando nova medida",
+            'titulo' => "Cadastrando nova medida",
             'medida' => $medida,
         ];
 

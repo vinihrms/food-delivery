@@ -57,7 +57,7 @@ class FormasPagamento extends BaseController
         $formaPagamento = new FormaPagamento();
 
         $data = [
-            'titulo' => "Criando a forma de pagamento",
+            'titulo' => "Cadastrando a forma de pagamento",
             'forma' => $formaPagamento
         ];  
 

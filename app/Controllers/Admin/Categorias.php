@@ -65,7 +65,7 @@ class Categorias extends BaseController
         $categoria = new Categoria();
 
         $data = [
-            'titulo' => "Criando nova categoria",
+            'titulo' => "Cadastrando nova categoria",
             'categoria' => $categoria,
         ];
 

@@ -27,11 +27,11 @@
             <?php endif;?>
 
 
-            <?php echo form_open("admin/extras/cadastrar"); ?>
+            <?php echo form_open("admin/bairros/cadastrar"); ?>
 
-            <?php echo $this->include('Admin/Extras/form'); ?>
+            <?php echo $this->include('Admin/Bairros/form'); ?>
 
-            <a href="<?php echo site_url("admin/extras"); ?>"
+            <a href="<?php echo site_url("admin/bairros"); ?>"
                 class="btn btn-light btn-sm btn-icon-tex btn-icon-prepend">
                 <i class="mdi mdi-keyboard-backspace btn-icon-prepend"></i>
                 Voltar
@@ -50,6 +50,48 @@
 <script src="<?php echo site_url('admin/vendors/mask/app.js'); ?>"></script>
 <script src="<?php echo site_url('admin/vendors/mask/jquery.mask.min.js'); ?>"></script>
 
+<script>
+    $('#btn-salvar').prop('disabled', true);
+    $('[name=cep]').focusout(function () {
+        var cep = $(this).val();
+
+        $.ajax({
+            type: 'get',
+            url: '<?php echo site_url('admin/bairros/consultacep'); ?>',
+            dataType: 'json',
+            data: {
+                cep: cep
+            },
+            beforeSend: function() {
+                $("#cep").html('Consultando...');
+
+                $('[name=nome]').val('');
+                $('[name=cidade]').val('');
+                $('[name=estado]').val('');
+
+                $('#btn-salvar').prop('disabled', true);
+            },
+            success: function (response) {
+                if(!response.erro){
+                    $('[name=nome]').val(response.endereco.bairro);
+                    $('[name=cidade]').val(response.endereco.localidade);
+                    $('[name=estado]').val(response.endereco.uf);
+
+                    $('#btn-salvar').prop('disabled', false);
+
+                    $("#cep").html('');
+
+                } else {
+                    $("#cep").html(response.erro);
+                }
+            },
+            error: function() {
+                alert('Não foi possível consultar o CEP. Consulte o suporte técnico.');
+                $('#btn-salvar').prop('disabled', true);
+            },
+        });
+    });
+</script>
 
 
 <?php echo $this->endSection(); ?>

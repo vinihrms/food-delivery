@@ -68,20 +68,20 @@
 
                 <a href="<?php echo site_url("admin/extras/editar/$extra->id"); ?>"
                     class="btn btn-dark btn-sm btn-icon-tex btn-icon-prepend btn-icon-text mr-2"
-                    data-toggle="tooltip" data-placement="top" title="Editar usuário">
+                    data-toggle="tooltip" data-placement="top" title="Editar extra">
                     <i class="mdi mdi-lead-pencil btn-icon-prepend"></i>
                     Editar
                 </a>
                 <a href="<?php echo site_url("admin/extras/excluir/$extra->id"); ?>"
                     class="btn btn-danger btn-sm btn-icon-tex btn-icon-prepend mr-2"
-                    data-toggle="tooltip" data-placement="top" title="Excluír usuário">
+                    data-toggle="tooltip" data-placement="top" title="Excluír extra">
                     <i class="mdi mdi-delete btn-icon-prepend"></i>
                     Excluir
                 </a>
 
                 <?php else:?>
                     <a href="<?php echo site_url("admin/extras/desfazerexclusao/$extra->id"); ?>"
-                    class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top" title="Recuperar usuário">
+                    class="btn btn-dark btn-sm" data-toggle="tooltip" data-placement="top" title="Recuperar extra">
                     <i class="mdi mdi-undo btn-icon-prepend"></i>
                     Recuperar
                 </a>
