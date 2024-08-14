@@ -6,7 +6,7 @@
     </div>
 
     <div class="form-group col-md-4">
-        <label for="categoria_id"> Categoria </label>
+        <a href="<?php echo site_url('admin/categorias/criar'); ?>"><label for="categoria_id"> Categoria </label></a>
         <select class="form-control" name="categoria_id"> 
             <option value=""> Escolha a categoria... </option>
 
@@ -21,8 +21,8 @@
             <?php endforeach; ?>
 
         </select>
-
     </div>
+
 
     <div class="form-group col-md-12">
         <label for="ingredientes">Ingredientes</label>

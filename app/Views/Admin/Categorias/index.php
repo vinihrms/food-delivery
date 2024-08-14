@@ -25,7 +25,7 @@
                 class="btn btn-success btn-icon-tex btn-icon-prepend float-right mb-5"
                 data-toggle="tooltip" data-placement="top" title="Cadastrar categoria">
                 <i class="mdi mdi-plus btn-icon-prepend"></i>
-                Criar
+                Cadastrar
             </a>
 
 

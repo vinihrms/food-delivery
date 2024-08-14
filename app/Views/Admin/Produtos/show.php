@@ -101,9 +101,9 @@
                     </a>
                     <a href="<?php echo site_url("admin/produtos/especificacoes/$produto->id"); ?>"
                         class="btn btn-outline-warning btn-sm btn-icon-tex btn-icon-prepend btn-icon-text mr-2" data-toggle="tooltip"
-                        data-placement="top" title="Gerenciar expecificações">
+                        data-placement="top" title="Gerenciar especificações">
                         <i class="mdi mdi-stack-overflow btn-icon-prepend"></i>
-                        Especificacoes
+                        Especificacões
                     </a>
                     <a href="<?php echo site_url("admin/produtos/excluir/$produto->id"); ?>"
                         class="btn btn-danger btn-sm btn-icon-tex btn-icon-prepend mr-2 mt-2" data-toggle="tooltip"

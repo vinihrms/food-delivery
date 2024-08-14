@@ -25,7 +25,7 @@
                 class="btn btn-success btn-icon-tex btn-icon-prepend float-right mb-5"
                 data-toggle="tooltip" data-placement="top" title="Cadastrar produto">
                 <i class="mdi mdi-plus btn-icon-prepend"></i>
-                Criar
+                Cadastrar
             </a>
 
 
@@ -35,6 +35,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Categoria</th>
+                            <th>Especificações</th>
                             <th>Data de criação</th>
                             <th>Ativo</th>
                             <th>Situação</th>
@@ -45,28 +46,47 @@
 
                             <?php foreach ($produtos as $produto) : ?>
 
-                            <td>
-                                <a href="<?php echo site_url("admin/produtos/show/$produto->id"); ?>">
-                                    <?php echo $produto->nome; ?>
-                                </a>
-                            </td>
-                            <td><?php echo $produto->categoria; ?></td>
-                            <td><?php echo $produto->criado_em->humanize(); ?></td>
-                            <td><?php echo ($produto->ativo && $produto->deletado_em == null ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>'); ?>
-                            <td>
+                                <td>
+                                    <a href="<?php echo site_url("admin/produtos/show/$produto->id"); ?>">
+                                        <?php echo $produto->nome; ?>
+                                    </a>
+                                </td>
+                                <td><?php echo $produto->categoria; ?></td>
+                                <td>
+                                    <?php
+                                    $hasEspecificacao = false;
+                                    foreach ($especificacoes as $especificacao):
+                                    ?>
+                                        <?php if ($produto->id == $especificacao->produto_id): ?>
+                                            <p>
+                                                <?php echo esc($especificacao->nome); ?>: R$&nbsp;<?php echo esc($especificacao->preco); ?>
+                                            </p>
+                                            <?php $hasEspecificacao = true; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
 
-                                <?php echo ($produto->deletado_em == null ? '<label class="badge badge-success">Disponível</label>' : '<label class="badge badge-danger">Excluído</label>'); ?>
-                                <?php if($produto->deletado_em != null): ?>
-                                <a href="<?php echo site_url("admin/produtos/desfazerexclusao/$produto->id"); ?>"
-                                    class="badge badge-dark ml-4"
-                                    data-toggle="tooltip" data-placement="top" title="Recuperar usuário">
-                                    <i class="mdi mdi-undo btn-icon-prepend"></i>
-                                    Recuperar
-                                </a>
-                                <?php endif?>
-                            </td>
+                                    <?php if (!$hasEspecificacao): ?>
+                                        <p class="text-danger">
+                                            Sem especificação definida
+                                        </p>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?php echo $produto->criado_em->humanize(); ?></td>
+                                <td><?php echo ($produto->ativo && $produto->deletado_em == null ? '<label class="badge badge-primary">Sim</label>' : '<label class="badge badge-danger">Não</label>'); ?>
+                                <td>
+
+                                    <?php echo ($produto->deletado_em == null ? '<label class="badge badge-success">Disponível</label>' : '<label class="badge badge-danger">Excluído</label>'); ?>
+                                    <?php if ($produto->deletado_em != null): ?>
+                                        <a href="<?php echo site_url("admin/produtos/desfazerexclusao/$produto->id"); ?>"
+                                            class="badge badge-dark ml-4"
+                                            data-toggle="tooltip" data-placement="top" title="Recuperar usuário">
+                                            <i class="mdi mdi-undo btn-icon-prepend"></i>
+                                            Recuperar
+                                        </a>
+                                    <?php endif ?>
+                                </td>
                         </tr>
-                        <?php endforeach; ?>
+                    <?php endforeach; ?>
 
                     </tbody>
                 </table>
@@ -87,38 +107,38 @@
 <script src="<?php echo site_url('admin/vendors/auto-complete/jquery-ui.js'); ?>"></script>
 
 <script>
-$(function() {
-    $("#query").autocomplete({
-        source: function(request, response) {
-            $.ajax({
-                url: "<?php echo site_url('admin/produtos/procurar') ?>",
-                dataType: "json",
-                data: {
-                    term: request.term
-                },
-                success: function(data) {
-                    if (data.length < 1) {
-                        var data = [{
-                            label: "Produto não encontrado",
-                            value: -1
-                        }];
-                    }
-                    response(data)
-                },
-            })
-        },
-        minLength: 1,
-        select: function(event, ui) {
-            if (ui.item.value == -1) {
-                $(this).val("");
-                return false
-            } else {
-                window.location.href = '<?php echo site_url('admin/produtos/show/'); ?>' + ui.item
-                    .id;
+    $(function() {
+        $("#query").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: "<?php echo site_url('admin/produtos/procurar') ?>",
+                    dataType: "json",
+                    data: {
+                        term: request.term
+                    },
+                    success: function(data) {
+                        if (data.length < 1) {
+                            var data = [{
+                                label: "Produto não encontrado",
+                                value: -1
+                            }];
+                        }
+                        response(data)
+                    },
+                })
+            },
+            minLength: 1,
+            select: function(event, ui) {
+                if (ui.item.value == -1) {
+                    $(this).val("");
+                    return false
+                } else {
+                    window.location.href = '<?php echo site_url('admin/produtos/show/'); ?>' + ui.item
+                        .id;
+                }
             }
-        }
+        });
     });
-});
 </script>
 
 <?php echo $this->endSection(); ?>
