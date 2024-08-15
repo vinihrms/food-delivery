@@ -25,7 +25,7 @@ class FormaDePagamentoModel extends Model
     protected $deletedField  = 'deletado_em';
 
     protected $validationRules = [
-        'nome'     => 'required|max_length[120]|min_length[3]|is_unique[formas_pagamento.nome]',
+        'nome'     => 'required|max_length[120]|min_length[3]|is_unique[formas_pagamento.nome,id,{id}]',
 
     ];
     protected $validationMessages = [

@@ -21,7 +21,7 @@ class ProdutoModel extends Model
 
     // Validation
     protected $validationRules = [
-        'nome'     => 'required|max_length[120]|min_length[4]|is_unique[produtos.nome]',
+        'nome'     => 'required|max_length[120]|min_length[4]|is_unique[produtos.nome,id,{id}]',
         'ingredientes'     => 'required|max_length[1000]|min_length[10]',
         'categoria_id' => 'required|integer'
 
@@ -43,35 +43,58 @@ class ProdutoModel extends Model
 
     ];
 
-    public function procurar($term) {
-        if($term === null){
+    public function procurar($term)
+    {
+        if ($term === null) {
             return [];
         };
 
         return $this->select('id, nome')
-                ->like('nome', $term)
-                ->withDeleted(true)
-                ->get()
-                ->getResult();
+            ->like('nome', $term)
+            ->withDeleted(true)
+            ->get()
+            ->getResult();
     }
-    
-    public function desfazerexclusao(int $id){
+
+    public function desfazerexclusao(int $id)
+    {
         return $this->protect(false)->where('id', $id)
-                                    ->set('deletado_em', null)
-                                    ->update();
+            ->set('deletado_em', null)
+            ->update();
     }
-    
+
 
     //eventos callback
     protected $beforeInsert = ['criaSlug'];
     protected $beforeUpdate = ['criaSlug'];
 
-    protected function criaSlug(array $data) {
+    protected function criaSlug(array $data)
+    {
 
-        if(isset($data['data']['nome'])){
+        if (isset($data['data']['nome'])) {
             $data['data']['slug'] = mb_url_title($data['data']['nome'], '-', true);
-            
         }
         return $data;
+    }
+
+    public function buscaProdutosWebHome()
+    {
+        return $this->select([
+            'produtos.id',
+            'produtos.nome',
+            'produtos.ingredientes',
+            'produtos.imagem',
+            'produtos.slug',
+            'categorias.id AS categoria_id',
+            'categorias.nome AS categoria',
+            'categorias.slug AS categoria_slug',
+        ])
+            ->selectMin('produtos_especificacoes.preco')
+            ->join('categorias', 'categorias.id = produtos.categoria_id')
+            ->join('produtos_especificacoes', 'produtos_especificacoes.produto_id = produtos.id')
+            ->where('produtos.ativo', true)
+            ->groupBy('produtos.nome')
+            ->orderBy('categorias.nome', 'ASC')
+            ->findAll();
     }
 }

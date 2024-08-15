@@ -107,10 +107,10 @@
                                     </div>
                                 </div>
                                 <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Delicious Food</h4>
+                                    <h4 class="item_name">Produto</h4>
                                     <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                     <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Make Reservation</a>
+                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
                                     </div>
                                 </div>
                             </div>
@@ -126,10 +126,10 @@
                                     </div>
                                 </div>
                                 <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Delicious Food</h4>
+                                    <h4 class="item_name">Produto</h4>
                                     <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                     <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Make Reservation</a>
+                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
                                     </div>
                                 </div>
                             </div>
@@ -145,10 +145,10 @@
                                     </div>
                                 </div>
                                 <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Delicious Food</h4>
+                                    <h4 class="item_name">Produto</h4>
                                     <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                     <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Make Reservation</a>
+                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
                                     </div>
                                 </div>
                             </div>
@@ -164,10 +164,10 @@
                                     </div>
                                 </div>
                                 <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Delicious Food</h4>
+                                    <h4 class="item_name">Produto</h4>
                                     <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                     <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Make Reservation</a>
+                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
                                     </div>
                                 </div>
                             </div>
@@ -186,7 +186,7 @@
                                     <h4 class="item_name">Delicious Food</h4>
                                     <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                     <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Make Reservation</a>
+                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
                                     </div>
                                 </div>
                             </div>
@@ -206,9 +206,9 @@
 
                         <div class="navbar_top hidden-xs">
                             <div class="top_addr">
-                                <span><i class="fa fa-map-marker" aria-hidden="true"></i> Your country, your city, 12345</span>
-                                <span><i class="fa fa-phone" aria-hidden="true"></i> 123 456 789</span>
-                                <span><i class="fa fa-clock-o" aria-hidden="true"></i> 11:00 - 21:00</span>
+                                <span><i class="fa fa-map-marker" aria-hidden="true"></i> CORBÉLIA, PARANÁ, BRASIL - 85420-000</span>
+                                <span><i class="fa fa-phone" aria-hidden="true"></i> (99) 99999-9999</span>
+                                <span><i class="fa fa-clock-o" aria-hidden="true"></i> 19:00 - 23:00</span>
                                 <div class="pull-right search-block">
                                     <i class="fa fa-search" id="search" aria-hidden="true"></i>
                                 </div>
@@ -227,8 +227,8 @@
                             <div id="navbar_content">
                                 <!-- Brand and toggle get grouped for better mobile display -->
                                 <div class="navbar-header">
-                                    <a class="navbar-brand" href="#">
-                                        <img src="<?php echo site_url('web/'); ?>src/assets/img/logo.png" alt="logo" />
+                                    <a class="navbar-brand" href="/">
+                                        <img src="<?php echo site_url('web/'); ?>src/assets/img/" alt="logo" />
                                     </a>
                                     <a href="#cd-nav" class="cd-nav-trigger right_menu_icon">
                                         <span><i class="fa fa-bars" aria-hidden="true"></i></span>
@@ -240,14 +240,13 @@
                                     <div class="navbar-right">
                                         <ul class="nav navbar-nav">
                                             <li><a class="page-scroll" href="#header">Home</a></li>
-                                            <li><a class="page-scroll" href="#about_us">About</a></li>
-                                            <li><a class="page-scroll" href="#menu">Menus</a></li>
-                                            <li><a class="page-scroll" href="#gallery">Gallery</a></li>
-                                            <li><a class="page-scroll" href="#reservation">Reservation</a></li>
-                                            <li><a class="page-scroll" href="#footer">Contact</a></li>
+                                            <li><a class="page-scroll" href="#about_us">Sobre</a></li>
+                                            <li><a class="page-scroll" href="#menu">Cardápio</a></li>
+                                            <li><a class="page-scroll" href="#gallery">Galeria</a></li>
+                                            <li><a class="page-scroll" href="#footer">Contato</a></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div>  
                                 <!-- /.navbar-collapse -->
                             </div>
                         </nav>
@@ -272,13 +271,13 @@
 
             <!--    Google map, Social links    -->
             <div class="section" id="contact">
-                <div id="googleMap"></div>
+                <!-- <div id="googleMap"></div> -->
                 <div class="footer_pos">
                     <div class="container">
                         <div class="footer_content">
                             <div class="row">
                                 <div class="col-sm-6 col-md-4">
-                                    <h4 class="footer_ttl footer_ttl_padd">about us</h4>
+                                    <h4 class="footer_ttl footer_ttl_padd">Sobre nós</h4>
                                     <p class="footer_txt">Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries but also the leap into electronic typesetting. </p>
                                 </div>
                                 <div class="col-sm-6 col-md-5">
@@ -425,15 +424,15 @@
         <ul class="rmenu_list">
             <li><a class="page-scroll" href="#header">Home</a></li>
             <li><a class="page-scroll" href="#about_us">About</a></li>
-            <li><a class="page-scroll" href="#menu">Menus</a></li>
+            <li><a class="page-scroll" href="#menu">Cardápio</a></li>
             <li><a class="page-scroll" href="#gallery">Gallery</a></li>
             <li><a class="page-scroll" href="#reservation">Reservation</a></li>
             <li><a class="page-scroll" href="#footer">Contact</a></li>
         </ul>
         <div class="right_menu_addr top_addr">
-            <span><i class="fa fa-map-marker" aria-hidden="true"></i> Your country, your city, 12345</span>
-            <span><i class="fa fa-phone" aria-hidden="true"></i> 123 456 789</span>
-            <span><i class="fa fa-clock-o" aria-hidden="true"></i> 11:00 - 21:00</span>
+            <span><i class="fa fa-map-marker" aria-hidden="true"></i> CORBÉLIA, PARANÁ, BRASIL - 85420-000</span>
+            <span><i class="fa fa-phone" aria-hidden="true"></i> (99) 99999-9999</span>
+            <span><i class="fa fa-clock-o" aria-hidden="true"></i> 19:00 - 23:00</span>
         </div>
     </nav>
 
@@ -457,7 +456,7 @@
     <script src="<?php echo site_url('web/'); ?>src/assets/js/jquery.fancybox.js"></script>
     <script src="<?php echo site_url('web/'); ?>src/assets/js/loadMoreResults.js"></script>
     <script src="<?php echo site_url('web/'); ?>src/assets/js/main.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcg5Y2D1fpGI12T8wcbtPIsyGdw-_NV1Y&amp;callback=myMap"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcg5Y2D1fpGI12T8wcbtPIsyGdw-_NV1Y&amp;callback=myMap"></script> -->
 
     <!-- essa section renderiza os scripts especificos da view que estender esse layout -->
     <?php echo $this->renderSection('scripts') ?>

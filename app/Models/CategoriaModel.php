@@ -22,7 +22,7 @@ class CategoriaModel extends Model
 
     // Validation
     protected $validationRules = [
-        'nome'     => 'required|max_length[120]|min_length[4]|is_unique[categorias.nome]',
+        'nome'     => 'required|max_length[120]|min_length[4]|is_unique[categorias.nome,id,{id}]',
 
     ];
     protected $validationMessages = [
@@ -65,4 +65,11 @@ class CategoriaModel extends Model
                                     ->update();
     }
 
+    public function buscaCategoriasWebHome()
+    {
+        return $this->select('id, nome, slug')
+                    ->where('ativo', true)
+                    ->orderBy('nome', 'ASC')
+                    ->findAll();
+    }
 }
