@@ -78,23 +78,24 @@ class ProdutoModel extends Model
     }
 
     public function buscaProdutosWebHome()
-    {
-        return $this->select([
-            'produtos.id',
-            'produtos.nome',
-            'produtos.ingredientes',
-            'produtos.imagem',
-            'produtos.slug',
-            'categorias.id AS categoria_id',
-            'categorias.nome AS categoria',
-            'categorias.slug AS categoria_slug',
-        ])
-            ->selectMin('produtos_especificacoes.preco')
-            ->join('categorias', 'categorias.id = produtos.categoria_id')
-            ->join('produtos_especificacoes', 'produtos_especificacoes.produto_id = produtos.id')
-            ->where('produtos.ativo', true)
-            ->groupBy('produtos.nome')
-            ->orderBy('categorias.nome', 'ASC')
-            ->findAll();
-    }
+{
+    return $this->select([
+        'produtos.id',
+        'produtos.nome',
+        'produtos.ingredientes',
+        'produtos.imagem',
+        'produtos.slug',
+        'categorias.id AS categoria_id',
+        'categorias.nome AS categoria',
+        'categorias.slug AS categoria_slug',
+    ])
+    ->selectMin('produtos_especificacoes.preco', 'min_preco')
+    ->join('categorias', 'categorias.id = produtos.categoria_id')
+    ->join('produtos_especificacoes', 'produtos_especificacoes.produto_id = produtos.id')
+    ->where('produtos.ativo', true)
+    ->groupBy('produtos.id')
+    ->orderBy('categorias.nome', 'ASC')
+    ->findAll();
+}
+
 }

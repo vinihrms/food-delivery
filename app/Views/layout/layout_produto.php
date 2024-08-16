@@ -73,124 +73,7 @@
 
             <!-- BEGIN carousel -->
             <div id="main-carousel" class="carousel slide" data-ride="carousel">
-                <div class="container pos_rel">
-
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#main-carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#main-carousel" data-slide-to="1"></li>
-                        <li data-target="#main-carousel" data-slide-to="2"></li>
-                        <li data-target="#main-carousel" data-slide-to="3"></li>
-                        <li data-target="#main-carousel" data-slide-to="4"></li>
-                    </ol>
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#main-carousel" role="button" data-slide="prev">
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                    </a>
-                    <a class="right carousel-control" href="#main-carousel" role="button" data-slide="next">
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-
-                        <!-- Carousel items   -->
-                        <div class="item active">
-                            <div class="carousel-caption">
-                                <div class="fadeUp item_img">
-                                    <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/pizza.png" alt="sample" />
-                                    <div class="item_badge">
-                                        <span class="badge_btext">20%</span>
-                                        <span class="badge_stext">OFF</span>
-                                    </div>
-                                </div>
-                                <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Produto</h4>
-                                    <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="carousel-caption">
-                                <div class="fadeUp item_img">
-                                    <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/tortilla.png" alt="sample" />
-                                    <div class="item_badge">
-                                        <span class="badge_btext">20%</span>
-                                        <span class="badge_stext">OFF</span>
-                                    </div>
-                                </div>
-                                <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Produto</h4>
-                                    <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="carousel-caption">
-                                <div class="fadeUp item_img">
-                                    <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/burger.png" alt="sample" />
-                                    <div class="item_badge">
-                                        <span class="badge_btext">20%</span>
-                                        <span class="badge_stext">OFF</span>
-                                    </div>
-                                </div>
-                                <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Produto</h4>
-                                    <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="carousel-caption">
-                                <div class="fadeUp item_img">
-                                    <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/pizza.png" alt="sample" />
-                                    <div class="item_badge">
-                                        <span class="badge_btext">20%</span>
-                                        <span class="badge_stext">OFF</span>
-                                    </div>
-                                </div>
-                                <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Produto</h4>
-                                    <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="carousel-caption">
-                                <div class="fadeUp item_img">
-                                    <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/burger.png" alt="sample" />
-                                    <div class="item_badge">
-                                        <span class="badge_btext">20%</span>
-                                        <span class="badge_stext">OFF</span>
-                                    </div>
-                                </div>
-                                <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Delicious Food</h4>
-                                    <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="container pos_rel2">
 
                 </div>
                 <!-- /.container -->
@@ -203,22 +86,12 @@
                 <div class="navbar-container" data-spy="affix" data-offset-top="400">
                     <div class="container">
 
-                        <div class="navbar_top hidden-xs">
-                            <div class="top_addr">
-                                <span><i class="fa fa-map-marker" aria-hidden="true"></i> CORBÉLIA, PARANÁ, BRASIL - 85420-000</span>
-                                <span><i class="fa fa-phone" aria-hidden="true"></i> (99) 99999-9999</span>
-                                <span><i class="fa fa-clock-o" aria-hidden="true"></i> 19:00 - 23:00</span>
-                                <div class="pull-right search-block">
-                                    <i class="fa fa-search" id="search" aria-hidden="true"></i>
-                                </div>
-                            </div>
                             <div id="navbar_search">
                                 <form method="post">
                                     <input type="text" name="q" class="form-control pull-left" value="" placeholder="Search anything">
                                     <button type="submit" class="pull-right close" id="search_close"><i class="fa fa-close"></i></button>
                                 </form>
                             </div>
-                        </div>
                         <!-- /.navbar_top -->
 
                         <!-- BEGIN navbar -->

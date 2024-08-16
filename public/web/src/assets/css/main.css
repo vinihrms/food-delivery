@@ -75,6 +75,13 @@ a:focus {
     align-items: center;
 }
 
+.pos_rel2 {
+    position: relative;
+    min-height: 10vh;
+    display: flex;
+    align-items: center;
+}
+
 .d-flex {
     display: flex !important;
     display: -ms-flexbox !important;

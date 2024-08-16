@@ -64,16 +64,16 @@
 
 
                 <div class="col-sm-6 filter-item image filter active <?php echo $produto->categoria_slug; ?>">
-                    <a href="<?php echo site_url('web/'); ?>src/assets/img/photos/food-6.jpg" class="block fancybox" data-fancybox-group="fancybox">
+                    <a href="<?php echo site_url("produto/detalhes/$produto->slug"); ?>" class="block fancybox" data-fancybox-group="fancybox">
                         <div class="content">
                             <div class="filter_item_img">
                                 <i class="fa fa-search-plus"></i>
-                                <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/food-6.jpg" alt="sample" />
+                                <img src="<?php echo site_url("produto/imagem/$produto->imagem"); ?>" alt="<?php echo esc($produto->nome) ?>" />
                             </div>
                             <div class="info">
-                                <div class="name">Pepper beef</div>
-                                <div class="short">Classic marinara sauce, authentic pepperoni</div>
-                                <span class="filter_item_price">$9.00</span>
+                                <div class="name"><?php echo esc($produto->nome) ?></div>
+                                <div class="short"><?php echo word_limiter($produto->ingredientes, 5) ?></div>
+                                <span class="filter_item_price">A partir de R$&nbsp;<?php echo esc(number_format($produto->min_preco, 2, ',', '.')) ?></span>
                             </div>
                         </div>
                     </a>
