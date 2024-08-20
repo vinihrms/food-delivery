@@ -7,12 +7,18 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Carrinho extends BaseController
 {
+    private $produtoEspecificacaoModel;
+    private $extraModel;
+    private $produtoModel;
 
     private $validacao;
 
     public function __construct()
     {
         $this->validacao = service('validation');
+        $this->produtoEspecificacaoModel = new \App\Models\ProdutoEspecificacaoModel();
+        $this->extraModel = new \App\Models\ExtraModel();
+        $this->produtoModel = new \App\Models\ProdutoModel();
     }
 
 
@@ -33,6 +39,7 @@ class Carrinho extends BaseController
                 'produto.preco' => ['label' => 'Valor', 'rules' => 'required|greater_than[0]'],
                 'produto.especificacao_id' => ['label' => 'Valor', 'rules' => 'required|greater_than[0]'],
                 'produto.quantidade' => ['label' => 'Quantidade', 'rules' => 'required|greater_than[0]'],
+
             ]);
 
             if (!$this->validacao->withRequest($this->request)->run()) {
@@ -40,8 +47,40 @@ class Carrinho extends BaseController
                 return redirect()->back()->with('errors_model', $this->validacao->getErrors())
                     ->with('atencao', 'Por favor, verifique os errors abaixo e tente novamente.')
                     ->withInput();
-
             }
+
+            //valida existencia da especificacao id
+
+            $especificacaoProduto = $this->produtoEspecificacaoModel
+            ->join('medidas', 'medidas.id = produtos_especificacoes.medida_id')
+            ->where('produtos_especificacoes.id', $produtoPost['especificacao_id'])->first();
+
+            if ($especificacaoProduto == null) {
+                return redirect()->back()
+                    ->with('fraude', "Não conseguimos processar a sua solicitação. Entre em contato com a nossa equipe e informe o codigo de erro. <strong> Erro: ADD-PROD-157 </strong>"); // FRAUDE FORMULARIO
+            }
+
+            if ($produtoPost['extra_id'] && $produtoPost['extra_id'] != "") {
+                $extra = $this->extraModel->where('id', $produtoPost['extra_id'])->first();
+
+                if ($extra == null) {
+                    return redirect()->back()
+                        ->with('fraude', "Não conseguimos processar a sua solicitação. Entre em contato com a nossa equipe e informe o codigo de erro. <strong> Erro: ADD-PROD-158 </strong>"); // FRAUDE FORMULARIO
+                }
+            }
+
+            $produto = $this->produtoModel->select(['id', 'nome', 'slug', 'ativo'])->where('slug', $produtoPost['slug'])->first()->toArray();
+
+
+
+            if ($produto == null || $produto['ativo'] == false) {
+                return redirect()->back()
+                    ->with('fraude', "Não conseguimos processar a sua solicitação. Entre em contato com a nossa equipe e informe o codigo de erro. <strong> Erro: ADD-PROD-159 </strong>"); // FRAUDE FORMULARIO
+            }
+
+            $produto['slug'] = mb_url_title($especificacaoProduto->nome . '-' . $produto['slug'] . '-' . (isset($extra) ? 'com extra' . '-' . $extra->nome : ''), '-', true);
+
+            dd($produto);
         } else {
             return redirect()->back();
         }

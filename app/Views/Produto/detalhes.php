@@ -17,7 +17,7 @@
     <!-- Verifique se há margens, paddings, ou outros estilos aplicados aqui -->
     <div class="col-sm-12 col-md-12 col-lg-12">
 
-        <div class="container">
+        <div class="row">
             <?php if (session()->has('sucesso')): ?>
                 <div class="alert alert-success" role="alert">
                     <?php echo session('sucesso'); ?>
@@ -35,6 +35,10 @@
 
                 <div class="alert alert-danger" role="alert"> <?php echo session('atencao'); ?></div>
 
+            <?php endif ?>
+
+            <?php if (session()->has('fraude')): ?>
+                <div class="alert alert-warning" role="alert"> <?php echo session('fraude'); ?></div>
             <?php endif ?>
 
             <!-- errors de CSRF ACAO NAO PERMITIDA -->

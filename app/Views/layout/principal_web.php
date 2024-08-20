@@ -215,7 +215,7 @@
                             </div>
                             <div id="navbar_search">
                                 <form method="post">
-                                    <input type="text" name="q" class="form-control pull-left" value="" placeholder="Search anything">
+                                    <input type="text" name="q" class="form-control pull-left" value="" placeholder="Busque por algo">
                                     <button type="submit" class="pull-right close" id="search_close"><i class="fa fa-close"></i></button>
                                 </form>
                             </div>
@@ -359,7 +359,7 @@
                                         </div>
                                         <div class="footer_cnt">
                                             <i class="fa fa-envelope"></i>
-                                            <span>email@emaill.com</span>
+                                            <span>email@email.com</span>
                                         </div>
                                     </div>
                                 </div>
@@ -423,7 +423,7 @@
         </div>
         <div class="right_menu_search">
             <form method="post">
-                <input type="text" name="q" class="form-control search_input" value="" placeholder="Search anything">
+                <input type="text" name="q" class="form-control search_input" value="" placeholder="Busque por algo">
                 <button type="submit" class="search_icon"><i class="fa fa-search"></i></button>
             </form>
         </div>
