@@ -429,11 +429,10 @@
         </div>
         <ul class="rmenu_list">
             <li><a class="page-scroll" href="#header">Home</a></li>
-            <li><a class="page-scroll" href="#about_us">About</a></li>
+            <li><a class="page-scroll" href="#about_us">Sobre</a></li>
             <li><a class="page-scroll" href="#menu">Cardápio</a></li>
-            <li><a class="page-scroll" href="#gallery">Gallery</a></li>
-            <li><a class="page-scroll" href="#reservation">Reservation</a></li>
-            <li><a class="page-scroll" href="#footer">Contact</a></li>
+            <li><a class="page-scroll" href="#gallery">Galeria</a></li>
+            <li><a class="page-scroll" href="#footer">Contato</a></li>
         </ul>
         <div class="right_menu_addr top_addr">
             <span><i class="fa fa-map-marker" aria-hidden="true"></i> CORBÉLIA, PARANÁ, BRASIL - 85420-000</span>
