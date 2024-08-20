@@ -14,7 +14,7 @@
 			showItems: 8, 
 			button: {
 				'class': ' btn-load-more',
-				text: 'more images'
+				text: 'Carregar mais'
 			}
 		};
 
