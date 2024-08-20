@@ -16,16 +16,62 @@
 <div class="container section" data-aos="fade-up" style="margin-top: 3em">
     <!-- Verifique se há margens, paddings, ou outros estilos aplicados aqui -->
     <div class="col-sm-12 col-md-12 col-lg-12">
+
+        <div class="container">
+            <?php if (session()->has('sucesso')): ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo session('sucesso'); ?>
+
+                </div>
+            <?php endif ?>
+
+            <?php if (session()->has('info')): ?>
+                <div class="alert alert-info" role="alert">
+                    <?php echo session('info'); ?>
+
+                </div>
+            <?php endif ?>
+            <?php if (session()->has('atencao')): ?>
+
+                <div class="alert alert-danger" role="alert"> <?php echo session('atencao'); ?></div>
+
+            <?php endif ?>
+
+            <!-- errors de CSRF ACAO NAO PERMITIDA -->
+            <?php if (session()->has('error')): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo session('error'); ?>
+                </div>
+            <?php endif ?>
+
+        </div>
+
+
         <div class="product-content product-wrap clearfix product-deatil">
             <div class="row">
+
                 <div class="col-md-4 col-sm-12 col-xs-12">
                     <div class="product-image">
                         <img src="<?php echo site_url("produto/imagem/$produto->imagem"); ?>" alt="<?php echo esc($produto->nome) ?>" />
                     </div>
+
                 </div>
 
+
                 <?php echo form_open("carrinho/adicionar") ?>
+
+
+
                 <div class="col-md-7 col-md-offset-1 col-sm-12 col-xs-12">
+
+                    <?php if (session()->has('errors_model')): ?>
+                        <ul style="margin-left: -1.6em !important; list-style: decimal">
+                            <?php foreach (session('errors_model') as $error): ?>
+                                <li class="text-danger"><?php echo $error; ?></li>
+                            <?php endforeach ?>
+                        </ul>
+                    <?php endif; ?>
+
                     <h2 class="name">
                         <?php echo esc($produto->nome) ?>
                     </h2>
@@ -70,7 +116,7 @@
 
                         <?php endif ?>
                     </h3>
-                    
+
                     <hr />
 
 
@@ -80,7 +126,7 @@
                             <label>Quantidade</label>
 
                             <input type="number" class="form-control" placeholder="Quantidade" name="produto[quantidade]" value="1" min="1"
-                                    max="10" step="1" require="">
+                                max="10" step="1" require="">
                         </div>
                     </div>
 
@@ -112,20 +158,28 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-sm-4">
-                            <input id="btn-adiciona" type="submit" class="btn btn-success  " value="Adicionar ao carrinho">
-                        </div>
 
-                        <?php  foreach ($especificoes as $especificacao): ?>
-                        <?php  endforeach ?>
+
 
                         <div class="col-sm-4">
-                            <a href="<?php echo site_url("produto/customizar/$produto->slug") ?>" class="btn btn-info  ">Customizar</a>
+                            <input id="btn-adiciona" type="submit" class="btn btn-success btn-block " value="Adicionar ao carrinho">
                         </div>
+
+                        <?php foreach ($especificacoes as $especificacao): ?>
+                            <?php if ($especificacao->customizavel): ?>
+                                <div class="col-sm-4">
+                                    <a href="<?php echo site_url("produto/customizar/$produto->slug") ?>" class="btn btn-info btn-block ">Customizar</a>
+                                </div>
+                                <?php break ?>
+                            <?php endif ?>
+                        <?php endforeach ?>
+
+
                         <div class="col-sm-4">
-                            <a href="<?php echo site_url("/") ?>" class="btn btn-primary  ">Mais delícias</a>
+                            <a href="<?php echo site_url("/") ?>" class="btn btn-primary btn-block ">Mais delícias</a>
                         </div>
                     </div>
+
                 </div>
                 <?php echo form_close() ?>
             </div>
@@ -151,7 +205,7 @@
             $("#btn-adiciona").prop("value", "Selecione uma medida");
         }
 
-        $(".especificacao").on('click', function () {
+        $(".especificacao").on('click', function() {
             especificacao_id = $(this).attr('data-especificacao');
             $("#especificacao_id").val(especificacao_id);
 
@@ -159,7 +213,7 @@
             $("#btn-adiciona").prop("value", "Adicionar ao carrinho");
         });
 
-        $(".extra").on('click', function () {
+        $(".extra").on('click', function() {
             var extra_id = $(this).attr('data-extra');
             $("#extra_id").val(extra_id);
 

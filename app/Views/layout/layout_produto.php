@@ -51,6 +51,7 @@
 <!-- END head -->
 
 <!-- BEGIN body -->
+
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
     <!-- BEGIN  Loading Section -->
@@ -86,12 +87,12 @@
                 <div class="navbar-container" data-spy="affix" data-offset-top="400">
                     <div class="container">
 
-                            <div id="navbar_search">
-                                <form method="post">
-                                    <input type="text" name="q" class="form-control pull-left" value="" placeholder="Search anything">
-                                    <button type="submit" class="pull-right close" id="search_close"><i class="fa fa-close"></i></button>
-                                </form>
-                            </div>
+                        <div id="navbar_search">
+                            <form method="post">
+                                <input type="text" name="q" class="form-control pull-left" value="" placeholder="Search anything">
+                                <button type="submit" class="pull-right close" id="search_close"><i class="fa fa-close"></i></button>
+                            </form>
+                        </div>
                         <!-- /.navbar_top -->
 
                         <!-- BEGIN navbar -->
@@ -111,14 +112,16 @@
                                 <div class="collapse navbar-collapse" id="navbar">
                                     <div class="navbar-right">
                                         <ul class="nav navbar-nav">
-                                            <li><a class="page-scroll" href="#header">Home</a></li>
-                                            <li><a class="page-scroll" href="#about_us">Sobre</a></li>
-                                            <li><a class="page-scroll" href="#menu">Cardápio</a></li>
-                                            <li><a class="page-scroll" href="#gallery">Galeria</a></li>
-                                            <li><a class="page-scroll" href="#footer">Contato</a></li>
+                                            <li><a href="<?php echo site_url('/') ?>">Home</a></li>
+                                            <li><a href="<?php echo site_url('/') ?>?section=about_us">Sobre</a></li>
+                                            <li><a href="<?php echo site_url('/') ?>?section=menu">Cardápio</a></li>
+                                            <li><a href="<?php echo site_url('/') ?>?section=gallery">Galeria</a></li>
+                                            <li><a href="<?php echo site_url('/') ?>?section=footer">Contato</a></li>
                                         </ul>
                                     </div>
-                                </div>  
+                                </div>
+
+
                                 <!-- /.navbar-collapse -->
                             </div>
                         </nav>
@@ -132,7 +135,7 @@
         </header>
         <!-- End header -->
 
-        
+
         <!-- essa section renderiza os conteudos especificos da view que estender esse layout -->
         <?php echo $this->renderSection('conteudo') ?>
 

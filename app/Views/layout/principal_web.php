@@ -51,6 +51,7 @@
 <!-- END head -->
 
 <!-- BEGIN body -->
+
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
     <!-- BEGIN  Loading Section -->
@@ -245,7 +246,7 @@
                                             <li><a class="page-scroll" href="#footer">Contato</a></li>
                                         </ul>
                                     </div>
-                                </div>  
+                                </div>
                                 <!-- /.navbar-collapse -->
                             </div>
                         </nav>
@@ -259,9 +260,14 @@
         </header>
         <!-- End header -->
 
-        
+
+
+
+
+
         <!-- essa section renderiza os conteudos especificos da view que estender esse layout -->
         <?php echo $this->renderSection('conteudo') ?>
+
 
 
         <!--  Begin Footer  -->
@@ -460,6 +466,24 @@
 
     <!-- essa section renderiza os scripts especificos da view que estender esse layout -->
     <?php echo $this->renderSection('scripts') ?>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const section = urlParams.get('section');
+
+            if (section) {
+                const element = document.getElementById(section);
+                if (element) {
+                    element.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+
+                history.replaceState(null, null, window.location.pathname);
+            }
+        });
+    </script>
 </body>
 
 </html>
