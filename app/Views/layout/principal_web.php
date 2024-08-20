@@ -359,7 +359,7 @@
                                         </div>
                                         <div class="footer_cnt">
                                             <i class="fa fa-envelope"></i>
-                                            <span>email@email.com</span>
+                                            <span>email@emaill.com</span>
                                         </div>
                                     </div>
                                 </div>
