@@ -54,6 +54,7 @@ class Carrinho extends BaseController
             ->join('medidas', 'medidas.id = produtos_especificacoes.medida_id')
             ->where('produtos_especificacoes.id', $produtoPost['especificacao_id'])->first();
 
+
             if ($especificacaoProduto == null) {
                 return redirect()->back()
                     ->with('fraude', "Não conseguimos processar a sua solicitação. Entre em contato com a nossa equipe e informe o codigo de erro. <strong> Erro: ADD-PROD-157 </strong>"); // FRAUDE FORMULARIO
@@ -79,11 +80,18 @@ class Carrinho extends BaseController
             // slug composto para identificar os itens no carrinho para adicionar
             $produto['slug'] = mb_url_title($produto['slug'] . '-'. $especificacaoProduto->nome . '-' . (isset($extra) ? 'com extra-' . $extra->nome : ''), '-', true);
 
+            //
             $produto['nome'] = $produto['nome'] . ' ' . $especificacaoProduto->nome . ' ' . (isset($extra) ? 'com extra ' . $extra->nome : '');
+
+            // preco quantiade e tamanho
+            $preco = $especificacaoProduto->preco + (isset($extra) ? $extra->preco : 0);
+            $produto['preco'] = number_format($preco, 2);
+            $produto['quantidade'] = (int) $produtoPost['quantidade'];
+            $produto['tamanho'] = $especificacaoProduto->nome;
 
             dd($produto);
         } else {
             return redirect()->back();
-        }
+        }   
     }
 }

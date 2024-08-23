@@ -33,6 +33,7 @@ class Produto extends BaseController
 
     $extras = $this->produtoExtraModel->buscaExtrasDoProdutoDetalhes($produto->id);
 
+
     if($extras){
         $data['extras'] = $extras;
     }

@@ -110,7 +110,7 @@
                             <?php foreach ($extras as $extra): ?>
                                 <div class="radio">
                                     <label style="font-size: 16px">
-                                        <input type="radio" class="extra" style="margin-top: 2px" data-extra="<?php echo $extra->id_principal ?>"
+                                        <input type="radio" class="extra" style="margin-top: 2px" data-extra="<?php echo $extra->id ?>"
                                             name="extra" value="<?php echo $extra->preco; ?>">
                                         <?php echo esc($extra->nome) ?>
                                         <?php echo esc(number_format($extra->preco, 2)) ?>
