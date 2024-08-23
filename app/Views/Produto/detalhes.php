@@ -55,7 +55,7 @@
             <div class="row">
 
                 <div class="col-md-4 col-sm-12 col-xs-12">
-                    <div class="product-image">
+                    <div class="card-img-top w-75 mb-4">
                         <img src="<?php echo site_url("produto/imagem/$produto->imagem"); ?>" alt="<?php echo esc($produto->nome) ?>" />
                     </div>
 

@@ -10,6 +10,7 @@ class Carrinho extends BaseController
     private $produtoEspecificacaoModel;
     private $extraModel;
     private $produtoModel;
+    private $acao;
 
     private $validacao;
 
@@ -19,6 +20,8 @@ class Carrinho extends BaseController
         $this->produtoEspecificacaoModel = new \App\Models\ProdutoEspecificacaoModel();
         $this->extraModel = new \App\Models\ExtraModel();
         $this->produtoModel = new \App\Models\ProdutoModel();
+        
+        $this->acao = service('router')->methodName();
     }
 
 
@@ -83,15 +86,75 @@ class Carrinho extends BaseController
             //
             $produto['nome'] = $produto['nome'] . ' ' . $especificacaoProduto->nome . ' ' . (isset($extra) ? 'com extra ' . $extra->nome : '');
 
-            // preco quantiade e tamanho
+            // preco, quantiade e tamanho
             $preco = $especificacaoProduto->preco + (isset($extra) ? $extra->preco : 0);
             $produto['preco'] = number_format($preco, 2);
             $produto['quantidade'] = (int) $produtoPost['quantidade'];
             $produto['tamanho'] = $especificacaoProduto->nome;
 
-            dd($produto);
+            unset($produto['ativo']); // atibuto ativo nao tem utilidade nesta parte
+
+
+            // start insersao do produto no carrinho
+            if(session()->has('carrinho')){
+                // existe carrinho de compras
+
+                $produtos = session()->get('carrinho');
+
+                // recupera os slugs dos produtos do carrinho
+                $produtosSlugs = array_column($produtos, 'slug');
+
+                if(in_array($produto['slug'], $produtosSlugs)){
+                    // ja esta no carrinho, incrementa a quantidade
+                    $produtos = $this->atualizaProduto($this->acao, $produto['slug'], $produto['quantidade'], $produtos);
+
+                    //sobrescreve a sessao do carrinho com o array $produtos que foi alterado
+                    session()->set('carrinho', $produtos);
+
+
+                } else {
+                    // nao existe, pode adicionar
+                    session()->push('carrinho', [$produto]);
+                    
+                }
+
+            } else{
+                // aqui nao existe carrinho de compras na sessao
+
+                $produtos[] = $produto;
+
+                session()->set('carrinho', $produtos);
+            }
+
+            return redirect()->back()->with('sucesso', 'Produto adicionado ao carrinho com sucesso!');
         } else {
             return redirect()->back();
         }   
+    }
+
+    private function atualizaProduto(string $acao, string $slug, int $quantidade, array $produtos){
+        $produtos = array_map(
+            function($linha) use ($acao, $slug, $quantidade){
+            
+                    if($linha['slug'] == $slug){
+
+                    if($acao === 'adicionar'){
+
+                        $linha['quantidade'] += $quantidade;
+
+                    }
+
+                    if($acao === 'atualizar'){
+
+                        $linha['quantidade'] = $quantidade;
+
+                    }
+            } 
+
+            return $linha;
+        }, $produtos);
+
+        return $produtos;
+
     }
 }
