@@ -50,7 +50,6 @@ class Carrinho extends BaseController
             }
 
             //valida existencia da especificacao id
-
             $especificacaoProduto = $this->produtoEspecificacaoModel
             ->join('medidas', 'medidas.id = produtos_especificacoes.medida_id')
             ->where('produtos_especificacoes.id', $produtoPost['especificacao_id'])->first();
@@ -69,16 +68,18 @@ class Carrinho extends BaseController
                 }
             }
 
+            
             $produto = $this->produtoModel->select(['id', 'nome', 'slug', 'ativo'])->where('slug', $produtoPost['slug'])->first()->toArray();
-
 
 
             if ($produto == null || $produto['ativo'] == false) {
                 return redirect()->back()
                     ->with('fraude', "Não conseguimos processar a sua solicitação. Entre em contato com a nossa equipe e informe o codigo de erro. <strong> Erro: ADD-PROD-159 </strong>"); // FRAUDE FORMULARIO
             }
+            // slug composto para identificar os itens no carrinho para adicionar
+            $produto['slug'] = mb_url_title($produto['slug'] . '-'. $especificacaoProduto->nome . '-' . (isset($extra) ? 'com extra-' . $extra->nome : ''), '-', true);
 
-            $produto['slug'] = mb_url_title($especificacaoProduto->nome . '-' . $produto['slug'] . '-' . (isset($extra) ? 'com extra' . '-' . $extra->nome : ''), '-', true);
+            $produto['nome'] = $produto['nome'] . ' ' . $especificacaoProduto->nome . ' ' . (isset($extra) ? 'com extra ' . $extra->nome : '');
 
             dd($produto);
         } else {
