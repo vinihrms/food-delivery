@@ -152,13 +152,15 @@
                     </div>
                     <hr />
 
+                    
+
                     <div>
 
-                        <input type="text" name="produto[slug]" value="<?php echo $produto->slug; ?>">
+                        <input hidden="" type="text" name="produto[slug]" value="<?php echo $produto->slug; ?>">
 
-                        <input type="text" id="especificacao_id" name="produto[especificacao_id]">
+                        <input hidden="" type="text" id="especificacao_id" name="produto[especificacao_id]">
 
-                        <input type="text" id="extra_id" name="produto[extra_id]">
+                        <input hidden="" type="text" id="extra_id" name="produto[extra_id]">
 
                     </div>
                     <div class="row">
