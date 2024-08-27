@@ -96,6 +96,49 @@ class Produto extends BaseController
 
     }
 
+    public function exibeTamanho() {
+        
+        if (!$this->request->isAJAX()) {
+            return redirect()->back();
+        }
+
+        $get = $this->request->getGet();
+
+        $primeiroProduto = $this->produtoModel->where('id', $get['primeiro_produto_id'])->first();
+
+        if($primeiroProduto == null){
+            return $this->response->setJSON([]);
+        }
+
+        $especificacoesPrimeiroProduto = $this->produtoEspecificacaoModel->where('produto_id', $primeiroProduto->id)->findAll();
+
+        if($especificacoesPrimeiroProduto == null){
+            return $this->response->setJSON([]);
+        }
+
+        $extrasPrimeiroProduto = $this->produtoExtraModel->buscaExtrasDoProduto($primeiroProduto->id);
+
+        //------------------------------------segundo produto----------------------------//
+
+        $segundoProduto = $this->produtoModel->where('id', $get['segundo_produto_id'])->first();
+
+        if($segundoProduto == null){
+            return $this->response->setJSON([]);
+        }
+
+        $especificacoesSegundoProduto = $this->produtoEspecificacaoModel->where('produto_id', $segundoProduto->id)->findAll();
+
+        if($especificacoesSegundoProduto == null){
+            return $this->response->setJSON([]);
+        }
+
+        $extrasSegundoProduto = $this->produtoExtraModel->buscaExtrasDoProduto($segundoProduto->id);
+
+        $extrasCombinados = $segundoProduto->combinaExtrasDosProdutos($extrasPrimeiroProduto, $extrasSegundoProduto);
+
+        
+    }
+
     public function imagem(string $imagem = null)
     {
         if ($imagem) {
@@ -115,4 +158,6 @@ class Produto extends BaseController
             exit;
         }
     }
+
+
 }

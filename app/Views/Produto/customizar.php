@@ -221,46 +221,29 @@
         });
 
         $("#segunda_metade").on('change', function() {
-            
             var primeiro_produto_id = $('#primeira_metade').val();
-
             var segundo_produto_id = $(this).val();
 
             if (primeiro_produto_id && segundo_produto_id) {
                 $.ajax({
-
                     type: 'get',
-                    url: '<?php echo site_url('produto/procurar') ?>',
+                    url: '<?php echo site_url('produto/exibeTamanho') ?>',
                     dataType: 'json',
                     data: {
-                        primeira_metade: primeira_metade,
-                        categoria_id: categoria_id
+                        primeiro_produto_id: primeiro_produto_id,
+                        segundo_produto_id: segundo_produto_id,
                     },
-                    before: function(data) {
-                        $("#segunda_metade").html('<img class="img-responsive center-block d-block mx-auto" src="<?php echo site_url("produto/imagem/"); ?>' + data.imagemPrimeiroProduto + '" width="200" alt="Escolha o produto">')
-
+                    beforeSend: function() {
+                        // Qualquer lógica a ser executada antes de enviar a requisição
                     },
                     success: function(data) {
-                        if (data.imagemPrimeiroProduto) {
-                            $("#imagemPrimeiroProduto").html('<img class="img-responsive center-block d-block mx-auto" src="<?php echo site_url("produto/imagem/"); ?>' + data.imagemPrimeiroProduto + '" width="200" alt="Escolha o produto">');
-                        }
-
-                        if (data.produtos) {
-                            $("#segunda_metade").html('<option>Escolha a segunda metade</option>');
-
-                            $(data.produtos).each(function() {
-                                var option = $('<option />');
-                                option.attr('value', this.id).text(this.nome);
-                                $("#segunda_metade").append(option);
-                            });
-                        } else {
-                            $("#segunda_metade").html('<option>Não encontramos opções de customização</option>');
-                        }
+                        // Processa a resposta recebida
+                        console.log(data);
                     },
-
                 });
             }
         });
+
 
         $(".extra").on('click', function() {
             var extra_id = $(this).attr('data-extra');

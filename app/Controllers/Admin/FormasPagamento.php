@@ -44,13 +44,24 @@ class FormasPagamento extends BaseController
 
         return $this->response->setJSON($retorno);
     }
-
     
     private function buscaFormaOu404(int $id = null) {
         if(!$id || !$formaPagamento = $this->formaPagamentoModel->withDeleted(true)->where('id', $id)->first()){
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Não encontramos a forma de pagamento $id");
         }
         return $formaPagamento;
+    }
+
+    public function show ($id = null){
+        $formaPagamento = $this->buscaFormaOu404($id);
+
+        $data = [
+            'titulo' => "Detalhando a forma de pagamento $formaPagamento->nome",
+            'forma' => $formaPagamento
+        ];  
+
+        return view('Admin/FormasPagamento/show', $data);
+
     }
 
     public function criar ($id = null){
@@ -64,6 +75,7 @@ class FormasPagamento extends BaseController
         return view('Admin/FormasPagamento/criar', $data);
 
     }
+
     public function cadastrar($id = null) {
 
         if($this->request->getMethod() === 'post'){
@@ -84,17 +96,6 @@ class FormasPagamento extends BaseController
         }
     }
 
-    public function show ($id = null){
-        $formaPagamento = $this->buscaFormaOu404($id);
-
-        $data = [
-            'titulo' => "Detalhando a forma de pagamento $formaPagamento->nome",
-            'forma' => $formaPagamento
-        ];  
-
-        return view('Admin/FormasPagamento/show', $data);
-
-    }
 
     public function editar ($id = null){
         $formaPagamento = $this->buscaFormaOu404($id);
@@ -174,4 +175,5 @@ class FormasPagamento extends BaseController
         }
         
     }
+
 }
