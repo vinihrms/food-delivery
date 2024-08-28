@@ -136,6 +136,17 @@ class Produto extends BaseController
 
         $extrasCombinados = $segundoProduto->combinaExtrasDosProdutos($extrasPrimeiroProduto, $extrasSegundoProduto);
 
+        if($extrasCombinados != null){
+            $data['extras'] = $extrasCombinados;
+            
+
+        }
+
+        $medidasEmComum = $segundoProduto->recuperaMedidasEmComum($especificacoesPrimeiroProduto, $especificacoesSegundoProduto);
+
+        $data['medidas'] = $medidasEmComum;
+
+        $data[];
         
     }
 

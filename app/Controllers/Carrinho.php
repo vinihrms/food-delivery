@@ -120,8 +120,7 @@ class Carrinho extends BaseController
 
             } else{
                 // aqui nao existe carrinho de compras na sessao
-
-                
+     
                 $produtos[] = $produto;
 
                 session()->set('carrinho', $produtos);
