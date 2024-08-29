@@ -66,7 +66,7 @@
 
 
 
-                    <div class="row" style="min-height: 500px;">
+                    <div class="row" style="min-height: 300px;">
 
                         <div class="col-md-12" style="margin-bottom: 2em;">
 
@@ -129,21 +129,65 @@
                             </select>
 
                         </div>
+
+
+
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="valor_produto_customizado">
+                                <!-- renderizado por js -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <label for=""> Tamanho do produto </label>
+                            <select name="tamanho" id="tamanho" class="form-control">
+
+                                <!-- renderiza opcoes de tamanho via JS -->
+
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <div id="boxInfoExtras" style="display: none;">
+                                <label>Extras do produto</label>
+
+                                <div class="radio">
+                                    <label for="">
+                                        <input type="radio" class="extra" name="extra" checked=""> Sem extra
+                                    </label>
+
+                                </div>
+
+                                <div id="extras">
+                                    <!-- renderiz os extra via js -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
                 <hr />
 
+                <div>
+                    <input type="text" id="extra_id" name="extra_id" hidden="">
+                </div>
 
                 <div class="row">
                     <div class="col-sm-3">
                         <input id="btn-adiciona" type="submit" class="btn btn-success" value="Adicionar ao carrinho">
                     </div>
-
-
-
 
                     <div class="col-sm-3">
                         <a href="<?php echo site_url("/produto/detalhes/$produto->slug") ?>" class="btn btn-primary ">Voltar</a>
@@ -224,6 +268,13 @@
             var primeiro_produto_id = $('#primeira_metade').val();
             var segundo_produto_id = $(this).val();
 
+
+            $("#imagemSegundoProduto").html('<img class="img-responsive center-block d-block mx-auto" src="<?php echo site_url("web/src/assets/img/escolha_produto.png") ?>" width="200" alt="Escolha o produto">');
+
+            $("#boxInfoExtras").hide();
+            $("#extras").html('');
+
+
             if (primeiro_produto_id && segundo_produto_id) {
                 $.ajax({
                     type: 'get',
@@ -237,20 +288,78 @@
                         // Qualquer lógica a ser executada antes de enviar a requisição
                     },
                     success: function(data) {
-                        // Processa a resposta recebida
-                        console.log(data);
+                        if (data.imagemSegundoProduto) {
+                            $("#imagemSegundoProduto").html('<img class="img-responsive center-block d-block mx-auto" src="<?php echo site_url("produto/imagem/"); ?>' + data.imagemSegundoProduto + '" width="200" alt="Escolha o produto">');
+                        }
+
+                        if (data.medidas) {
+                            $("#tamanho").html('<option>Escolha o tamanho...</option>');
+
+                            $(data.medidas).each(function() {
+                                var option = $('<option />');
+                                option.attr('value', this.id).text(this.nome);
+                                $("#tamanho").append(option);
+                            });
+                        } else {
+                            $("#tamanho").html('<option>Escolha a segunda metade</option>');
+                        }
+
+                        if (data.extras) {
+                            $("#boxInfoExtras").show();
+
+                            $(data.extras).each(function() {
+                                var input = "<div class='radio'><label for='extra" + this.id + "'><input type='radio' class='extra' name='extra' data-extra='" + this.id + "' value='" + this.preco + "'>" + this.nome + "</label></div>";
+
+                                $("#extras").append(input);
+
+                            });
+
+                            $(".extra").on('click', function() {
+                                var extra_id = $(this).attr('data-extra');
+                                $("#extra_id").val(extra_id);
+                            });
+                        }
+
                     },
                 });
             }
+
+            $(".extra").on('click', function() {
+                var extra_id = $(this).attr('data-extra');
+                $("#extra_id").val(extra_id);
+
+
+            });
         });
 
+        $("#tamanho").on('change', function(){
+            $("#btn-adiciona").prop("disabled", true);
+            $("#btn-adiciona").prop("value", "Selecione um tamanho");
 
-        $(".extra").on('click', function() {
-            var extra_id = $(this).attr('data-extra');
-            $("#extra_id").val(extra_id);
+            var medida_id = $ (this).val()
+
+            $("#valor_produto_customizado").html('')
+
+            if(medida_id){
+                $.ajax({
+                    type: 'get',
+                    url: '<?php echo site_url('produto/exibevalor') ?>',
+                    dataType: 'json',
+                    data: {
+                        medida_id: medida_id,
+                    },
+                    beforeSend: function (data){
+
+                    },
+                    success: function (data){
+
+                    },
+                })
+            }
+        })
 
 
-        });
+
     })
 </script>
 

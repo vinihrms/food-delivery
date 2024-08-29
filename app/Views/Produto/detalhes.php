@@ -222,8 +222,6 @@
         $(".extra").on('click', function() {
             var extra_id = $(this).attr('data-extra');
             $("#extra_id").val(extra_id);
-
-
         });
     })
 </script>
