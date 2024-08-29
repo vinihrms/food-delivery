@@ -95,11 +95,11 @@ class Produto extends BaseController
         $data['imagemPrimeiroProduto'] = $produto->imagem;
 
         return $this->response->setJSON($data);
-
     }
 
-    public function exibeTamanho() {
-        
+    public function exibeTamanho()
+    {
+
         if (!$this->request->isAJAX()) {
             return redirect()->back();
         }
@@ -108,13 +108,13 @@ class Produto extends BaseController
 
         $primeiroProduto = $this->produtoModel->where('id', $get['primeiro_produto_id'])->first();
 
-        if($primeiroProduto == null){
+        if ($primeiroProduto == null) {
             return $this->response->setJSON([]);
         }
 
         $especificacoesPrimeiroProduto = $this->produtoEspecificacaoModel->where('produto_id', $primeiroProduto->id)->findAll();
 
-        if($especificacoesPrimeiroProduto == null){
+        if ($especificacoesPrimeiroProduto == null) {
             return $this->response->setJSON([]);
         }
 
@@ -124,13 +124,13 @@ class Produto extends BaseController
 
         $segundoProduto = $this->produtoModel->where('id', $get['segundo_produto_id'])->first();
 
-        if($segundoProduto == null){
+        if ($segundoProduto == null) {
             return $this->response->setJSON([]);
         }
 
         $especificacoesSegundoProduto = $this->produtoEspecificacaoModel->where('produto_id', $segundoProduto->id)->findAll();
 
-        if($especificacoesSegundoProduto == null){
+        if ($especificacoesSegundoProduto == null) {
             return $this->response->setJSON([]);
         }
 
@@ -138,10 +138,8 @@ class Produto extends BaseController
 
         $extrasCombinados = $segundoProduto->combinaExtrasDosProdutos($extrasPrimeiroProduto, $extrasSegundoProduto);
 
-        if($extrasCombinados != null){
+        if ($extrasCombinados != null) {
             $data['extras'] = $extrasCombinados;
-            
-
         }
 
         $medidasEmComum = $segundoProduto->recuperaMedidasEmComum($especificacoesPrimeiroProduto, $especificacoesSegundoProduto);
@@ -153,16 +151,23 @@ class Produto extends BaseController
         $data['imagemSegundoProduto'] = $segundoProduto->imagem;
 
         return $this->response->setJSON($data);
-        
     }
 
-    public function exibeValor() {
+    public function exibeValor()
+    {
         if (!$this->request->isAJAX()) {
             return redirect()->back();
         }
 
         $get = $this->request->getGet();
 
+        $medida = $this->medidaModel->exibeValor($get['medida_id']);
+
+        if ($medida == null) {
+            return $this->response->setJSON([]);
+        }
+
+        return $this->response->setJSON($medida);
     }
 
     public function imagem(string $imagem = null)
@@ -184,5 +189,4 @@ class Produto extends BaseController
             exit;
         }
     }
-
 }

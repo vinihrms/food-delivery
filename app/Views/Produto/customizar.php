@@ -61,7 +61,6 @@
 
                     <hr />
 
-
                     <?php echo form_open("carrinho/adicionar") ?>
 
 
@@ -135,11 +134,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div id="valor_produto_customizado">
-                                <!-- renderizado por js -->
-                            </div>
-                        </div>
+
                     </div>
 
                     <div class="row">
@@ -185,6 +180,7 @@
                 </div>
 
                 <div class="row">
+
                     <div class="col-sm-3">
                         <input id="btn-adiciona" type="submit" class="btn btn-success" value="Adicionar ao carrinho">
                     </div>
@@ -192,6 +188,13 @@
                     <div class="col-sm-3">
                         <a href="<?php echo site_url("/produto/detalhes/$produto->slug") ?>" class="btn btn-primary ">Voltar</a>
                     </div>
+
+                    <div class="col-md-6">
+                        <div id="valor_produto_customizado" style=" font-size: 18px; color: #990100; font-family: 'Montserrat-Bold';">
+                            <!-- renderizado por js -->
+                        </div>
+                    </div>
+
                 </div>
                 <?php echo form_close() ?>
             </div>
@@ -215,13 +218,23 @@
 
         $("#btn-adiciona").prop("disabled", true);
         $("#btn-adiciona").prop("value", "Selecione um tamanho");
+        $("#segunda_metade").html('<option>Escolha a primeira metade</option>')
+        $("#tamanho").html('<option>Escolha a segunda metade</option>')
+
 
         $("#primeira_metade").on('change', function() {
             var primeira_metade = $(this).val();
 
             var categoria_id = '<?php echo $produto->categoria_id ?>'
 
+            //eventos change primeira metade
             $("#imagemPrimeiroProduto").html('<img class="img-responsive center-block d-block mx-auto" src="<?php echo site_url("web/src/assets/img/escolha_produto.png") ?>" width="200" alt="Escolha o produto">');
+            $("#valor_produto_customizado").html('')
+            $("#tamanho").html('<option>Escolha a segunda metade</option>')
+            $("#boxInfoExtras").hide();
+            $("#extras").html('');
+            $("#btn-adiciona").prop("disabled", true);
+            $("#btn-adiciona").prop("value", "Selecione um tamanho");
 
             if (primeira_metade) {
                 $.ajax({
@@ -260,7 +273,6 @@
                 //cliente nao escolheu a primeira metade
                 $("#segunda_metade").html('<option>Escolha a primeira metade</option>');
 
-
             }
         });
 
@@ -270,9 +282,12 @@
 
 
             $("#imagemSegundoProduto").html('<img class="img-responsive center-block d-block mx-auto" src="<?php echo site_url("web/src/assets/img/escolha_produto.png") ?>" width="200" alt="Escolha o produto">');
-
             $("#boxInfoExtras").hide();
             $("#extras").html('');
+            $("#valor_produto_customizado").html('')
+            $("#tamanho").html('<option>Escolha a segunda metade</option>')
+            $("#btn-adiciona").prop("disabled", true);
+            $("#btn-adiciona").prop("value", "Selecione um tamanho");
 
 
             if (primeiro_produto_id && segundo_produto_id) {
@@ -283,9 +298,6 @@
                     data: {
                         primeiro_produto_id: primeiro_produto_id,
                         segundo_produto_id: segundo_produto_id,
-                    },
-                    beforeSend: function() {
-                        // Qualquer lógica a ser executada antes de enviar a requisição
                     },
                     success: function(data) {
                         if (data.imagemSegundoProduto) {
@@ -332,15 +344,15 @@
             });
         });
 
-        $("#tamanho").on('change', function(){
+        $("#tamanho").on('change', function() {
             $("#btn-adiciona").prop("disabled", true);
             $("#btn-adiciona").prop("value", "Selecione um tamanho");
 
-            var medida_id = $ (this).val()
+            var medida_id = $(this).val()
 
             $("#valor_produto_customizado").html('')
 
-            if(medida_id){
+            if (medida_id) {
                 $.ajax({
                     type: 'get',
                     url: '<?php echo site_url('produto/exibevalor') ?>',
@@ -348,11 +360,12 @@
                     data: {
                         medida_id: medida_id,
                     },
-                    beforeSend: function (data){
-
-                    },
-                    success: function (data){
-
+                    success: function(data) {
+                        if (data) {
+                            $("#valor_produto_customizado").html('R$ ' + data.preco);
+                            $("#btn-adiciona").prop("disabled", false);
+                            $("#btn-adiciona").prop("value", "Adicionar ao carrinho");
+                        }
                     },
                 })
             }
