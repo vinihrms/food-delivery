@@ -163,10 +163,9 @@ class Produto extends BaseController
 
         $get = $this->request->getGet();
 
+            $medida = $this->medidaModel->exibeValor($get['medida_id']);
 
-        $medida = $this->medidaModel->exibeValor($get['medida_id']);
-
-        if ($medida == null) {
+        if ($medida->preco == null) {
             return $this->response->setJSON([]);
         }
 
@@ -174,7 +173,8 @@ class Produto extends BaseController
 
         if ($extra != null) {
             $medida->preco = number_format($medida->preco + $extra->preco, 2);
-        }
+        }   
+
 
 
         return $this->response->setJSON($medida);

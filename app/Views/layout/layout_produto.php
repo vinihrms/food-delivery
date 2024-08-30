@@ -135,6 +135,7 @@
         </header>
         <!-- End header -->
 
+        
 
         <!-- essa section renderiza os conteudos especificos da view que estender esse layout -->
         <?php echo $this->renderSection('conteudo') ?>

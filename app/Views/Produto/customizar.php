@@ -15,7 +15,39 @@
 <!-- Begin Sections-->
 <div class="container section" data-aos="fade-up" style="margin-top: 3em">
     <div class="col-sm-8 col-md-offset-2">
+        
+    <div class="row">
+            <?php if (session()->has('sucesso')): ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo session('sucesso'); ?>
 
+                </div>
+            <?php endif ?>
+
+            <?php if (session()->has('info')): ?>
+                <div class="alert alert-info" role="alert">
+                    <?php echo session('info'); ?>
+
+                </div>
+            <?php endif ?>
+            <?php if (session()->has('atencao')): ?>
+
+                <div class="alert alert-danger" role="alert"> <?php echo session('atencao'); ?></div>
+
+            <?php endif ?>
+
+            <?php if (session()->has('fraude')): ?>
+                <div class="alert alert-warning" role="alert"> <?php echo session('fraude'); ?></div>
+            <?php endif ?>
+
+            <!-- errors de CSRF ACAO NAO PERMITIDA -->
+            <?php if (session()->has('error')): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo session('error'); ?>
+                </div>
+            <?php endif ?>
+
+        </div>
         <div class="row">
 
 
@@ -31,8 +63,6 @@
 
                     <?php echo form_open("carrinho/especial") ?>
 
-
-
                     <div class="row" style="min-height: 300px;">
 
                         <div class="col-md-12" style="margin-bottom: 2em;">
@@ -46,20 +76,6 @@
                             <?php endif; ?>
 
                         </div>
-
-                        <div class="col-md-12">
-
-                            <?php if (session()->has('errors_model')): ?>
-                                <ul style="margin-left: -1.6em !important; list-style: decimal">
-                                    <?php foreach (session('errors_model') as $error): ?>
-                                        <li class="text-danger"><?php echo $error; ?></li>
-                                    <?php endforeach ?>
-                                </ul>
-                            <?php endif; ?>
-
-                        </div>
-
-
 
                         <div class="col-md-6">
 
@@ -288,7 +304,7 @@
                             $("#boxInfoExtras").show();
 
                             $(data.extras).each(function() {
-                                var input = "<div class='radio'><label for='extra" + this.id + "'><input type='radio' class='extra' name='extra' data-extra='" + this.id + "' value='" + this.preco + "'>" + this.nome + "</label></div>";
+                                var input = "<div class='radio'><label for='extra" + this.id + "'><input type='radio' class='extra' name='extra' data-extra='" + this.id + "' value='" + this.preco + "'>" + this.nome + ' - R$ ' + this.preco + "</label></div>";
 
                                 $("#extras").append(input);
 
@@ -308,10 +324,7 @@
     var extra_id = $(this).attr('data-extra');
     var extra_valor = $(this).val();
 
-    console.log("Extra ID:", extra_id);  // Debug
-    console.log("Extra Valor:", extra_valor);  // Debug
 
-    // Captura o tamanho escolhido
     var medida_id = $("#tamanho").val();
 
     if ($.isNumeric(medida_id)) {
@@ -321,7 +334,7 @@
             dataType: 'json',
             data: {
                 medida_id: medida_id,
-                extra_id: extra_valor !== "0" ? extra_id : null, // Se o valor do extra for "0", não inclui o extra_id
+                extra_id: extra_valor !== "0" ? extra_id : null, 
             },
             success: function(data) {
                 if (data) {
@@ -354,7 +367,7 @@
                         extra_id: $("#extra_id").val(),
                     },
                     success: function(data) {
-                        if (data) {
+                        if (data.preco) {
                             $("#valor_produto_customizado").html('R$ ' + data.preco);
                             $("#btn-adiciona").prop("disabled", false);
                             $("#btn-adiciona").prop("value", "Adicionar ao carrinho");
