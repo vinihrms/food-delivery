@@ -158,7 +158,7 @@
 
                                 <div class="radio">
                                     <label for="">
-                                        <input type="radio" class="extra" name="extra" checked=""> Sem extra
+                                        <input type="radio" class="extra" name="extra" checked="" value="0"> Sem extra
                                     </label>
 
                                 </div>
@@ -336,12 +336,36 @@
                 });
             }
 
-            $(".extra").on('click', function() {
-                var extra_id = $(this).attr('data-extra');
-                $("#extra_id").val(extra_id);
+            $(document).on('click', '.extra', function() {
+    var extra_id = $(this).attr('data-extra');
+    var extra_valor = $(this).val();
 
+    console.log("Extra ID:", extra_id);  // Debug
+    console.log("Extra Valor:", extra_valor);  // Debug
 
-            });
+    // Captura o tamanho escolhido
+    var medida_id = $("#tamanho").val();
+
+    if ($.isNumeric(medida_id)) {
+        $.ajax({
+            type: 'get',
+            url: '<?php echo site_url('produto/exibevalor') ?>',
+            dataType: 'json',
+            data: {
+                medida_id: medida_id,
+                extra_id: extra_valor !== "0" ? extra_id : null, // Se o valor do extra for "0", não inclui o extra_id
+            },
+            success: function(data) {
+                if (data) {
+                    $("#valor_produto_customizado").html('R$ ' + data.preco);
+                    $("#btn-adiciona").prop("disabled", false);
+                    $("#btn-adiciona").prop("value", "Adicionar ao carrinho");
+                }
+            },
+        });
+    }
+});
+
         });
 
         $("#tamanho").on('change', function() {
@@ -359,6 +383,7 @@
                     dataType: 'json',
                     data: {
                         medida_id: medida_id,
+                        extra_id: $("#extra_id").val(),
                     },
                     success: function(data) {
                         if (data) {
