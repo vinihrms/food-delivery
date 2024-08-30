@@ -14,42 +14,10 @@
 
 <!-- Begin Sections-->
 <div class="container section" data-aos="fade-up" style="margin-top: 3em">
-    <!-- Verifique se há margens, paddings, ou outros estilos aplicados aqui -->
     <div class="col-sm-8 col-md-offset-2">
 
         <div class="row">
-            <div class="row">
-                <?php if (session()->has('sucesso')): ?>
-                    <div class="alert alert-success" role="alert">
-                        <?php echo session('sucesso'); ?>
 
-                    </div>
-                <?php endif ?>
-
-                <?php if (session()->has('info')): ?>
-                    <div class="alert alert-info" role="alert">
-                        <?php echo session('info'); ?>
-
-                    </div>
-                <?php endif ?>
-                <?php if (session()->has('atencao')): ?>
-
-                    <div class="alert alert-danger" role="alert"> <?php echo session('atencao'); ?></div>
-
-                <?php endif ?>
-
-                <?php if (session()->has('fraude')): ?>
-                    <div class="alert alert-warning" role="alert"> <?php echo session('fraude'); ?></div>
-                <?php endif ?>
-
-                <!-- errors de CSRF ACAO NAO PERMITIDA -->
-                <?php if (session()->has('error')): ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php echo session('error'); ?>
-                    </div>
-                <?php endif ?>
-
-            </div>
 
 
             <div class="product-content product-wrap clearfix product-deatil">
@@ -61,7 +29,7 @@
 
                     <hr />
 
-                    <?php echo form_open("carrinho/adicionar") ?>
+                    <?php echo form_open("carrinho/especial") ?>
 
 
 

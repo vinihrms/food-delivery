@@ -20,7 +20,7 @@ class Carrinho extends BaseController
         $this->produtoEspecificacaoModel = new \App\Models\ProdutoEspecificacaoModel();
         $this->extraModel = new \App\Models\ExtraModel();
         $this->produtoModel = new \App\Models\ProdutoModel();
-        
+
         $this->acao = service('router')->methodName();
     }
 
@@ -54,8 +54,8 @@ class Carrinho extends BaseController
 
             //valida existencia da especificacao id
             $especificacaoProduto = $this->produtoEspecificacaoModel
-            ->join('medidas', 'medidas.id = produtos_especificacoes.medida_id')
-            ->where('produtos_especificacoes.id', $produtoPost['especificacao_id'])->first();
+                ->join('medidas', 'medidas.id = produtos_especificacoes.medida_id')
+                ->where('produtos_especificacoes.id', $produtoPost['especificacao_id'])->first();
 
 
             if ($especificacaoProduto == null) {
@@ -72,7 +72,7 @@ class Carrinho extends BaseController
                 }
             }
 
-            
+
             $produto = $this->produtoModel->select(['id', 'nome', 'slug', 'ativo'])->where('slug', $produtoPost['slug'])->first()->toArray();
 
 
@@ -81,7 +81,7 @@ class Carrinho extends BaseController
                     ->with('fraude', "Não conseguimos processar a sua solicitação. Entre em contato com a nossa equipe e informe o codigo de erro. <strong> Erro: ADD-PROD-159 </strong>"); // FRAUDE FORMULARIO
             }
             // slug composto para identificar os itens no carrinho para adicionar
-            $produto['slug'] = mb_url_title($produto['slug'] . '-'. $especificacaoProduto->nome . '-' . (isset($extra) ? 'com extra-' . $extra->nome : ''), '-', true);
+            $produto['slug'] = mb_url_title($produto['slug'] . '-' . $especificacaoProduto->nome . '-' . (isset($extra) ? 'com extra-' . $extra->nome : ''), '-', true);
 
             //
             $produto['nome'] = $produto['nome'] . ' ' . $especificacaoProduto->nome . ' ' . (isset($extra) ? 'com extra ' . $extra->nome : '');
@@ -96,7 +96,7 @@ class Carrinho extends BaseController
 
 
             // start insersao do produto no carrinho
-            if(session()->has('carrinho')){
+            if (session()->has('carrinho')) {
                 // existe carrinho de compras
 
                 $produtos = session()->get('carrinho');
@@ -104,23 +104,19 @@ class Carrinho extends BaseController
                 // recupera os slugs dos produtos do carrinho
                 $produtosSlugs = array_column($produtos, 'slug');
 
-                if(in_array($produto['slug'], $produtosSlugs)){
+                if (in_array($produto['slug'], $produtosSlugs)) {
                     // ja esta no carrinho, incrementa a quantidade
                     $produtos = $this->atualizaProduto($this->acao, $produto['slug'], $produto['quantidade'], $produtos);
 
                     //sobrescreve a sessao do carrinho com o array $produtos que foi alterado
                     session()->set('carrinho', $produtos);
-
-
                 } else {
                     // nao existe, pode adicionar
                     session()->push('carrinho', [$produto]);
-
                 }
-
-            } else{
+            } else {
                 // aqui nao existe carrinho de compras na sessao
-     
+
                 $produtos[] = $produto;
 
                 session()->set('carrinho', $produtos);
@@ -129,32 +125,57 @@ class Carrinho extends BaseController
             return redirect()->back()->with('sucesso', 'Produto adicionado ao carrinho com sucesso!');
         } else {
             return redirect()->back();
-        }   
+        }
     }
 
-    private function atualizaProduto(string $acao, string $slug, int $quantidade, array $produtos){
+    private function atualizaProduto(string $acao, string $slug, int $quantidade, array $produtos)
+    {
         $produtos = array_map(
-            function($linha) use ($acao, $slug, $quantidade){
-            
-                    if($linha['slug'] == $slug){
+            function ($linha) use ($acao, $slug, $quantidade) {
 
-                    if($acao === 'adicionar'){
+                if ($linha['slug'] == $slug) {
+
+                    if ($acao === 'adicionar') {
 
                         $linha['quantidade'] += $quantidade;
-
                     }
 
-                    if($acao === 'atualizar'){
+                    if ($acao === 'atualizar') {
 
                         $linha['quantidade'] = $quantidade;
-
                     }
-            } 
+                }
 
-            return $linha;
-        }, $produtos);
+                return $linha;
+            },
+            $produtos
+        );
 
         return $produtos;
+    }
 
+    public function especial()
+    {
+        if ($this->request->getMethod() === 'post') {
+
+            $produtoPost = $this->request->getPost();
+
+            $this->validacao->setRules([
+                'primeira_metade' => ['label' => 'Primeiro Produto', 'rules' => 'required|greater_than[0]'],
+                'segunda_metade' => ['label' => 'Segundo Produto', 'rules' => 'required|greater_than[0]'],
+            ]);
+
+            if (!$this->validacao->withRequest($this->request)->run()) {
+
+                return redirect()->back()->with('errors_model', $this->validacao->getErrors())
+                    ->with('atencao', 'Por favor, verifique os errors abaixo e tente novamente.')
+                    ->withInput();
+            }
+
+            dd($produtoPost);
+
+        } else {
+            return redirect()->back();
+        }
     }
 }
