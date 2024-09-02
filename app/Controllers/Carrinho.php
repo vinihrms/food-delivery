@@ -26,10 +26,18 @@ class Carrinho extends BaseController
         $this->acao = service('router')->methodName();
     }
 
-
     public function index()
     {
-        //
+        $data = [
+            'titulo' => 'Meu carrinho de compras',
+
+        ];
+
+        if( session()->has('carrinho') && count(session()->get('carrinho')) > 0) {
+            $data['carrinho'] = json_decode(json_encode(session()->get('carrinho')), false);
+        }
+
+        return view('Carrinho/index', $data);
     }
 
     public function adicionar()
@@ -138,6 +146,11 @@ class Carrinho extends BaseController
                 if ($linha['slug'] == $slug) {
 
                     if ($acao === 'adicionar') {
+
+                        $linha['quantidade'] += $quantidade;
+                    }
+
+                    if ($acao === 'especial') {
 
                         $linha['quantidade'] += $quantidade;
                     }
@@ -259,4 +272,6 @@ class Carrinho extends BaseController
         }
         
     }
+
+
 }
