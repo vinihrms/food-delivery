@@ -130,7 +130,7 @@
                             <label>Quantidade</label>
 
                             <input type="number" class="form-control" placeholder="Quantidade" name="produto[quantidade]" value="1" min="1"
-                                max="10" step="1" require="">
+                                max="10" step="1" required="">
                         </div>
                     </div>
 
