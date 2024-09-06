@@ -33,7 +33,7 @@ class Carrinho extends BaseController
 
         ];
 
-        if( session()->has('carrinho') && count(session()->get('carrinho')) > 0) {
+        if (session()->has('carrinho') && count(session()->get('carrinho')) > 0) {
             $data['carrinho'] = json_decode(json_encode(session()->get('carrinho')), false);
         }
 
@@ -67,7 +67,6 @@ class Carrinho extends BaseController
                 ->join('medidas', 'medidas.id = produtos_especificacoes.medida_id')
                 ->where('produtos_especificacoes.id', $produtoPost['especificacao_id'])->first();
 
-
             if ($especificacaoProduto == null) {
                 return redirect()->back()
                     ->with('fraude', "Não conseguimos processar a sua solicitação. Entre em contato com a nossa equipe e informe o codigo de erro. <strong> Erro: ADD-PROD-157 </strong>"); // FRAUDE FORMULARIO
@@ -82,14 +81,19 @@ class Carrinho extends BaseController
                 }
             }
 
+            $produto = $this->produtoModel->select(['id', 'nome', 'slug', 'ativo'])->where('slug', $produtoPost['slug'])->first();
 
-            $produto = $this->produtoModel->select(['id', 'nome', 'slug', 'ativo'])->where('slug', $produtoPost['slug'])->first()->toArray();
+            
 
-
+            
             if ($produto == null || $produto['ativo'] == false) {
                 return redirect()->back()
                     ->with('fraude', "Não conseguimos processar a sua solicitação. Entre em contato com a nossa equipe e informe o codigo de erro. <strong> Erro: ADD-PROD-159 </strong>"); // FRAUDE FORMULARIO
             }
+
+            $produto = $produto->toArray();
+
+
             // slug composto para identificar os itens no carrinho para adicionar
             $produto['slug'] = mb_url_title($produto['slug'] . '-' . $especificacaoProduto->nome . '-' . (isset($extra) ? 'com extra-' . $extra->nome : ''), '-', true);
 
@@ -103,7 +107,6 @@ class Carrinho extends BaseController
             $produto['tamanho'] = $especificacaoProduto->nome;
 
             unset($produto['ativo']); // atibuto ativo nao tem utilidade nesta parte
-
 
             // start insersao do produto no carrinho
             if (session()->has('carrinho')) {
@@ -138,37 +141,6 @@ class Carrinho extends BaseController
         }
     }
 
-    private function atualizaProduto(string $acao, string $slug, int $quantidade, array $produtos)
-    {
-        $produtos = array_map(
-            function ($linha) use ($acao, $slug, $quantidade) {
-
-                if ($linha['slug'] == $slug) {
-
-                    if ($acao === 'adicionar') {
-
-                        $linha['quantidade'] += $quantidade;
-                    }
-
-                    if ($acao === 'especial') {
-
-                        $linha['quantidade'] += $quantidade;
-                    }
-
-                    if ($acao === 'atualizar') {
-
-                        $linha['quantidade'] = $quantidade;
-                    }
-                }
-
-                return $linha;
-            },
-            $produtos
-        );
-
-        return $produtos;
-    }
-
     public function especial()
     {
         if ($this->request->getMethod() === 'post') {
@@ -187,7 +159,6 @@ class Carrinho extends BaseController
                     ->with('atencao', 'Por favor, verifique os errors abaixo e tente novamente.')
                     ->withInput();
             }
-
 
             $primeiroProduto = $this->produtoModel->select(['id', 'nome', 'slug'])
                 ->where('id', $produtoPost['primeira_metade'])
@@ -211,7 +182,6 @@ class Carrinho extends BaseController
             $primeiroProduto = $primeiroProduto->toArray();
             $segundoProduto = $segundoProduto->toArray();
 
-
             if ($produtoPost['extra_id'] && $produtoPost['extra_id'] != "") {
                 $extra = $this->extraModel->where('id', $produtoPost['extra_id'])->first();
 
@@ -229,10 +199,9 @@ class Carrinho extends BaseController
             }
 
             // slug composto para identificar os itens no carrinho para adicionar
-            $produto['slug'] = mb_url_title($medida->nome .'-metade-'.  $primeiroProduto['slug'] . '-metade-' . $segundoProduto['slug'] . '-' . (isset($extra) ? 'com extra-' . $extra->nome : ''), '-', true);
-            $produto['nome'] = $medida->nome .' metade '.  $primeiroProduto['nome'] . ' metade ' . $segundoProduto['nome'] . ' ' . (isset($extra) ? 'com extra ' . $extra->nome : '');
-            
-            
+            $produto['slug'] = mb_url_title($medida->nome . '-metade-' .  $primeiroProduto['slug'] . '-metade-' . $segundoProduto['slug'] . '-' . (isset($extra) ? 'com extra-' . $extra->nome : ''), '-', true);
+            $produto['nome'] = $medida->nome . ' metade ' .  $primeiroProduto['nome'] . ' metade ' . $segundoProduto['nome'] . ' ' . (isset($extra) ? 'com extra ' . $extra->nome : '');
+
             // preco, quantiade e tamanho
             $preco = $medida->preco + (isset($extra) ? $extra->preco : 0);
 
@@ -270,8 +239,128 @@ class Carrinho extends BaseController
         } else {
             return redirect()->back();
         }
-        
     }
 
+    public function atualizar()
+    {
+        if ($this->request->getMethod() == 'post') {
 
+            $produtoPost = $this->request->getPost('produto');
+
+            $this->validacao->setRules([
+                'produto.slug' => ['label' => 'Produto', 'rules' => 'required|string'],
+                'produto.quantidade' => ['label' => 'Quantidade', 'rules' => 'required|greater_than[0]'],
+
+            ]);
+
+            if (!$this->validacao->withRequest($this->request)->run()) {
+
+                return redirect()->back()->with('errors_model', $this->validacao->getErrors())
+                    ->with('atencao', 'Por favor, verifique os errors abaixo e tente novamente.')
+                    ->withInput();
+            }
+
+            $produtos = session()->get('carrinho');
+
+            // recupera os slugs dos produtos do carrinho
+            $produtosSlugs = array_column($produtos, 'slug');
+
+            if (!in_array($produtoPost['slug'], $produtosSlugs)) {
+
+                return redirect()->back()
+                    ->with('fraude', "Não conseguimos processar a sua solicitação. Entre em contato com a nossa equipe e informe o codigo de erro. <strong> Erro: ATT-CARR-223 </strong>"); // FRAUDE FORMULARIO
+            } else {
+
+                //PRODUTO VALIDADO E ATUALIZA A QUANTIDADE DO MESMO NO CARRINHO
+
+                // ja esta no carrinho, incrementa a quantidade
+                $produtos = $this->atualizaProduto($this->acao, $produtoPost['slug'], $produtoPost['quantidade'], $produtos);
+
+                //sobrescreve a sessao do carrinho com o array $produtos que foi alterado
+                session()->set('carrinho', $produtos);
+
+                return redirect()->back()->with('sucesso', 'Quantidade atualizada com sucesso!');
+
+            }
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function remover()  {
+        if ($this->request->getMethod() == 'post') {
+
+            $produtoPost = $this->request->getPost('produto');
+
+            $this->validacao->setRules([
+                'produto.slug' => ['label' => 'Produto', 'rules' => 'required|string'],
+
+            ]);
+
+            if (!$this->validacao->withRequest($this->request)->run()) {
+
+                return redirect()->back()->with('errors_model', $this->validacao->getErrors())
+                    ->with('atencao', 'Por favor, verifique os errors abaixo e tente novamente.')
+                    ->withInput();
+            }
+
+            $produtos = session()->get('carrinho');
+
+            // recupera os slugs dos produtos do carrinho
+            $produtosSlugs = array_column($produtos, 'slug');
+
+            if (!in_array($produtoPost['slug'], $produtosSlugs)) {
+
+                return redirect()->back()
+                    ->with('fraude', "Não conseguimos processar a sua solicitação. Entre em contato com a nossa equipe e informe o codigo de erro. <strong> Erro: ATT-CARR-223 </strong>"); // FRAUDE FORMULARIO
+            } else {
+
+                $produtos = $this->removeProduto($produtos, $produtoPost['slug']);
+
+                session()->set('carrinho', $produtos);
+
+                return redirect()->back()->with('sucesso', 'Produto removido com sucesso!');
+
+            }
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    private function atualizaProduto(string $acao, string $slug, int $quantidade, array $produtos)
+    {
+        $produtos = array_map(
+            function ($linha) use ($acao, $slug, $quantidade) {
+
+                if ($linha['slug'] == $slug) {
+
+                    if ($acao === 'adicionar') {
+
+                        $linha['quantidade'] += $quantidade;
+                    }
+
+                    if ($acao === 'especial') {
+
+                        $linha['quantidade'] += $quantidade;
+                    }
+
+                    if ($acao === 'atualizar') {
+
+                        $linha['quantidade'] = $quantidade;
+                    }
+                }
+
+                return $linha;
+            },
+            $produtos
+        );
+
+        return $produtos;
+    }
+
+    private function removeProduto(array $produtos, string $slug){
+        return array_filter($produtos, function($linha) use($slug){
+            return $linha['slug'] != $slug;
+        });
+    }
 }

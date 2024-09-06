@@ -64,8 +64,18 @@
 
                 <?php else: ?>
 
+                    <h3 style="margin-bottom: 2em;">Resumo do carrinho de compras</h3>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+
+                        <?php if (session()->has('errors_model')): ?>
+                            <ul style="margin-left: -1.6em !important; list-style: decimal">
+                                <?php foreach (session('errors_model') as $error): ?>
+                                    <li class="text-danger"><?php echo $error; ?></li>
+                                <?php endforeach ?>
+                            </ul>
+                        <?php endif; ?>
+
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th class="text-center" scope="col">Remover</th>
@@ -81,7 +91,18 @@
                                 <?php foreach ($carrinho as $produto): ?>
                                     <tr>
                                         <th class="text-center" scope="row">
-                                            <a class="btn btn-danger btn-sm" href="<?php echo site_url("carrinho/remover/$produto->slug"); ?>"> X </a>
+
+
+                                            <?php echo form_open("carrinho/remover", ['class' => 'form-inline d-inline']); ?>
+                                            <div class="form-group">
+                                                <input type="hidden" name="produto[slug]" value="<?php echo $produto->slug; ?>">
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </div>
+                                            <?php form_close() ?>
+
+
                                         </th>
                                         <td style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?php echo esc($produto->nome) ?>">
                                             <?php echo esc($produto->nome) ?>
@@ -90,23 +111,41 @@
                                         <td class="text-center">
                                             <?php echo form_open("carrinho/atualizar", ['class' => 'form-inline d-inline']); ?>
                                             <div class="form-group d-flex align-items-center">
-                                                <input type="number" class="form-control" name="produto[quantidade]" value="<?php echo $produto->quantidade ?>" min="1" max="10" step="1" required="" style="width: 60px; margin-right: 10px;"> <!-- Ajuste de largura -->
+                                                <input type="number" class="form-control" name="produto[quantidade]" value="<?php echo $produto->quantidade ?>" min="1" max="10" step="1" required="" style="width: 60px; margin-right: 10px;">
                                                 <input type="hidden" name="produto[slug]" value="<?php echo $produto->slug; ?>">
-                                                <button type="submit" class="btn btn-primary btn-sm"> <!-- Botão pequeno para combinar -->
-                                                    Atualizar
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-refresh"></i>
                                                 </button>
                                             </div>
                                             <?php form_close() ?>
                                         </td>
                                         <td>R$&nbsp;<?php echo esc($produto->preco) ?></td>
 
-                                        <?php 
-                                            $subTotal = $produto
+                                        <?php
+                                        $subTotal = $produto->preco * $produto->quantidade;
+
+                                        $total += $subTotal;
                                         ?>
 
-                                        <td><?php echo esc($produto->preco * $produto->quantidade) ?></td> <!-- Subtotal -->
+                                        <td>R$&nbsp;<?php echo esc(number_format($subTotal, 2)); ?></td>
                                     </tr>
                                 <?php endforeach; ?>
+
+                                <tr>
+                                    <td class="text-right" colspan="5" style="font-weight: bold">Total produtos:</td>
+                                    <td colspan="5">R$&nbsp;<?php echo number_format($total, 2) ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right border-top-0" colspan="5" style="font-weight: bold">Taxa de entrega:</td>
+                                    <td class="border-top-0" id="valor_entrega" colspan="5">
+                                        <!-- TODO: arrumar isso -->
+                                        R$&nbsp;<?php echo number_format($total, 2) ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right" id="total" colspan="5" style="font-weight: bold">Valor final:</td>
+                                    <td colspan="5"><?php echo 'R$&nbsp;' . number_format($total, 2) ?></td>
+                                </tr>
                             </tbody>
                         </table>
 
