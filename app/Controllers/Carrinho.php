@@ -86,7 +86,7 @@ class Carrinho extends BaseController
             
 
             
-            if ($produto == null || $produto['ativo'] == false) {
+            if ($produto == null || $produto->ativo == false) {
                 return redirect()->back()
                     ->with('fraude', "Não conseguimos processar a sua solicitação. Entre em contato com a nossa equipe e informe o codigo de erro. <strong> Erro: ADD-PROD-159 </strong>"); // FRAUDE FORMULARIO
             }
@@ -135,7 +135,7 @@ class Carrinho extends BaseController
                 session()->set('carrinho', $produtos);
             }
 
-            return redirect()->back()->with('sucesso', 'Produto adicionado ao carrinho com sucesso!');
+            return redirect()->to(site_url('carrinho'))->with('sucesso', 'Produto adicionado ao carrinho com sucesso!');
         } else {
             return redirect()->back();
         }
@@ -235,7 +235,7 @@ class Carrinho extends BaseController
                 session()->set('carrinho', $produtos);
             }
 
-            return redirect()->back()->with('sucesso', 'Produto adicionado ao carrinho com sucesso!');
+            return redirect()->to(site_url('carrinho'))->with('sucesso', 'Produto adicionado ao carrinho com sucesso!');
         } else {
             return redirect()->back();
         }
@@ -246,6 +246,7 @@ class Carrinho extends BaseController
         if ($this->request->getMethod() == 'post') {
 
             $produtoPost = $this->request->getPost('produto');
+
 
             $this->validacao->setRules([
                 'produto.slug' => ['label' => 'Produto', 'rules' => 'required|string'],
@@ -292,8 +293,9 @@ class Carrinho extends BaseController
 
             $produtoPost = $this->request->getPost('produto');
 
+
             $this->validacao->setRules([
-                'produto.slug' => ['label' => 'Produto', 'rules' => 'required|string'],
+                'produto.slug' => ['label' => 'produto', 'rules' => 'required|string'],
 
             ]);
 

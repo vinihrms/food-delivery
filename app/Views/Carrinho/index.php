@@ -90,20 +90,18 @@
                                 <?php $total = 0; ?>
                                 <?php foreach ($carrinho as $produto): ?>
                                     <tr>
+                                        <?php echo form_open("carrinho/remover", ['class' => 'form-inline d-inline']); ?>
                                         <th class="text-center" scope="row">
-
-
-                                            <?php echo form_open("carrinho/remover", ['class' => 'form-inline d-inline']); ?>
                                             <div class="form-group">
                                                 <input type="hidden" name="produto[slug]" value="<?php echo $produto->slug; ?>">
                                                 <button type="submit" class="btn btn-danger btn-sm">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </div>
-                                            <?php form_close() ?>
-
-
                                         </th>
+                                        <?php form_close() ?>
+
+
                                         <td style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?php echo esc($produto->nome) ?>">
                                             <?php echo esc($produto->nome) ?>
                                         </td>
@@ -111,7 +109,7 @@
                                         <td class="text-center">
                                             <?php echo form_open("carrinho/atualizar", ['class' => 'form-inline d-inline']); ?>
                                             <div class="form-group d-flex align-items-center">
-                                                <input type="number" class="form-control" name="produto[quantidade]" value="<?php echo $produto->quantidade ?>" min="1" max="10" step="1" required="" style="width: 60px; margin-right: 10px;">
+                                                <input type="number" class="form-control" name="produto[quantidade]" value="<?php echo $produto->quantidade ?>" min="1" max="10" step="1" required style="width: 60px; margin-right: 10px;">
                                                 <input type="hidden" name="produto[slug]" value="<?php echo $produto->slug; ?>">
                                                 <button type="submit" class="btn btn-primary btn-sm">
                                                     <i class="fa fa-refresh"></i>
