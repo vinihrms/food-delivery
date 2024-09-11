@@ -335,6 +335,16 @@ class Carrinho extends BaseController
         return redirect()->to(site_url('carrinho'));
     }
 
+    public function consultaCep () {
+        if(!$this->request->isAJAX()){
+            return redirect()->back();
+        }
+
+        $get = $this->request->getGet('cep');
+
+        $this->validacao->setRule('cep', 'CEP', 'required|exact_length[9]')
+    }
+
     private function atualizaProduto(string $acao, string $slug, int $quantidade, array $produtos)
     {
         $produtos = array_map(

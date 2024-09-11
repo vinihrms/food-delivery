@@ -50,7 +50,7 @@
 
         </div>
 
-        <div class="product-content product-wrap clearfix product-deatil" id="carrinho">
+        <div class="product-content product-wrap clearfix product-deatil">
             <div class="row">
 
                 <?php if (!isset($carrinho)): ?>
@@ -146,6 +146,12 @@
                                 </tr>
                             </tbody>
                         </table>
+                        
+                        <div class="form-group col-md-4">
+                            <label for="">Calcular taxa de entrega</label>
+                            <input type="text" name="cep" class="cep form-control" placeholder="Informe o seu CEP">
+                            <div id="cep"></div>
+                        </div>
 
                     </div>
                     
@@ -172,8 +178,44 @@
 
 <?php echo $this->section('scripts'); ?>
 <!-- envia script -->
-<script>
+<script src="<?php echo site_url('admin/vendors/mask/app.js'); ?>"></script>
+<script src="<?php echo site_url('admin/vendors/mask/jquery.mask.min.js'); ?>"></script>
 
+<script>
+    $("[name=cep]").focusout(function () {
+        var cep = $(this).val()
+
+        if(cep.length === 9){
+            $.ajax({
+                type: 'get',
+                url: '<?php echo site_url('carrinho/consultacep') ?>',
+                dataType: 'json',
+                data: {
+                    cep: cep
+                },
+                beforeSend: function () {
+                    $("cep").html('Consultando...')
+
+                    $("[name=cep]").val('')
+
+                },
+                success: function (response) {
+                    if(!response.error) {
+                        /* cep valido */
+
+
+
+                    } else {
+
+                    }
+
+                },
+                error: function () {
+                    alert('Não foi possível consultar a taxa de entrega. Entre em contato com a nossa equipe e informe o erro CONSULTA-ERRO-TAXA')
+                }
+            })
+        }
+    })
 </script>
 
 <?php echo $this->endSection(); ?>
