@@ -32,6 +32,7 @@
     <link href="<?php echo site_url('web/'); ?>src/assets/css/main.css" type="text/css" rel="stylesheet" />
     <link href="<?php echo site_url('web/'); ?>src/assets/css/responsive.css" type="text/css" rel="stylesheet" />
 
+
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo site_url('web/'); ?>src/assets/img/favicon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="256x256" href="<?php echo site_url('web/'); ?>src/assets/img/favicon/android-chrome-256x256.png">
@@ -46,6 +47,12 @@
 
     <!-- essa section renderiza os estilos especificos da view que estender esse layout -->
     <?php echo $this->renderSection('estilos') ?>
+
+    <style>
+        .navbar-nav > li > a {
+            line-height: 30px;
+        }
+    </style>
 
 </head>
 <!-- END head -->
@@ -244,6 +251,13 @@
                                             <li><a class="page-scroll" href="#menu">Cardápio</a></li>
                                             <li><a class="page-scroll" href="#gallery">Galeria</a></li>
                                             <li><a class="page-scroll" href="#footer">Contato</a></li>
+                                            
+                                            <?php if(session()->has('carrinho') && count(session()->get('carrinho')) > 0): ?>
+                                                <li><a class="page-scroll" href="<?php echo site_url('/carrinho') ?>">
+                                                    <i class="fa fa-shopping-cart fa fa-2x"></i>
+                                                    <span style="font-size: 25px !important"> <?php echo count(session()->get('carrinho')) ?></span>
+                                                </a></li>
+                                            <?php endif ?>
                                         </ul>
                                     </div>
                                 </div>

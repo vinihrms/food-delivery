@@ -1,4 +1,4 @@
-<?php echo $this->extend('layout/layout_produto'); ?>
+<?php echo $this->extend('layout/principal_web'); ?>
 
 <?php echo $this->section('titulo'); ?>
 <?php echo $titulo; ?>

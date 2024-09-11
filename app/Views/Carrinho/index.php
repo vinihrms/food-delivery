@@ -1,4 +1,4 @@
-<?php echo $this->extend('layout/layout_produto'); ?>
+<?php echo $this->extend('layout/principal_web'); ?>
 
 <?php echo $this->section('titulo'); ?>
 <?php echo $titulo; ?>
@@ -13,7 +13,7 @@
 <?php echo $this->section('conteudo'); ?>
 
 <!-- Begin Sections-->
-<div class="container-fluid section" data-aos="fade-up" style="margin-top: 3em">
+<div class="container section" data-aos="fade-up" style="margin-top: 3em">
     <!-- Verifique se há margens, paddings, ou outros estilos aplicados aqui -->
     <div class="col-sm-12 col-md-12 col-lg-12">
 
@@ -101,20 +101,20 @@
                                         </th>
                                         <?php echo form_close() ?>
 
-                                        
+
                                         <td style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?php echo esc($produto->nome) ?>">
                                             <?php echo esc($produto->nome) ?>
                                         </td>
                                         <td><?php echo esc($produto->tamanho) ?></td>
                                         <td class="text-center">
                                             <?php echo form_open("carrinho/atualizar", ['class' => 'form-inline d-inline']); ?>
-                                                <div class="form-group d-flex align-items-center">
-                                                    <input type="number" class="form-control" name="produto[quantidade]" value="<?php echo $produto->quantidade ?>" min="1" max="10" step="1" required style="width: 60px; margin-right: 10px;">
-                                                    <input type="hidden" name="produto[slug]" value="<?php echo $produto->slug; ?>">
-                                                    <button type="submit" class="btn btn-primary btn-sm">
-                                                        <i class="fa fa-refresh"></i>
-                                                    </button>
-                                                </div>
+                                            <div class="form-group d-flex align-items-center">
+                                                <input type="number" class="form-control" name="produto[quantidade]" value="<?php echo $produto->quantidade ?>" min="1" max="10" step="1" required style="width: 60px; margin-right: 10px;">
+                                                <input type="hidden" name="produto[slug]" value="<?php echo $produto->slug; ?>">
+                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-refresh"></i>
+                                                </button>
+                                            </div>
                                             <?php echo form_close() ?>
                                         </td>
                                         <td>R$&nbsp;<?php echo esc($produto->preco) ?></td>
@@ -148,7 +148,16 @@
                         </table>
 
                     </div>
+                    
+                    <hr>
 
+                    <div class="col-md-12">
+                        <a href="<?php echo site_url("/") ?>" style="background-color: #990100; color: #FFFFFF" class="btn">Mais delícias</a>
+
+                        <a href="<?php echo site_url("/carrinho/limpar") ?>" class="btn btn-default ">Limpar carrinho</a>
+
+                        <a href="<?php echo site_url("/carrinho/checkout") ?>" class="btn btn-success pull-right">Checkout</a>
+                    </div>
                 <?php endif ?>
 
             </div>

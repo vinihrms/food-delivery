@@ -329,6 +329,12 @@ class Carrinho extends BaseController
         }
     }
 
+    public function limpar()  {
+        session()->remove('carrinho');
+
+        return redirect()->to(site_url('carrinho'));
+    }
+
     private function atualizaProduto(string $acao, string $slug, int $quantidade, array $produtos)
     {
         $produtos = array_map(
