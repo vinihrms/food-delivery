@@ -50,7 +50,7 @@
 
         </div>
 
-        <div class="product-content product-wrap clearfix product-deatil">
+        <div class="product-content product-wrap clearfix product-deatil" id="carrinho">
             <div class="row">
 
                 <?php if (!isset($carrinho)): ?>

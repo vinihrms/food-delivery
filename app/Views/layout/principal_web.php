@@ -253,7 +253,7 @@
                                             <li><a class="page-scroll" href="#footer">Contato</a></li>
                                             
                                             <?php if(session()->has('carrinho') && count(session()->get('carrinho')) > 0): ?>
-                                                <li><a class="page-scroll" href="<?php echo site_url('/carrinho') ?>">
+                                                <li><a class="page-scroll" href="<?php echo site_url('/carrinho') ?>" >
                                                     <i class="fa fa-shopping-cart fa fa-2x"></i>
                                                     <span style="font-size: 25px !important"> <?php echo count(session()->get('carrinho')) ?></span>
                                                 </a></li>
