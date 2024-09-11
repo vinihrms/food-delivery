@@ -99,23 +99,23 @@
                                                 </button>
                                             </div>
                                         </th>
-                                        <?php form_close() ?>
+                                        <?php echo form_close() ?>
 
-
+                                        
                                         <td style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?php echo esc($produto->nome) ?>">
                                             <?php echo esc($produto->nome) ?>
                                         </td>
                                         <td><?php echo esc($produto->tamanho) ?></td>
                                         <td class="text-center">
                                             <?php echo form_open("carrinho/atualizar", ['class' => 'form-inline d-inline']); ?>
-                                            <div class="form-group d-flex align-items-center">
-                                                <input type="number" class="form-control" name="produto[quantidade]" value="<?php echo $produto->quantidade ?>" min="1" max="10" step="1" required style="width: 60px; margin-right: 10px;">
-                                                <input type="hidden" name="produto[slug]" value="<?php echo $produto->slug; ?>">
-                                                <button type="submit" class="btn btn-primary btn-sm">
-                                                    <i class="fa fa-refresh"></i>
-                                                </button>
-                                            </div>
-                                            <?php form_close() ?>
+                                                <div class="form-group d-flex align-items-center">
+                                                    <input type="number" class="form-control" name="produto[quantidade]" value="<?php echo $produto->quantidade ?>" min="1" max="10" step="1" required style="width: 60px; margin-right: 10px;">
+                                                    <input type="hidden" name="produto[slug]" value="<?php echo $produto->slug; ?>">
+                                                    <button type="submit" class="btn btn-primary btn-sm">
+                                                        <i class="fa fa-refresh"></i>
+                                                    </button>
+                                                </div>
+                                            <?php echo form_close() ?>
                                         </td>
                                         <td>R$&nbsp;<?php echo esc($produto->preco) ?></td>
 
