@@ -165,8 +165,6 @@ class Bairros extends BaseController
 
             $bairro = new Bairro($this->request->getPost());
 
-
-
             if ($this->bairroModel->save($bairro)) {
                 return redirect()->to(site_url("admin/bairros/show/" . $this->bairroModel->getInsertID()))
                     ->with('sucesso', "O bairro $bairro->nome foi cadastrado com sucesso.");

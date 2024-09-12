@@ -11,6 +11,7 @@ class Carrinho extends BaseController
     private $extraModel;
     private $produtoModel;
     private $medidaModel;
+    private $bairroModel;
     private $acao;
 
     private $validacao;
@@ -22,6 +23,7 @@ class Carrinho extends BaseController
         $this->extraModel = new \App\Models\ExtraModel();
         $this->produtoModel = new \App\Models\ProdutoModel();
         $this->medidaModel = new \App\Models\MedidaModel();
+        $this->bairroModel = new \App\Models\BairroModel();
 
         $this->acao = service('router')->methodName();
     }
@@ -83,16 +85,12 @@ class Carrinho extends BaseController
 
             $produto = $this->produtoModel->select(['id', 'nome', 'slug', 'ativo'])->where('slug', $produtoPost['slug'])->first();
 
-            
-
-            
             if ($produto == null || $produto->ativo == false) {
                 return redirect()->back()
                     ->with('fraude', "Não conseguimos processar a sua solicitação. Entre em contato com a nossa equipe e informe o codigo de erro. <strong> Erro: ADD-PROD-159 </strong>"); // FRAUDE FORMULARIO
             }
 
             $produto = $produto->toArray();
-
 
             // slug composto para identificar os itens no carrinho para adicionar
             $produto['slug'] = mb_url_title($produto['slug'] . '-' . $especificacaoProduto->nome . '-' . (isset($extra) ? 'com extra-' . $extra->nome : ''), '-', true);
@@ -247,7 +245,6 @@ class Carrinho extends BaseController
 
             $produtoPost = $this->request->getPost('produto');
 
-
             $this->validacao->setRules([
                 'produto.slug' => ['label' => 'Produto', 'rules' => 'required|string'],
                 'produto.quantidade' => ['label' => 'Quantidade', 'rules' => 'required|greater_than[0]'],
@@ -281,18 +278,17 @@ class Carrinho extends BaseController
                 session()->set('carrinho', $produtos);
 
                 return redirect()->back()->with('sucesso', 'Quantidade atualizada com sucesso!');
-
             }
         } else {
             return redirect()->back();
         }
     }
 
-    public function remover()  {
+    public function remover()
+    {
         if ($this->request->getMethod() == 'post') {
 
             $produtoPost = $this->request->getPost('produto');
-
 
             $this->validacao->setRules([
                 'produto.slug' => ['label' => 'produto', 'rules' => 'required|string'],
@@ -322,27 +318,81 @@ class Carrinho extends BaseController
                 session()->set('carrinho', $produtos);
 
                 return redirect()->back()->with('sucesso', 'Produto removido com sucesso!');
-
             }
         } else {
             return redirect()->back();
         }
     }
 
-    public function limpar()  {
+    public function limpar()
+    {
         session()->remove('carrinho');
 
         return redirect()->to(site_url('carrinho'));
     }
 
-    public function consultaCep () {
-        if(!$this->request->isAJAX()){
+
+    // FIXME: ARRUMAR VALORES DE ENTREGA PARA CIDADE PEQUENA ANTES DE SUBIR
+    public function consultaCep()
+    {
+        if (!$this->request->isAJAX()) {
             return redirect()->back();
         }
 
-        $get = $this->request->getGet('cep');
+        $this->validacao->setRule('cep', 'CEP', 'required|exact_length[9]');
 
-        $this->validacao->setRule('cep', 'CEP', 'required|exact_length[9]')
+        if (!$this->validacao->withRequest($this->request)->run()) {
+            $retorno['erro'] = '<span class="text-danger small">' . $this->validacao->getError() . '</span>';
+
+            return $this->response->setJSON($retorno);
+        }
+
+        $cep = str_replace("-", "", $this->request->getGet('cep'));
+
+        helper('consulta_cep');
+
+        $consulta = consultaCep($cep);
+
+        if (isset($consulta->erro) && !isset($consulta->cep)) {
+            $retorno['erro'] = '<span class="text-danger small"> Informe um CEP válido </span>';
+
+            return $this->response->setJSON($retorno);
+        }
+
+        $bairroRetornoSlug = mb_url_title($consulta->bairro, '-', true);
+
+        $bairro = $this->bairroModel->select('nome, valor_entrega')->where('slug', $bairroRetornoSlug)->where('ativo', true)->first();
+
+        if ($consulta->bairro == null || $bairro == null) {
+            $retorno['erro'] = '<span class="text-danger small"> Não atendemos o bairro: ' . esc($consulta->bairro) . ' - ' . esc($consulta->localidade) . ' - ' . esc($consulta->uf) . ' - '
+                . '</span>';
+
+            return $this->response->setJSON($retorno);
+        }
+
+        $retorno['valor_entrega'] = 'R$ ' . esc(number_format($bairro->valor_entrega, 2));
+
+        $retorno['bairro'] = '<span class="small"> Valor de entrega para o bairro: '
+            . esc($consulta->bairro) . ' - '
+            . esc($consulta->localidade) . ' - '
+            . esc($consulta->uf) . ' - '
+            . 'R$' . esc(number_format($bairro->valor_entrega, 2))
+            . '</span>';
+
+        $carrinho = session()->get('carrinho');
+
+        $total = 0;
+
+        foreach ($carrinho as $produto){
+            $total += $produto['preco'] * $produto['quantidade'];
+        }
+
+        $total += esc(number_format($bairro->valor_entrega, 2));
+
+        $retorno['total'] = 'R$' . esc(number_format($total, 2));
+
+        return $this->response->setJSON($retorno);
+
     }
 
     private function atualizaProduto(string $acao, string $slug, int $quantidade, array $produtos)
@@ -376,8 +426,9 @@ class Carrinho extends BaseController
         return $produtos;
     }
 
-    private function removeProduto(array $produtos, string $slug){
-        return array_filter($produtos, function($linha) use($slug){
+    private function removeProduto(array $produtos, string $slug)
+    {
+        return array_filter($produtos, function ($linha) use ($slug) {
             return $linha['slug'] != $slug;
         });
     }

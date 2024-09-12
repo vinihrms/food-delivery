@@ -130,31 +130,30 @@
                                 <?php endforeach; ?>
 
                                 <tr>
-                                    <td class="text-right" colspan="5" style="font-weight: bold">Total produtos:</td>
+                                    <td class="text-right" colspan="5">Total produtos:</td>
                                     <td colspan="5">R$&nbsp;<?php echo number_format($total, 2) ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right border-top-0" colspan="5" style="font-weight: bold">Taxa de entrega:</td>
-                                    <td class="border-top-0" id="valor_entrega" colspan="5">
-                                        <!-- TODO: arrumar isso -->
-                                        R$&nbsp;<?php echo number_format($total, 2) ?>
+                                    <td class="text-right border-top-0" style="border-top: none; !important" colspan="5" style="font-weight: bold">Taxa de entrega:</td>
+                                    <td class="border-top-0" style="border-top: none; !important" id="valor_entrega" colspan="5">
+                                        Não calculado
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right" id="total" colspan="5" style="font-weight: bold">Valor final:</td>
-                                    <td colspan="5"><?php echo 'R$&nbsp;' . number_format($total, 2) ?></td>
+                                    <td class="text-right" style="border-top: none; font-weight: bold !important" colspan="5">Valor final:</td>
+                                    <td class="border-top-0" id="total" style="border-top: none; font-weight: bold !important" colspan="5"><?php echo 'R$&nbsp;' . number_format($total, 2) ?></td>
                                 </tr>
                             </tbody>
                         </table>
-                        
-                        <div class="form-group col-md-4">
+
+                        <div class="form-group col-md-5">
                             <label for="">Calcular taxa de entrega</label>
                             <input type="text" name="cep" class="cep form-control" placeholder="Informe o seu CEP">
                             <div id="cep"></div>
                         </div>
 
                     </div>
-                    
+
                     <hr>
 
                     <div class="col-md-12">
@@ -182,10 +181,10 @@
 <script src="<?php echo site_url('admin/vendors/mask/jquery.mask.min.js'); ?>"></script>
 
 <script>
-    $("[name=cep]").focusout(function () {
+    $("[name=cep]").focusout(function() {
         var cep = $(this).val()
 
-        if(cep.length === 9){
+        if (cep.length === 9) {
             $.ajax({
                 type: 'get',
                 url: '<?php echo site_url('carrinho/consultacep') ?>',
@@ -193,24 +192,32 @@
                 data: {
                     cep: cep
                 },
-                beforeSend: function () {
-                    $("cep").html('Consultando...')
+                beforeSend: function() {
+                    $("#cep").html('Consultando...')
 
                     $("[name=cep]").val('')
 
                 },
-                success: function (response) {
-                    if(!response.error) {
+                success: function(response) {
+                    if (!response.erro) {
                         /* cep valido */
+                        $("#cep").html('')
 
+
+                        $("#valor_entrega").html(response.valor_entrega);
+
+                        $("#total").html(response.total);
+
+                        $("#cep").html(response.bairro)
 
 
                     } else {
+                        $("#cep").html(response.erro)
 
                     }
 
                 },
-                error: function () {
+                error: function() {
                     alert('Não foi possível consultar a taxa de entrega. Entre em contato com a nossa equipe e informe o erro CONSULTA-ERRO-TAXA')
                 }
             })

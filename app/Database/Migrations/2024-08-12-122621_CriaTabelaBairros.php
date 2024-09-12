@@ -22,7 +22,7 @@ class CriaTabelaBairros extends Migration
             "cidade" => [
                 "type" => "VARCHAR",
                 "constraint" => "128",
-                "default" => "Corbélia",
+                // "default" => "Corbélia",
             ],
             "slug" => [
                 "type" => "VARCHAR",

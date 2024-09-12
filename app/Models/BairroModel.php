@@ -9,7 +9,7 @@ class BairroModel extends Model
     protected $table            = 'bairros';
     protected $returnType       = 'App\Entities\Bairro';
     protected $useSoftDeletes   = true;
-    protected $allowedFields    = ['nome', 'slug', 'ativo', 'valor_entrega'];
+    protected $allowedFields    = ['nome', 'cidade', 'slug', 'ativo', 'valor_entrega'];
 
     protected bool $allowEmptyInserts = false;
 
@@ -23,7 +23,7 @@ class BairroModel extends Model
     // Validation
     protected $validationRules = [
         'nome'     => 'required|max_length[120]|min_length[2]|is_unique[bairros.nome,id,{id}]',
-        'cidade'     => 'required|equals[Corbélia]',
+        'cidade'     => 'required',  // |equals[Corbélia]
         'valor_entrega'     => 'required',
 
     ];
@@ -35,7 +35,7 @@ class BairroModel extends Model
         ],
         'cidade' => [
             'required' => 'A cidade é obrigatório.',
-            'equals' => 'Essa aplicação ainda não aceita outra cidades. Se você deseja adicionar esta opção, contate o suporte técnico.',
+            // 'equals' => 'Essa aplicação ainda não aceita outra cidades. Se você deseja adicionar esta opção, contate o suporte técnico.',
         ],
         'valor_entrega' => [
             'required' => 'O valor de entrega é obrigatório.',
