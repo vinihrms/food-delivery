@@ -1,0 +1,46 @@
+FIXME: TENTAR ARRUMAR ISSO
+
+public function ativarContaPeloToken(string $token) {
+    $token = new Token($token);
+    $tokenHash = $token->getHash();
+
+    $usuario = $this->where('ativacao_hash', $tokenHash)->first();
+
+    if ($usuario != null) {
+        $usuario->ativar();
+        $this->protect(false)->save($usuario);
+        return true;  // Sucesso na ativação
+    }
+
+    return false;
+}
+
+public function ativar(string $token = null) {
+    if ($token == null) {
+        return redirect()->to(site_url('/login'))->with('erro', 'Token inválido ou ausente.');
+    }
+
+    if (!$this->usuarioModel->ativarContaPeloToken($token)) {
+        return redirect()->to(site_url('/login'))->with('erro', 'Token inválido ou usuário não encontrado.');
+    }
+
+    return redirect()->to(site_url('/login'))->with('sucesso', 'Conta ativada com sucesso, por favor realize o login.');
+}
+
+$usuario->iniciarAtivacao();
+
+if ($this->usuarioModel->insert($usuario)) {
+    log_message('debug', 'Hash de ativação salvo no banco de dados: ' . $usuario->ativacao_hash);
+    $this->enviaEmailParaAtivarConta($usuario);
+}
+
+$mensagem = view('Registrar/ativacao_email', ['token' => $usuario->token]); // Não use o hash diretamente aqui
+
+
+log_message('debug', 'Token recebido: ' . $token);
+log_message('debug', 'Token hash gerado: ' . $tokenHash);
+if ($usuario == null) {
+    log_message('error', 'Token inválido ou usuário não encontrado: ' . $tokenHash);
+} else {
+    log_message('debug', 'Usuário encontrado: ' . json_encode($usuario));
+}

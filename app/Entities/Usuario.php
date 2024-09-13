@@ -42,7 +42,6 @@ class Usuario extends Entity
     public function ativar() {
         $this->ativo = true;
         $this->ativacao_hash = null;
-
     }
 
 

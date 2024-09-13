@@ -133,14 +133,14 @@ class UsuarioModel extends Model
     public function ativarContaPeloToken(string $token){
         $token = new Token($token);
 
-        $tokenHash = $token->getHash();
+        $token_hash = $token->getHash();
 
-        $usuario = $this->where('ativacao_hash', $tokenHash)->first();
+        $usuario = $this->where('ativacao_hash', $token_hash)->first();
 
         if($usuario != null){
             $usuario->ativar();
+            $this->protect(false)->save($usuario);
         }
 
-        $this->protect(false)->save($usuario);
     }
 }

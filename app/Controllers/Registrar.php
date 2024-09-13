@@ -70,7 +70,7 @@ class Registrar extends BaseController
         $this->usuarioModel->ativarContaPeloToken($token);
 
         
-        return redirect()->to(site_url('/login'))->with('sucesso', 'Conta ativada com sucesso, por favor realize o login');
+        return redirect()->to(site_url('login'))->with('sucesso', 'Conta ativada com sucesso, por favor realize o login');
     }
 
     private function enviaEmailParaAtivarConta(object $usuario){
