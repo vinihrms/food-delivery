@@ -31,4 +31,19 @@ class Usuario extends Entity
         $this->reset_expira_em = null;
     }
 
+    public function iniciarAtivacao() {
+        $token = new Token();
+
+        $this->token = $token->getValue();
+
+        $this->ativacao_hash = $token->getHash();
+    }
+
+    public function ativar() {
+        $this->ativo = true;
+        $this->ativacao_hash = null;
+
+    }
+
+
 }

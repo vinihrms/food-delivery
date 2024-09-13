@@ -58,8 +58,7 @@
                     <h2 class="text-center"> Seu carrinho de compras está vazio</h2>
 
                     <div class="text-center">
-                        <a href="<?php echo site_url("/") ?>" style="background-color: #990100; color: #FFFFFF; margin-top: 3em" class="btn btn-lg">Mais delícias</a>
-
+                        <a href="<?php echo site_url("/") ?>" style="margin-top: 3em" class="btn btn-lg btn-food">Mais delícias</a>
                     </div>
 
                 <?php else: ?>
@@ -134,8 +133,8 @@
                                     <td colspan="5">R$&nbsp;<?php echo number_format($total, 2) ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="text-right border-top-0" style="border-top: none; !important" colspan="5" style="font-weight: bold">Taxa de entrega:</td>
-                                    <td class="border-top-0" style="border-top: none; !important" id="valor_entrega" colspan="5">
+                                    <td class="text-right border-top-0" style="border-top: none !important" colspan="5" style="font-weight: bold">Taxa de entrega:</td>
+                                    <td class="border-top-0" style="border-top: none !important" id="valor_entrega" colspan="5">
                                         Não calculado
                                     </td>
                                 </tr>
@@ -157,11 +156,11 @@
                     <hr>
 
                     <div class="col-md-12">
-                        <a href="<?php echo site_url("/") ?>" style="background-color: #990100; color: #FFFFFF" class="btn">Mais delícias</a>
+                        <a href="<?php echo site_url("/") ?>"class="btn btn-food">Mais delícias</a>
 
-                        <a href="<?php echo site_url("/carrinho/limpar") ?>" class="btn btn-default ">Limpar carrinho</a>
+                        <a href="<?php echo site_url("/carrinho/limpar") ?>" class="btn btn-default" style="font-family: Montserrat-bold">Limpar carrinho</a>
 
-                        <a href="<?php echo site_url("/carrinho/checkout") ?>" class="btn btn-success pull-right">Checkout</a>
+                        <a href="<?php echo site_url("/carrinho/checkout") ?>" class="btn btn-success pull-right" style="font-family: Montserrat-bold">Checkout</a>
                     </div>
                 <?php endif ?>
 

@@ -49,8 +49,32 @@
     <?php echo $this->renderSection('estilos') ?>
 
     <style>
-        .navbar-nav > li > a {
+        .navbar-nav>li>a {
             line-height: 30px;
+        }
+
+        .btn-food {
+            background-color: #990100;
+            color: white !important;
+            font-family: 'Montserrat-bold';
+        }
+
+        .btn-food:hover {
+            color: #fff;
+            background-color: #660000;
+            border-color: #5d0000;
+            box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5);
+        }
+
+        .btn-food:focus,
+        .btn-food.focus {
+            box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5);
+        }
+
+        .btn-food:not(:disabled):not(.disabled):active:focus,
+        .btn-food:not(:disabled):not(.disabled).active:focus,
+        .show>.btn-food.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5);
         }
     </style>
 
@@ -251,12 +275,12 @@
                                             <li><a class="page-scroll" href="#menu">Cardápio</a></li>
                                             <li><a class="page-scroll" href="#gallery">Galeria</a></li>
                                             <li><a class="page-scroll" href="#footer">Contato</a></li>
-                                            
-                                            <?php if(session()->has('carrinho') && count(session()->get('carrinho')) > 0): ?>
-                                                <li><a class="page-scroll" href="<?php echo site_url('/carrinho') ?>" >
-                                                    <i class="fa fa-shopping-cart fa fa-2x"></i>
-                                                    <span style="font-size: 25px !important"> <?php echo count(session()->get('carrinho')) ?></span>
-                                                </a></li>
+
+                                            <?php if (session()->has('carrinho') && count(session()->get('carrinho')) > 0): ?>
+                                                <li><a class="page-scroll" href="<?php echo site_url('/carrinho') ?>">
+                                                        <i class="fa fa-shopping-cart fa fa-2x"></i>
+                                                        <span style="font-size: 25px !important"> <?php echo count(session()->get('carrinho')) ?></span>
+                                                    </a></li>
                                             <?php endif ?>
                                         </ul>
                                     </div>

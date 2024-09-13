@@ -456,7 +456,7 @@
 </head>
 
 <body>
-    <span class="preheader">Use este link para redefinir sua senha. Esse link é válido por apenas 3 horas.</span>
+    <span class="preheader">Use este link para ativar sua conta. Esse link é válido por apenas 3 horas.</span>
     <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
         <tr>
             <td align="center">
@@ -477,7 +477,7 @@
                                     <td class="content-cell">
                                         <div class="f-fallback">
                                             <h1>Olá,</h1>
-                                            <p>Voce recentemente solicitou uma redefinição para a sua senha do Food Delivery. Clique no botão abaixo para redefini-la. <strong>Este link é válido por apenas 3 horas...</strong></p>
+                                            <p>Obrigado por se inscrever em nosso serviço. Para ativar sua conta, por favor, clique no botão abaixo. <strong>Este link é válido por apenas 3 horas...</strong></p>
                                             <!-- Action -->
                                             <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                                                 <tr>
@@ -487,14 +487,14 @@
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                                             <tr>
                                                                 <td align="center">
-                                                                <a href="<?php echo site_url('password/reset/'. $token); ?>"> Redefinir sua senha </a>
+                                                                <a href="<?php echo site_url('registrar/ativar/'. $token); ?>"> Ativar sua conta </a>
                                                                 </td>
                                                             </tr>
                                                         </table>
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <p>Para a sua segurança, se você não solicitou uma redefinição de senha, por favor ignore este e-mail.</p>
+                                            <p>Se você não se inscreveu para este serviço, por favor ignore este e-mail.</p>
                                             <p>Obrigado,
                                                 <br>Time Food Delivery
                                             </p>
@@ -503,7 +503,7 @@
                                                 <tr>
                                                     <td>
                                                         <p class="f-fallback sub">Se você estiver obtendo problemas com o botão, copie e cole o link abaixo no navegador.</p>
-                                                        <p class="f-fallback sub"><?php echo site_url('password/reset/'. $token); ?></p>
+                                                        <p class="f-fallback sub"><?php echo site_url('registrar/ativar/'. $token); ?></p>
                                                     </td>
                                                 </tr>
                                             </table>

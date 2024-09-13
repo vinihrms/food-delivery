@@ -142,7 +142,7 @@ class Email
      *
      * @var string 'text' or 'html'
      */
-    public $mailType = 'text';
+    public $mailType = 'html';
 
     /**
      * Character set (default: utf-8)

@@ -11,6 +11,7 @@ $routes->get('/', 'Home::index');
 // só deixa acessar URL de login para visitantes (nao logados)
 $routes->get('/login', 'Login::novo', ['filter' => 'visitante']); 
 
+$routes->get('/registrar', 'Registrar::novo', ['filter' => 'visitante']); 
 
 
 $routes->group('admin', static function ($routes) {

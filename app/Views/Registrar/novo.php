@@ -67,36 +67,42 @@
                 <?php endif; ?>
 
                 <div class="col-md-12">
-                <div class="brand-logo">
-                        <img src="<?php echo site_url('admin/') ?>images/logo.svg" alt="logo">
-                    </div>
-                    <h4>Olá. Seja bem vindo(a)!</h4>
-                    <h6 class="font-weight-light mb-4">Faça o login para continuar.</h6>
+                    <?php echo form_open('registrar/criar') ?>
+                    <form>
+                        <div class="form-group">
+                            <label for="nome">Nome completo</label>
+                            <input type="text" class="form-control" name="nome" placeholder="Seu nome completo" value="<?php echo old('nome') ?>">
+                        </div>
 
-                    <?php echo form_open('login/criar'); ?>
-                    <div class="form-group">
-                        <input type="email" name="email" value="<?php echo old('email') ?>"
-                            class="form-control form-control-lg" id="exampleInputEmail1"
-                            placeholder="Digite o seu e-mail">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"
-                            name="password" placeholder="Digite a sua senha">
-                    </div>
-                    <div class="mt-3">
-                        <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-                            href="../../index.html"> ENTRAR </button>
-                    </div>
-                    <!-- TODO: esqueceu a senha -->
-                    <div class="my-2 d-flex justify-content-between align-items-center">
-                        <a href="<?php echo site_url('password/esqueci'); ?>" class="auth-link text-black">Esqueceu a senha?</a>
-                    </div>
+                        <div class="form-group">
+                            <label for="email">Email válido</label>
+                            <input type="text" class="form-control" name="email" placeholder="Seu email" value="<?php echo old('email') ?>">
+                        </div>
 
-                    <div class="text-center mt-4 font-weight-light">
-                        Ainda não tem uma conta? <a href="<?php echo site_url('registrar');?>"
-                            class="text-primary">Criar conta</a>
-                    </div>
-                    <?php echo form_close()?>
+                        <!-- <div class="form-group">
+                            <label for="telefone">Telefone</label>
+                            <input type="text" class="form-control sp_celphones" placeholder="Telefone" name="telefone"
+                                value="<?php echo old('telefone'); ?>">
+                        </div> -->
+
+                        <div class="form-group">
+                            <label for="cpf">CPF válido</label>
+                            <input type="text" class="form-control cpf" name="cpf" placeholder="CPF" value="<?php echo old('cpf') ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="senha">Senha</label>
+                            <input type="password" class="form-control" name="password" placeholder="Senha">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="senha">Confirmação de senha</label>
+                            <input type="password" class="form-control" name="password_confirmation" placeholder="Confirme sua senha">
+                        </div>
+
+                        <button type="submit" class="btn btn-food">Criar conta</button>
+                    </form>
+                    <?php echo form_close() ?>
                 </div>
 
             </div>
