@@ -33,8 +33,8 @@ class Registrar extends BaseController
 
             $this->usuarioModel->desabilitaValidacaoTelefone();
 
-            $usuario->iniciarAtivacao();
 
+            $usuario->iniciarAtivacao();
 
             if($this->usuarioModel->insert($usuario)){
 
@@ -62,29 +62,32 @@ class Registrar extends BaseController
         return view('Registrar/ativacao_enviado', $data);
     }
 
-    public function ativar (string $token = null){
-        if($token == null){
+    public function ativar(string $token = null)
+    {
+        if ($token === null) {
+            return redirect()->to(site_url('/login'))->with('erro', 'Token inválido ou ausente.');
+        }
+    
+        $sucesso = $this->usuarioModel->ativarContaPeloToken($token);
+    
+        if ($sucesso) {
+            return redirect()->to(site_url('/login'));
+        } else {
             return redirect()->to(site_url('/login'));
         }
-
-        $this->usuarioModel->ativarContaPeloToken($token);
-
-        
-        return redirect()->to(site_url('login'))->with('sucesso', 'Conta ativada com sucesso, por favor realize o login');
     }
+    
 
-    private function enviaEmailParaAtivarConta(object $usuario){
+    private function enviaEmailParaAtivarConta(object $usuario)
+    {
         $email = service('email');
-
         $email->setFrom('no-reply@fooddelivery.com', 'Food Delivery');
         $email->setTo($usuario->email);
-
         $email->setSubject('Ativação de conta');
-
-        $mensagem = view('Registrar/ativacao_email', ['token' => $usuario->ativacao_hash]);
-
+        
+        $mensagem = view('Registrar/ativacao_email', ['token' => $usuario->token]);
         $email->setMessage($mensagem);
-
+        
         $email->send();
     }
 }
