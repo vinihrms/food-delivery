@@ -68,7 +68,7 @@
 
                 <div class="col-md-12">
                 <div class="brand-logo">
-                        <img src="<?php echo site_url('admin/') ?>images/logo.svg" alt="logo">
+                        <img src="<?php echo site_url('admin/') ?>images/" alt="logo">
                     </div>
                     <h4>Olá. Seja bem vindo(a)!</h4>
                     <h6 class="font-weight-light mb-4">Faça o login para continuar.</h6>
@@ -84,15 +84,15 @@
                             name="password" placeholder="Digite a sua senha">
                     </div>
                     <div class="mt-3">
-                        <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                        <button type="submit" class="btn btn-block btn btn-food btn-lg font-weight-medium auth-form-btn"
                             href="../../index.html"> ENTRAR </button>
                     </div>
                     <!-- TODO: esqueceu a senha -->
                     <div class="my-2 d-flex justify-content-between align-items-center">
-                        <a href="<?php echo site_url('password/esqueci'); ?>" class="auth-link text-black">Esqueceu a senha?</a>
+                        <a style="margin-top: .5em;" href="<?php echo site_url('password/esqueci'); ?>" class="auth-link text-black">Esqueceu a senha?</a>
                     </div>
 
-                    <div class="text-center mt-4 font-weight-light">
+                    <div style="margin-top: .5em;" class="text-center font-weight-light">
                         Ainda não tem uma conta? <a href="<?php echo site_url('registrar');?>"
                             class="text-primary">Criar conta</a>
                     </div>

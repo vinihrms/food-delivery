@@ -282,6 +282,15 @@
                                                         <span style="font-size: 25px !important"> <?php echo count(session()->get('carrinho')) ?></span>
                                                     </a></li>
                                             <?php endif ?>
+
+                                            <?php if (usuario_logado()): ?>
+                                                <li><a class="page-scroll" href="<?php echo site_url('conta') ?>">Conta</a></li>
+                                                <li><a class="page-scroll" href="<?php echo site_url('login/logout') ?>">Sair</a></li>
+
+                                            <?php else: ?>
+                                                <li><a class="page-scroll" href="<?php echo site_url('login') ?>">Entrar</a></li>
+                                                <li><a class="page-scroll" href="<?php echo site_url('registrar') ?>">Registre-se</a></li>
+                                            <?php endif ?>
                                         </ul>
                                     </div>
                                 </div>

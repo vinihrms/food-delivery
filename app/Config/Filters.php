@@ -74,7 +74,9 @@ class Filters extends BaseConfig
     public array $filters = [
         'login' => [
             'before' => [
-                'admin/*' //nao deixa que usuarios deslogados acesse qualquer area sob o namespace de ADMIN.
+                'admin/*', //nao deixa que usuarios deslogados acesse qualquer area sob o namespace de ADMIN.
+                'Conta(/*)?', //nao deixa usuarios deslogados acessar o /conta
+                'Checkout(/*)?' //nao deixa usuarios deslogados acessar o /checkout
             ]
         ],
         'admin' => [
