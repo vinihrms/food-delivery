@@ -1,10 +1,10 @@
 .sidebar {
-    height: 100%;
+    max-height: 100%;
     width: 0;
     position: fixed;
     z-index: 1; 
     top: 0;
-    left: 10;
+    left: 0;
     background-color: #111; 
     overflow-x: hidden; 
     padding-top: 60px; 
@@ -29,7 +29,7 @@
     top: 0;
     right: 25px;
     font-size: 36px;
-    margin-left: 50px;
+    margin-left: 10px;
   }
   
   .openbtn {
@@ -39,6 +39,8 @@
     color: white;
     padding: 10px 15px;
     border: none;
+
+    margin-left: -18px;
   }
   
   .openbtn:hover {

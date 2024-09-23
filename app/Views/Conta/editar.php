@@ -58,30 +58,44 @@
             </div>
 
             <div class="col-md-6">
+                
+            <?php if (session()->has('errors_model')): ?>
+                    <ul>
+                        <?php foreach (session('errors_model') as $error): ?>
+                            <li class="text-danger"><?php echo $error; ?></li>
+                        <?php endforeach ?>
+                    </ul>
+            <?php endif; ?>
+
+                <?php echo form_open('conta/atualizar') ?>
+
                 <div class="panel panel-info">
                     <div class="panel-body">
-                        <dl>
-                            <dt>Nome completo:</dt>
-                            <dd><?php echo esc($usuario->nome); ?></dd>
-                            <hr>
-                            <dt>E-mail:</dt>
-                            <dd><?php echo esc($usuario->email); ?></dd>
-                            <hr>
-                            <dt>Telefone:</dt>
-                            <dd><?php echo esc($usuario->telefone); ?></dd>
-                            <hr>
-                            <dt>CPF:</dt>
-                            <dd><?php echo esc($usuario->cpf); ?></dd>
-                            <hr>
-                            <dt>Cliente desde:</dt>
-                            <dd><?php echo $usuario->criado_em->humanize(); ?></dd>
-                        </dl>
+                        <div>
+                            <label for="">Nome completo: </label>
+                            <input type="text" class="form-control" name="nome" value="<?php echo old('nome', esc($usuario->nome)) ?>">
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <label for="">E-mail: </label>
+                            <input type="email" class="form-control" name="email" value="<?php echo old('email', esc($usuario->email)) ?>">
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <label for="">Telefone: </label>
+                            <input type="tel" class="form-control sp_celphones" name="telefone" value="<?php echo old('telefone', esc($usuario->telefone)) ?>">
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <label for="">CPF:</label>
+                            <div class="well well-sm"><?php echo old('cpf', esc($usuario->cpf)) ?> &nbsp; <i class="fa fa-lock"></i></div>
+                        </div>
                     </div>
                     <div class="panel-footer">
-                        <a href="<?php echo site_url('conta/editar') ?>" class="btn btn-primary"> Editar</a>
-                        <a href="<?php echo site_url('conta/editarsenha') ?>" class="btn btn-danger"> Alterar senha</a>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <a href="<?php echo site_url('conta/show') ?>" class="btn btn-default"> Cancelar </a>
                     </div>
                 </div>
+
+                <?php echo form_close(); ?>
+
             </div>
         </div>
 
@@ -111,5 +125,9 @@
         document.getElementById("main").style.marginLeft = "0";
     }
 </script>
+
+
+<script src="<?php echo site_url('admin/vendors/mask/app.js'); ?>"></script>
+<script src="<?php echo site_url('admin/vendors/mask/jquery.mask.min.js'); ?>"></script>
 
 <?php echo $this->endSection(); ?>

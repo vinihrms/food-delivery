@@ -58,30 +58,24 @@
             </div>
 
             <div class="col-md-6">
+
+                <?php echo form_open('conta/processaautenticar') ?>
+
                 <div class="panel panel-info">
                     <div class="panel-body">
-                        <dl>
-                            <dt>Nome completo:</dt>
-                            <dd><?php echo esc($usuario->nome); ?></dd>
-                            <hr>
-                            <dt>E-mail:</dt>
-                            <dd><?php echo esc($usuario->email); ?></dd>
-                            <hr>
-                            <dt>Telefone:</dt>
-                            <dd><?php echo esc($usuario->telefone); ?></dd>
-                            <hr>
-                            <dt>CPF:</dt>
-                            <dd><?php echo esc($usuario->cpf); ?></dd>
-                            <hr>
-                            <dt>Cliente desde:</dt>
-                            <dd><?php echo $usuario->criado_em->humanize(); ?></dd>
-                        </dl>
+                        <div>
+                            <label for="">Insira sua senha: </label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
                     </div>
                     <div class="panel-footer">
-                        <a href="<?php echo site_url('conta/editar') ?>" class="btn btn-primary"> Editar</a>
-                        <a href="<?php echo site_url('conta/editarsenha') ?>" class="btn btn-danger"> Alterar senha</a>
+                        <button type="submit" class="btn btn-primary">Autenticar</button>
+                        <a href="<?php echo site_url('conta/show') ?>" class="btn btn-default"> Cancelar </a>
                     </div>
                 </div>
+
+                <?php echo form_close(); ?>
+
             </div>
         </div>
 
@@ -111,5 +105,9 @@
         document.getElementById("main").style.marginLeft = "0";
     }
 </script>
+
+
+<script src="<?php echo site_url('admin/vendors/mask/app.js'); ?>"></script>
+<script src="<?php echo site_url('admin/vendors/mask/jquery.mask.min.js'); ?>"></script>
 
 <?php echo $this->endSection(); ?>

@@ -141,6 +141,7 @@ class UsuarioModel extends Model
             $this->protect(false)->save($usuario);
             return true; 
         }
+        
         return false; 
     }
     

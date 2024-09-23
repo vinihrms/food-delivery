@@ -58,35 +58,43 @@
             </div>
 
             <div class="col-md-6">
+
+                <?php if (session()->has('errors_model')): ?>
+                    <ul>
+                        <?php foreach (session('errors_model') as $error): ?>
+                            <li class="text-danger"><?php echo $error; ?></li>
+                        <?php endforeach ?>
+                    </ul>
+                <?php endif; ?>
+
+                <?php echo form_open('conta/atualizarsenha') ?>
+
                 <div class="panel panel-info">
                     <div class="panel-body">
-                        <dl>
-                            <dt>Nome completo:</dt>
-                            <dd><?php echo esc($usuario->nome); ?></dd>
-                            <hr>
-                            <dt>E-mail:</dt>
-                            <dd><?php echo esc($usuario->email); ?></dd>
-                            <hr>
-                            <dt>Telefone:</dt>
-                            <dd><?php echo esc($usuario->telefone); ?></dd>
-                            <hr>
-                            <dt>CPF:</dt>
-                            <dd><?php echo esc($usuario->cpf); ?></dd>
-                            <hr>
-                            <dt>Cliente desde:</dt>
-                            <dd><?php echo $usuario->criado_em->humanize(); ?></dd>
-                        </dl>
+                        <div>
+                            <label for="">Senha atual: </label>
+                            <input type="password" class="form-control" name="current_password">
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <label for="">Nova senha: </label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <label for="">Confirme a nova senha: </label>
+                            <input type="password" class="form-control" name="password_confirmation">
+                        </div>
+                        
                     </div>
                     <div class="panel-footer">
-                        <a href="<?php echo site_url('conta/editar') ?>" class="btn btn-primary"> Editar</a>
-                        <a href="<?php echo site_url('conta/editarsenha') ?>" class="btn btn-danger"> Alterar senha</a>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <a href="<?php echo site_url('conta/show') ?>" class="btn btn-default"> Cancelar </a>
                     </div>
                 </div>
+
+                <?php echo form_close(); ?>
+
             </div>
         </div>
-
-
-
 
     </div>
 </div>
@@ -111,5 +119,9 @@
         document.getElementById("main").style.marginLeft = "0";
     }
 </script>
+
+
+<script src="<?php echo site_url('admin/vendors/mask/app.js'); ?>"></script>
+<script src="<?php echo site_url('admin/vendors/mask/jquery.mask.min.js'); ?>"></script>
 
 <?php echo $this->endSection(); ?>

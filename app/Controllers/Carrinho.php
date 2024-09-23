@@ -15,7 +15,7 @@ class Carrinho extends BaseController
     private $acao;
 
     private $validacao;
-
+    
     public function __construct()
     {
         $this->validacao = service('validation');
