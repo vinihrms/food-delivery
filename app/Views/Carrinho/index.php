@@ -81,7 +81,7 @@
                                     <th scope="col" style="max-width: 150px;">Produto</th> <!-- Define uma largura máxima -->
                                     <th scope="col">Tamanho</th>
                                     <th scope="col">Quantidade</th>
-                                    <th scope="col">Preço</th>
+                                    <th scope="col">Preço Unitário</th>
                                     <th scope="col">Subtotal</th>
                                 </tr>
                             </thead>
@@ -158,9 +158,9 @@
                     <div class="col-md-12">
                         <a href="<?php echo site_url("/") ?>"class="btn btn-food">Mais delícias</a>
 
-                        <a href="<?php echo site_url("/carrinho/limpar") ?>" class="btn btn-default" style="font-family: Montserrat-bold">Limpar carrinho</a>
+                        <a href="<?php echo site_url("carrinho/limpar") ?>" class="btn btn-default" style="font-family: Montserrat-bold">Limpar carrinho</a>
 
-                        <a href="<?php echo site_url("/carrinho/checkout") ?>" class="btn btn-success pull-right" style="font-family: Montserrat-bold">Checkout</a>
+                        <a href="<?php echo site_url("checkout") ?>" class="btn btn-success pull-right" style="font-family: Montserrat-bold">Checkout</a>
                     </div>
                 <?php endif ?>
 

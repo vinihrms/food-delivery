@@ -65,15 +65,15 @@ class Registrar extends BaseController
     public function ativar(string $token = null)
     {
         if ($token === null) {
-            return redirect()->to(site_url('/login'))->with('erro', 'Token inválido ou ausente.');
+            return redirect()->to(site_url('login'))->with('erro', 'Token inválido ou ausente.');
         }
     
         $sucesso = $this->usuarioModel->ativarContaPeloToken($token);
     
         if ($sucesso) {
-            return redirect()->to(site_url('/login'));
+            return redirect()->to(site_url('login'));
         } else {
-            return redirect()->to(site_url('/login'));
+            return redirect()->to(site_url('login'));
         }
     }
     

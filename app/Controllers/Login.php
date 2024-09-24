@@ -29,6 +29,13 @@ class Login extends BaseController
                 $usuario = $autenticacao->pegaUsuarioLogado();
 
                 if(!$usuario->is_admin){
+
+                    if(session()->has('carrinho')){
+
+                        return redirect()->to(site_url('carrinho'));
+
+                    }
+
                     return redirect()->to(site_url('/'));
                 }
 

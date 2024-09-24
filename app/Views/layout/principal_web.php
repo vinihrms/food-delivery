@@ -270,7 +270,7 @@
                                 <div class="collapse navbar-collapse" id="navbar">
                                     <div class="navbar-right">
                                         <ul class="nav navbar-nav">
-                                            <li><a class="page-scroll" href="#header">Home</a></li>
+                                            <li><a class="page-scroll" href="/">Home</a></li>
                                             <li><a class="page-scroll" href="#about_us">Sobre</a></li>
                                             <li><a class="page-scroll" href="#menu">Cardápio</a></li>
                                             <li><a class="page-scroll" href="#gallery">Galeria</a></li>
