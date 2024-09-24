@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use GuzzleHttp\RetryMiddleware;
 use Predis\Command\Argument\Server\To;
 
 class Conta extends BaseController
@@ -15,7 +16,6 @@ class Conta extends BaseController
     {
         $this->usuario = service('autenticacao')->pegaUsuarioLogado();
         $this->usuarioModel = new \App\Models\UsuarioModel();
-
     }
 
     public function index() {}
@@ -100,7 +100,8 @@ class Conta extends BaseController
         }
     }
 
-    public function editarSenha() {
+    public function editarSenha()
+    {
         $data = [
             'titulo' => 'Alterar senha',
             'usuario' => $this->usuario
@@ -109,7 +110,27 @@ class Conta extends BaseController
         return view('Conta/editar_senha', $data);
     }
 
-    public function atualizarSenha() {
-        
+    public function atualizarSenha()
+    {
+
+        if ($this->request->getMethod() == 'post') {
+
+            if (!$this->usuario->verificaPassword($this->request->getPost('current_password'))) {
+                return redirect()->back()->with('atencao', 'Senha atual inválida');
+            }
+
+            $this->usuario->fill($this->request->getPost());
+
+            if ($this->usuarioModel->save($this->usuario)) {
+                return redirect()->to(site_url('conta/show'))->with('sucesso', 'Senha atualizada com sucesso.');
+            } else {
+
+                return redirect()->back()->with('errors_model', $this->usuarioModel->errors())
+                    ->with('atencao', 'Por favor, verifique os errors abaixo e tente novamente.')
+                    ->withInput();
+            }
+        } else {
+            return redirect()->back();
+        }
     }
 }
