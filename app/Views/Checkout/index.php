@@ -131,26 +131,27 @@
                         <hr>
                         <!-- sera exibida via js quando escolher a opção dinheiro -->
 
-                        <div id="troco" class="hidde">
+                        <div id="troco" class="hidden">
                             <div class="form-group col-md-12">
-                                <label for="">Troco para</label>
-                                <input class="form-control money" type="text" id="troco_para" name="checkout[troco_para]">
+                                <label for="">Enviar troco para</label>
+                                <input class="form-control money" type="text" id="troco_para" name="checkout[troco_para]" placeholder="Enviar troco para">
                                 <label for="">
                                     <input type="checkbox" id="sem_troco" name="checkout[sem_troco]">
                                     Não preciso de troco
                                 </label>
+                                <hr>
                             </div>
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="Consulte a taxa de entrega"></label>
+                            <label for="">Consulte a taxa de entrega</label>
                             <input type="text" name="cep" class="form-control cep" placeholder="Informe o CEP" value="">
                             <div id="cep"></div>
                         </div>
 
                         <div class="form-group col-md-9">
                             <label for="">Rua * </label>
-                            <input type="text" name="checkout[rua]" class="form-control" value="" readonly="" required="">
+                            <input id="rua" type="text" name="checkout[rua]" class="form-control" value="" readonly="" required="">
                         </div>
 
                         <div class="form-group col-md-3">
@@ -164,8 +165,8 @@
                         </div>
 
                         <div class="form-group col-md-12">
-                            <input type="text" id="forma" name="checkout[forma_id]" placeholder="checkout[forma_id]">
-                            <input type="text" id="bairro" name="checkout[bairro_slug]" placeholder="checkout[bairro_slug]">
+                            <input type="text" id="forma_id" name="checkout[forma_id]" placeholder="checkout[forma_id]">
+                            <input type="text" id="bairro_id" name="checkout[bairro_slug]" placeholder="checkout[bairro_slug]">
                         </div>
 
                         <div class="form-group col-md-12">
@@ -192,13 +193,49 @@
 <script src="<?php echo site_url('admin/vendors/mask/jquery.mask.min.js'); ?>"></script>
 
 <script>
+    $('#btn-checkout').prop('disabled', true);
+
+    $(".forma").on('click', function() {
+
+            var forma_id = $(this).attr('data-forma');
+
+            $("#forma_id").val(forma_id);
+
+            if (forma_id == 1) {
+                $("#troco").removeClass('hidden')
+            } else {
+                $("#troco").addClass('hidden')
+
+            }
+
+        }
+
+    )
+
+    $("#sem_troco").on('click', function() {
+
+            if (this.checked) {
+                $('#troco_para').prop('disabled', true);
+
+                $('#troco_para').attr('placeholder', 'Não preciso de troco, tenho o valor certinho.')
+            } else {
+                $('#troco_para').prop('disabled', false);
+
+                $('#troco_para').attr('placeholder', 'Enviar troco para')
+
+            }
+
+        }
+
+    )
+
     $("[name=cep]").focusout(function() {
         var cep = $(this).val()
 
         if (cep.length === 9) {
             $.ajax({
                 type: 'get',
-                url: '<?php echo site_url('carrinho/consultacep') ?>',
+                url: '<?php echo site_url('checkout/consultacep') ?>',
                 dataType: 'json',
                 data: {
                     cep: cep
@@ -208,17 +245,33 @@
 
                     $("[name=cep]").val('')
 
+                    $('#btn-checkout').prop('disabled', true);
+                    $('#btn-checkout').val('Consultando a taxa de entrega');
+
+
                 },
                 success: function(response) {
                     if (!response.erro) {
                         /* cep valido */
-                        $("#cep").html('')
 
                         $("#valor_entrega").html(response.valor_entrega);
+                        $("#bairro_slug").html(response.bairro_slug);
+
+                        $('#btn-checkout').prop('disabled', false);
+                        $('#btn-checkout').val('Processar pedido');
+
+                        if(response.logradouro){
+                            $('#rua').val(response.logradouro);
+                        } else {
+                            $('#rua').prop("readonly", false)
+                        }
+
+                        $("#endereco").html(response.endereco);
 
                         $("#total").html(response.total);
 
                         $("#cep").html(response.bairro)
+
 
                     } else {
                         $("#cep").html(response.erro)
@@ -227,7 +280,10 @@
 
                 },
                 error: function() {
-                    alert('Não foi possível consultar a taxa de entrega. Entre em contato com a nossa equipe e informe o erro CONSULTA-ERRO-TAXA')
+                    alert('Não foi possível consultar a taxa de entrega. Entre em contato com a nossa equipe e informe o erro CONS-ERRO-TAXA-CKOT')
+                
+                    $('#btn-checkout').prop('disabled', true);
+                    $('#btn-checkout').val('Antes, consulte a taxa de entrega');
                 }
             })
         }
