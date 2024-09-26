@@ -222,9 +222,7 @@
                 $('#troco_para').prop('disabled', false);
 
                 $('#troco_para').attr('placeholder', 'Enviar troco para')
-
             }
-
         }
 
     )
