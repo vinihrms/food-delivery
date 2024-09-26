@@ -223,6 +223,12 @@
 
                 $('#troco_para').attr('placeholder', 'Enviar troco para')
             }
+
+
+
+
+
+            
         }
 
     )
