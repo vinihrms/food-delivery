@@ -130,7 +130,6 @@
                         <?php endforeach ?>
                         <hr>
                         <!-- sera exibida via js quando escolher a opção dinheiro -->
-
                         <div id="troco" class="hidden">
                             <div class="form-group col-md-12">
                                 <label for="">Enviar troco para</label>
