@@ -33,9 +33,10 @@
             <div class="navbar-brand-wrapper d-flex justify-content-center">
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
 
-                    <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.svg" alt="logo" /></a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg"
-                            alt="logo" /></a>
+                    <a class="navbar-brand brand-logo" href="<?php echo site_url('') ?>"><img src="<?php echo site_url('web/'); ?>src/assets/img/logoGrande.png" alt="logo" />
+                    </a>
+                    <a class="navbar-brand brand-logo-mini" href="<?php echo site_url('') ?>"><img src="<?php echo site_url('web/'); ?>src/assets/img/logoPequena.png" alt="logo" />
+                    </a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
                         data-toggle="minimize">
                         <span class="mdi mdi-sort-variant"></span>
@@ -51,123 +52,26 @@
                                     <i class="mdi mdi-magnify"></i>
                                 </span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Search now" aria-label="search"
+                            <input type="text" class="form-control" placeholder="Busque por algo" aria-label="search"
                                 aria-describedby="search">
                         </div>
                     </li>
                 </ul>
                 <ul class="navbar-nav navbar-nav-right">
-                    <li class="nav-item dropdown mr-1">
-                        <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center"
-                            id="messageDropdown" href="#" data-toggle="dropdown">
-                            <i class="mdi mdi-message-text mx-0"></i>
-                            <span class="count"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                            aria-labelledby="messageDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
-                                </div>
-                                <div class="item-content flex-grow">
-                                    <h6 class="ellipsis font-weight-normal">David Grey
-                                    </h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        The meeting is cancelled
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
-                                </div>
-                                <div class="item-content flex-grow">
-                                    <h6 class="ellipsis font-weight-normal">Tim Cook
-                                    </h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        New product launch
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
-                                </div>
-                                <div class="item-content flex-grow">
-                                    <h6 class="ellipsis font-weight-normal"> Johnson
-                                    </h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        Upcoming board meeting
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown mr-4">
-                        <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center notification-dropdown"
-                            id="notificationDropdown" href="#" data-toggle="dropdown">
-                            <i class="mdi mdi-bell mx-0"></i>
-                            <span class="count"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                            aria-labelledby="notificationDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-success">
-                                        <i class="mdi mdi-information mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">Application Error</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Just now
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-warning">
-                                        <i class="mdi mdi-settings mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">Settings</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        Private message
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item">
-                                <div class="item-thumbnail">
-                                    <div class="item-icon bg-info">
-                                        <i class="mdi mdi-account-box mx-0"></i>
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h6 class="font-weight-normal">New user registration</h6>
-                                    <p class="font-weight-light small-text mb-0 text-muted">
-                                        2 days ago
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
+                    
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                            <img src="images/faces/face5.jpg" alt="profile" />
-                            <span class="nav-profile-name">Louis Barnett</span>
+                            <span class="nav-profile-name">Seja bem vindo!</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
                             <a class="dropdown-item">
                                 <i class="mdi mdi-settings text-primary"></i>
-                                Settings
+                                Configurações
                             </a>
-                            <a class="dropdown-item">
+                            <a class="dropdown-item" href="<?php echo site_url('login/logout') ?>">
                                 <i class="mdi mdi-logout text-primary"></i>
-                                Logout
+                                Sair
                             </a>
                         </div>
                     </li>
@@ -184,139 +88,70 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/home')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/home') ?>">
                             <i class="mdi mdi-home menu-icon"></i>
                             <span class="menu-title">Home</span>
                         </a>
                     </li>
-                    
+
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/categorias')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/categorias') ?>">
                             <i class="mdi mdi-format-list-bulleted-type menu-icon"></i>
                             <span class="menu-title">Categorias</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/extras')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/extras') ?>">
                             <i class="mdi mdi-plus-box menu-icon"></i>
                             <span class="menu-title">Extras</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/medidas')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/medidas') ?>">
                             <i class="mdi mdi-ruler menu-icon"></i>
                             <span class="menu-title">Medidas</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/produtos')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/produtos') ?>">
                             <i class="mdi mdi-food menu-icon"></i>
                             <span class="menu-title">Produtos</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/formas')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/formas') ?>">
                             <i class="mdi mdi-credit-card-multiple menu-icon"></i>
                             <span class="menu-title">Formas de Pagamento</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/entregadores')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/entregadores') ?>">
                             <i class="mdi mdi-motorbike menu-icon"></i>
                             <span class="menu-title">Entregadores</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/bairros')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/bairros') ?>">
                             <i class="mdi mdi-map-marker menu-icon"></i>
                             <span class="menu-title">Bairros</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/expedientes')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/expedientes') ?>">
                             <i class="mdi mdi-calendar-clock menu-icon"></i>
                             <span class="menu-title">Expedientes</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/usuarios')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/usuarios') ?>">
                             <i class="mdi mdi-account menu-icon"></i>
                             <span class="menu-title">Usuários</span>
                         </a>
                     </li>
 
-
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                            aria-controls="ui-basic">
-                            <i class="mdi mdi-circle-outline menu-icon"></i>
-                            <span class="menu-title">UI Elements</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="pages/ui-features/buttons.html">Buttons</a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="pages/ui-features/typography.html">Typography</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/forms/basic_elements.html">
-                            <i class="mdi mdi-view-headline menu-icon"></i>
-                            <span class="menu-title">Form elements</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/charts/chartjs.html">
-                            <i class="mdi mdi-chart-pie menu-icon"></i>
-                            <span class="menu-title">Charts</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/tables/basic-table.html">
-                            <i class="mdi mdi-grid-large menu-icon"></i>
-                            <span class="menu-title">Tables</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/mdi.html">
-                            <i class="mdi mdi-emoticon menu-icon"></i>
-                            <span class="menu-title">Icons</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false"
-                            aria-controls="auth">
-                            <i class="mdi mdi-account menu-icon"></i>
-                            <span class="menu-title">User Pages</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="auth">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a>
-                                </li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2
-                                    </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register
-                                    </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register
-                                        2 </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html">
-                                        Lockscreen </a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="documentation/documentation.html">
-                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                            <span class="menu-title">Documentation</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
             <!-- partial -->
@@ -324,41 +159,41 @@
                 <div class="content-wrapper">
 
 
-                    <?php if(session()->has('sucesso')): ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Perfeito!</strong> <?php echo session('sucesso'); ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <?php if (session()->has('sucesso')): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Perfeito!</strong> <?php echo session('sucesso'); ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     <?php endif ?>
 
-                    <?php if(session()->has('info')): ?>
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        <strong>Informação!</strong> <?php echo session('info'); ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <?php if (session()->has('info')): ?>
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <strong>Informação!</strong> <?php echo session('info'); ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     <?php endif ?>
 
-                    <?php if(session()->has('atencao')): ?>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Atenção!</strong> <?php echo session('atencao'); ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <?php if (session()->has('atencao')): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Atenção!</strong> <?php echo session('atencao'); ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     <?php endif ?>
 
                     <!-- errors de CSRF ACAO NAO PERMITIDA -->
-                    <?php if(session()->has('error')): ?>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Erro!</strong> <?php echo session('error'); ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <?php if (session()->has('error')): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Erro!</strong> <?php echo session('error'); ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     <?php endif ?>
 
                     <!-- TODO: WELLCOME
@@ -399,12 +234,10 @@
                 <!-- content-wrapper ends -->
                 <!-- partial:partials/_footer.html -->
                 <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <div class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
                         <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
-                            bootstrapdash.com 2020</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
-                                href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard template</a>
-                            from Bootstrapdash.com</span>
+                            vncs</span>
+
                     </div>
                 </footer>
                 <!-- partial -->

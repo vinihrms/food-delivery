@@ -18,7 +18,9 @@ class Conta extends BaseController
         $this->usuarioModel = new \App\Models\UsuarioModel();
     }
 
-    public function index() {}
+    public function index() {
+        echo 'aqui não é para ter nada por enquanto mesmo :)))))';
+    }
 
     public function show()
     {

@@ -68,7 +68,8 @@
 
                 <div class="col-md-12">
                 <div class="brand-logo">
-                        <img src="<?php echo site_url('admin/') ?>images/" alt="logo">
+                <img style="width: 10%" src="<?php echo site_url('web/'); ?>src/assets/img/logoPequena.png" alt="logo" />
+
                     </div>
                     <h4>Olá. Seja bem vindo(a)!</h4>
                     <h6 class="font-weight-light mb-4">Faça o login para continuar.</h6>

@@ -259,7 +259,7 @@
                                 <!-- Brand and toggle get grouped for better mobile display -->
                                 <div class="navbar-header">
                                     <a class="navbar-brand" href="/">
-                                        <img src="<?php echo site_url('web/'); ?>src/assets/img/" alt="logo" />
+                                        <img style="" src="<?php echo site_url('web/'); ?>src/assets/img/logoGrande.png" alt="logo" />
                                     </a>
                                     <a href="#cd-nav" class="cd-nav-trigger right_menu_icon">
                                         <span><i class="fa fa-bars" aria-hidden="true"></i></span>
@@ -270,11 +270,11 @@
                                 <div class="collapse navbar-collapse" id="navbar">
                                     <div class="navbar-right">
                                         <ul class="nav navbar-nav">
-                                            <li><a class="page-scroll" href="/">Home</a></li>
-                                            <li><a class="page-scroll" href="#about_us">Sobre</a></li>
-                                            <li><a class="page-scroll" href="#menu">Cardápio</a></li>
-                                            <li><a class="page-scroll" href="#gallery">Galeria</a></li>
-                                            <li><a class="page-scroll" href="#footer">Contato</a></li>
+                                            <li><a class="scroll-link" data-section="home" href="<?php echo site_url() ?>">Home</a></li>
+                                            <li><a class="scroll-link" data-section="about_us" href="#about_us">Sobre</a></li>
+                                            <li><a class="scroll-link" data-section="menu" href="#menu">Cardápio</a></li>
+                                            <li><a class="scroll-link" data-section="gallery" href="#gallery">Galeria</a></li>
+                                            <li><a class="scroll-link" data-section="footer" href="#footer">Contato</a></li>
 
                                             <?php if (session()->has('carrinho') && count(session()->get('carrinho')) > 0): ?>
                                                 <li><a class="page-scroll" href="<?php echo site_url('/carrinho') ?>">
@@ -418,7 +418,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="copy_text">
-                                        <a target="_blank" href="/">Placeholder</a>
+                                        <a href="/"><img src="<?php echo site_url('web/'); ?>src/assets/img/logoGrande.png" alt="logo" /></a>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -465,7 +465,7 @@
     <nav class="cd-nav-container right_menu" id="cd-nav">
         <div class="header__open_menu">
             <a href="index-2.html" class="rmenu_logo" title="yagmurmebel.az">
-                <img src="<?php echo site_url('web/'); ?>src/assets/img/logo.png" alt="logo" />
+                <img src="<?php echo site_url('web/'); ?>src/assets/img/logoGrande.png" alt="logo" />
             </a>
         </div>
         <div class="right_menu_search">
@@ -475,12 +475,28 @@
             </form>
         </div>
         <ul class="rmenu_list">
-            <li><a class="page-scroll" href="#header">Home</a></li>
-            <li><a class="page-scroll" href="#about_us">Sobre</a></li>
-            <li><a class="page-scroll" href="#menu">Cardápio</a></li>
-            <li><a class="page-scroll" href="#gallery">Galeria</a></li>
-            <li><a class="page-scroll" href="#footer">Contato</a></li>
-        </ul>
+                                            <li><a class="scroll-link" data-section="home" href="<?php echo site_url() ?>">Home</a></li>
+                                            <li><a class="scroll-link" data-section="about_us" href="#about_us">Sobre</a></li>
+                                            <li><a class="scroll-link" data-section="menu" href="#menu">Cardápio</a></li>
+                                            <li><a class="scroll-link" data-section="gallery" href="#gallery">Galeria</a></li>
+                                            <li><a class="scroll-link" data-section="footer" href="#footer">Contato</a></li>
+
+                                            <?php if (session()->has('carrinho') && count(session()->get('carrinho')) > 0): ?>
+                                                <li><a class="page-scroll" href="<?php echo site_url('/carrinho') ?>">
+                                                        <i class="fa fa-shopping-cart fa fa-2x"></i>
+                                                        <span style="font-size: 25px !important"> <?php echo count(session()->get('carrinho')) ?></span>
+                                                    </a></li>
+                                            <?php endif ?>
+
+                                            <?php if (usuario_logado()): ?>
+                                                <li><a class="page-scroll" href="<?php echo site_url('conta') ?>">Conta</a></li>
+                                                <li><a class="page-scroll" href="<?php echo site_url('login/logout') ?>">Sair</a></li>
+
+                                            <?php else: ?>
+                                                <li><a class="page-scroll" href="<?php echo site_url('login') ?>">Entrar</a></li>
+                                                <li><a class="page-scroll" href="<?php echo site_url('registrar') ?>">Registre-se</a></li>
+                                            <?php endif ?>
+                                        </ul>
         <div class="right_menu_addr top_addr">
             <span><i class="fa fa-map-marker" aria-hidden="true"></i> CORBÉLIA, PARANÁ, BRASIL - 85420-000</span>
             <span><i class="fa fa-phone" aria-hidden="true"></i> (99) 99999-9999</span>
@@ -513,7 +529,7 @@
     <?php echo $this->renderSection('scripts') ?>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const section = urlParams.get('section');
 
@@ -527,6 +543,21 @@
 
                 history.replaceState(null, null, window.location.pathname);
             }
+
+            const links = document.querySelectorAll('.scroll-link');
+
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    const section = link.getAttribute('data-section');
+                    const currentUrl = window.location.pathname;
+
+                    if (currentUrl !== '/') {
+                        event.preventDefault(); 
+
+                        window.location.href = '/' + '?section=' + section;
+                    }
+                });
+            });
         });
     </script>
 </body>
