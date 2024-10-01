@@ -70,7 +70,7 @@
 
                 <div class="form-group col-md-4">
                     <label for="preco">Preço</label>
-                    <input type="text" class="form-control money " id="preco" name="preco" placeholder="Preço" value="<?php echo old('preco'); ?>">
+                    <input maxlength="6" type="text" class="form-control money " id="preco" name="preco" placeholder="Preço" value="<?php echo old('preco'); ?>">
                 </div>
 
 

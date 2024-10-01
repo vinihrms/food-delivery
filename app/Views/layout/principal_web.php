@@ -259,7 +259,7 @@
                                 <!-- Brand and toggle get grouped for better mobile display -->
                                 <div class="navbar-header">
                                     <a class="navbar-brand" href="/">
-                                        <img style="" src="<?php echo site_url('web/'); ?>src/assets/img/logoGrande.png" alt="logo" />
+                                        <img style="" src="<?php echo site_url('web/'); ?>src/assets/img/logoGrandeBranca.png" alt="logo" />
                                     </a>
                                     <a href="#cd-nav" class="cd-nav-trigger right_menu_icon">
                                         <span><i class="fa fa-bars" aria-hidden="true"></i></span>
@@ -418,7 +418,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="copy_text">
-                                        <a href="/"><img src="<?php echo site_url('web/'); ?>src/assets/img/logoGrande.png" alt="logo" /></a>
+                                        <a href="/"><img src="<?php echo site_url('web/'); ?>src/assets/img/logoGrandeBranca.png" alt="logo" /></a>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -465,7 +465,7 @@
     <nav class="cd-nav-container right_menu" id="cd-nav">
         <div class="header__open_menu">
             <a href="index-2.html" class="rmenu_logo" title="yagmurmebel.az">
-                <img src="<?php echo site_url('web/'); ?>src/assets/img/logoGrande.png" alt="logo" />
+                <img src="<?php echo site_url('web/'); ?>src/assets/img/logoGrandeBranca.png" alt="logo" />
             </a>
         </div>
         <div class="right_menu_search">
