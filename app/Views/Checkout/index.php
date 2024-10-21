@@ -193,6 +193,7 @@
 
 <script>
     $('#btn-checkout').prop('disabled', true);
+    
 
     $(".forma").on('click', function() {
 
