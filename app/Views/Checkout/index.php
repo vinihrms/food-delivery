@@ -131,7 +131,7 @@
                         <hr>
                         <!-- sera exibida via js quando escolher a opção dinheiro -->
                         <div id="troco" class="hidden">
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-12" style="padding-left: 0">
                                 <label for="">Enviar troco para</label>
                                 <input class="form-control money" type="text" id="troco_para" name="checkout[troco_para]" placeholder="Enviar troco para">
                                 <label for="">
@@ -142,13 +142,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-12" style="padding-left: 0">
                             <label for="">Consulte a taxa de entrega</label>
                             <input type="text" name="cep" class="form-control cep" placeholder="Informe o CEP" value="">
                             <div id="cep"></div>
                         </div>
 
-                        <div class="form-group col-md-9">
+                        <div class="form-group col-md-9" style="padding-left: 0">
                             <label for="">Rua * </label>
                             <input id="rua" type="text" name="checkout[rua]" class="form-control" value="" readonly="" required="">
                         </div>
@@ -158,7 +158,7 @@
                             <input type="text" name="checkout[numero]" class="form-control" value="" required="">
                         </div>
 
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-12" style="padding-left: 0">
                             <label for="">Ponto de referência </label>
                             <input type="text" name="checkout[referencia]" class="form-control" value="" required="">
                         </div>
@@ -192,6 +192,13 @@
 <script src="<?php echo site_url('admin/vendors/mask/jquery.mask.min.js'); ?>"></script>
 
 <script>
+
+    $("btn-checkout").prop('disabled', true);
+
+    $("forma").on("click", function () {
+        var forma_id = $(this.attr('data-forma'));
+    })
+
     $('#btn-checkout').prop('disabled', true);
 
     $(".forma").on('click', function() {
