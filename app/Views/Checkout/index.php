@@ -53,16 +53,11 @@
         <div class="product-content product-wrap clearfix product-deatil">
             <div class="row">
 
-                <?php if (session()->has('errors_model')): ?>
-                    <ul style="margin-left: -1.6em !important; list-style: decimal">
-                        <?php foreach (session('errors_model') as $error): ?>
-                            <li class="text-danger"><?php echo $error; ?></li>
-                        <?php endforeach ?>
-                    </ul>
-                <?php endif; ?>
+                
 
                 <div class="col-md-12 col-xs-12">
-                    <h2 class="section-title pull-left"> <?php echo esc($titulo); ?></h2>
+                        <h2 class="section-title pull-left"> <?php echo esc($titulo); ?></h2>
+                        
                 </div>
 
                 <div class="col-md-7">
@@ -114,8 +109,16 @@
                 </div>
 
                 <div class="col-md-5">
-                    <?php echo form_open('checout/processar', ['id => form-checkout']) ?>
 
+                <?php if (session()->has('errors_model')): ?>
+                        <ul style="margin-left: -1.6em !important; list-style: decimal">
+                            <?php foreach (session('errors_model') as $error): ?>
+                                <li class="text-danger"><?php echo $error; ?></li>
+                            <?php endforeach ?>
+                        </ul>
+                    <?php endif; ?>
+                    <?php echo form_open('checkout/processar', ['id => form-checkout']) ?>
+                            
                     <p style="font-size: 18px; ">Escolha a forma de pagamento na entrega</p>
 
                     <div class="form-row">
@@ -165,7 +168,7 @@
 
                         <div class="form-group col-md-12">
                             <input type="text" id="forma_id" name="checkout[forma_id]" placeholder="checkout[forma_id]">
-                            <input type="text" id="bairro_id" name="checkout[bairro_slug]" placeholder="checkout[bairro_slug]">
+                            <input type="text" id="bairro_slug" name="checkout[bairro_slug]" placeholder="checkout[bairro_slug]">
                         </div>
 
                         <div class="form-group col-md-12">
@@ -255,7 +258,7 @@
                         /* cep valido */
 
                         $("#valor_entrega").html(response.valor_entrega);
-                        $("#bairro_slug").html(response.bairro_slug);
+                        $("#bairro_slug").val(response.bairro_slug);
 
                         $('#btn-checkout').prop('disabled', false);
                         $('#btn-checkout').val('Processar pedido');

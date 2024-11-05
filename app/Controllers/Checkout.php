@@ -11,11 +11,16 @@ class Checkout extends BaseController
     private $formaPagamentoModel;
     private $bairroModel;
 
+    private $validacao;
+
+
     public function __construct()
     {
         $this->usuario = service('autenticacao')->pegaUsuarioLogado();
         $this->formaPagamentoModel = new \App\Models\FormaDePagamentoModel();
         $this->bairroModel = new \App\Models\BairroModel();
+        $this->validacao = service('validation');
+
     }
 
     public function index()
@@ -92,28 +97,74 @@ class Checkout extends BaseController
             . '</span>';
 
         $retorno['logradouro'] = $consulta->logradouro;
-        $retorno['bairro_slug'] = $bairro->slig;
+        $retorno['bairro_slug'] = $bairro->slug;
         $retorno['total'] = number_format($this->somaValorProdutosCarrinho() + $bairro->valor_entrega, 2);
 
         session()->set('endereco_entrega', $retorno['endereco']);
         return $this->response->setJSON($retorno);
     }
 
-    //funcao pra somar os valores
-    private function somaValorProdutosCarrinho()
-{
-    $carrinho = session()->get('carrinho');
+    public function processar(){
+        if($this->request->getMethod() === 'post'){
+            $checkoutPost = $this->request->getPost('checkout');
 
-    if (empty($carrinho) || !is_array($carrinho)) {
-        return 0;
+            $this->validacao->setRules([
+                'checkout.rua' => ['label' => 'endereco', 'rules' => 'required|string|max_length[50]'],
+                'checkout.numero' => ['label' => 'numero', 'rules' => 'required|string|max_length[30]'],
+                'checkout.referencia' => ['label' => 'referencia', 'rules' => 'required|string|max_length[30]'],
+                'checkout.forma_id' => ['label' => 'forma de pagamento', 'rules' => 'required|integer'],
+                'checkout.bairro_slug' => ['label' => 'endereco de entrega', 'rules' => 'required|string|max_length[30]'],
+
+            ]);
+
+            if (!$this->validacao->withRequest($this->request)->run()) {
+
+                session()->remove('endereco_entrega');
+
+                return redirect()->back()->with('errors_model', $this->validacao->getErrors())
+                    ->with('atencao', 'Por favor, verifique os errors abaixo e tente novamente.')
+                    ->withInput();
+            }
+
+            $forma = $this->formaPagamentoModel->where('id', $checkoutPost['forma_id'])->where('ativo', true)->first();
+
+            if($forma == null){
+                return redirect()->back()
+                    ->with('atencao', 'Por favor, escolha a forma de pagamento.');
+            }
+
+            $bairro = $this->bairroModel->where('slug', $checkoutPost['bairro_slug'])->where('ativo', true)->first();
+
+            if($bairro == null){
+                return redirect()->back()
+                    ->with('atencao', 'Por favor, informe seu CEP e tente novamente.');
+            }
+
+            if(!session()->get('endereco_entrega')){
+                return redirect()->back()
+                ->with('atencao', 'Por favor, informe seu CEP e tente novamente.');
+            }
+
+        } else {
+            return redirect()->back();
+        }
     }
 
-    $produtosCarrinho = array_map(function ($linha) {
-        return (isset($linha['quantidade']) ? $linha['quantidade'] : 0) * 
-               (isset($linha['preco']) ? $linha['preco'] : 0);
-    }, $carrinho);
+    //funcao pra somar os valores
+    private function somaValorProdutosCarrinho()
+    {
+        $carrinho = session()->get('carrinho');
 
-    return array_sum($produtosCarrinho);
-}
+        if (empty($carrinho) || !is_array($carrinho)) {
+            return 0;
+        }
+
+        $produtosCarrinho = array_map(function ($linha) {
+            return (isset($linha['quantidade']) ? $linha['quantidade'] : 0) * 
+                (isset($linha['preco']) ? $linha['preco'] : 0);
+        }, $carrinho);
+
+        return array_sum($produtosCarrinho);
+    }
 
 }
