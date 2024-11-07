@@ -162,7 +162,7 @@
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="">Ponto de referência </label>
+                            <label for="">Ponto de referência *  </label>
                             <input type="text" name="checkout[referencia]" class="form-control" value="" required="">
                         </div>
 
@@ -278,7 +278,8 @@
 
                     } else {
                         $("#cep").html(response.erro)
-
+                        $('#btn-checkout').prop('disabled', true);
+                        $('#btn-checkout').val('Antes, consulte a taxa de entrega');
                     }
 
                 },

@@ -38,7 +38,6 @@ class FormasPagamento extends BaseController
         foreach ($formas as $forma) {
             $data['id'] = $forma->id;
             $data['value'] = $forma->nome;
-
             $retorno[] = $data;
         };
 

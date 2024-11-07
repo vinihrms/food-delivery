@@ -10,6 +10,7 @@ class Checkout extends BaseController
     private $usuario;
     private $formaPagamentoModel;
     private $bairroModel;
+    private $pedidoModel;
 
     private $validacao;
 
@@ -19,6 +20,7 @@ class Checkout extends BaseController
         $this->usuario = service('autenticacao')->pegaUsuarioLogado();
         $this->formaPagamentoModel = new \App\Models\FormaDePagamentoModel();
         $this->bairroModel = new \App\Models\BairroModel();
+        $this->pedidoModel = new \App\Models\PedidoModel();
         $this->validacao = service('validation');
 
     }
@@ -145,10 +147,44 @@ class Checkout extends BaseController
                 ->with('atencao', 'Por favor, informe seu CEP e tente novamente.');
             }
 
+            //salva pedido
+
+            $pedido = new \App\Entities\Pedido();
+
+            $pedido->usuario_id = $this->usuario->id;
+            $pedido->forma_pagamento = $forma->nome;
+            $pedido->produtos = serialize(session()->get('carrinho'));
+            $pedido->valor_produtos = number_format($this->somaValorProdutosCarrinho(), 2);
+            $pedido->valor_entrega = number_format($bairro->valor_entrega, 2);
+            $pedido->valor_pedido = number_format($pedido->valor_produtos + $pedido->valor_entrega, 2);
+            $pedido->codigo = $this->pedidoModel->geraCodigoPedido();
+            $pedido->endereco_entrega = session()->get('endereco_entrega').'- Número ' . $checkoutPost['numero'];
+
+            if($forma->id == 1) {
+                if (isset($checkoutPost['sem_troco'])){
+                    $pedido->observacoes = 'Ponto de referência: '.$checkoutPost['referencia'].' - Número: '.$checkoutPost['numero'] . '. Você informou que não precisa de troco.';
+                }
+                
+                if (isset($checkoutPost['troco_para'])) {
+
+                    if($checkoutPost['troco_para'] == "" || strlen($checkoutPost['troco_para'] < 1)){
+                        return redirect()->back()->with('atencao', 'Você precisa preenhcer o campo "enviar troco para" ou marcar que não é preciso de troco.');
+                } 
+                    $trocoPara = str_replace(',', '', $checkoutPost['troco_para']);
+
+                    $pedido->observacoes = 'Ponto de referência: '.$checkoutPost['referencia'].' - Número: '.$checkoutPost['numero'] . '. Você informou que precisa de troco para: R$' . number_format($trocoPara, 2, ',', '.');
+                
+            }
+
+            echo '<pre>';
+            print_r($pedido);
+            exit;
+
         } else {
             return redirect()->back();
         }
     }
+}
 
     //funcao pra somar os valores
     private function somaValorProdutosCarrinho()
