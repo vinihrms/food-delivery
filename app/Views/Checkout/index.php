@@ -7,6 +7,7 @@
 <?php echo $this->section('estilos'); ?>
 <!-- envia estilo -->
 <link rel="stylesheet" href="<?php echo site_url("/web/src/assets/css/produtos.css") ?>">
+<script src="https://kit.fontawesome.com/cf917007ba.js" crossorigin="anonymous"></script>
 
 <?php echo $this->endSection(); ?>
 
@@ -219,12 +220,15 @@
 
             if (this.checked) {
                 $('#troco_para').prop('disabled', true);
-
+                $('#troco_para').val('Não preciso de troco, tenho o valor certinho.');
+                
                 $('#troco_para').attr('placeholder', 'Não preciso de troco, tenho o valor certinho.')
+
             } else {
                 $('#troco_para').prop('disabled', false);
 
                 $('#troco_para').attr('placeholder', 'Enviar troco para')
+                $('#troco_para').val('');
 
             }
 
@@ -292,6 +296,20 @@
             })
         }
     })
+
+    $("form").submit(function(){
+        $(this).find(":submit").attr('disabled', 'disabled')
+        $('#btn-checkout').val('Estamos processando o seu pedido');
+
+    })
+
+    $("widow").keydown(function(event){
+        if(event.keyCode == 13){
+            event.preventDefault();
+            return false;
+        }
+    })
+
 </script>
 
 <?php echo $this->endSection(); ?>

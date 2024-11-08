@@ -43,11 +43,11 @@ class CriaTabelaPedidos extends Migration
             "produtos" => [
                 "type" => "TEXT",
             ],
-            "valor" => [
+            "valor_entrega" => [
                 "type" => "DECIMAL",
                 "constraint" => 10,2,
             ],
-            "valor_entrega" => [
+            "valor_produtos" => [
                 "type" => "DECIMAL",
                 "constraint" => 10,2,
             ],
