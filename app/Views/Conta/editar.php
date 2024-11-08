@@ -41,6 +41,9 @@
                 <div class="alert alert-warning" role="alert"> <?php echo session('fraude'); ?></div>
             <?php endif ?>
 
+            <?php if (session()->has('aviso')): ?>
+                <div class="alert alert-warning" role="alert"> <?php echo session('aviso'); ?></div>
+            <?php endif ?>
             <!-- errors de CSRF ACAO NAO PERMITIDA -->
             <?php if (session()->has('error')): ?>
                 <div class="alert alert-danger" role="alert">

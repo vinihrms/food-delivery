@@ -6,14 +6,14 @@
 
 <?php echo $this->section('estilos'); ?>
 <!-- envia estilo -->
-<link rel="stylesheet" href="<?php echo site_url("/web/src/assets/css/conta.css") ?>">
+<link rel="stylesheet" href="<?php echo site_url("/web/src/assets/css/produtos.css") ?>">
 
 <?php echo $this->endSection(); ?>
 
 <?php echo $this->section('conteudo'); ?>
 
 <!-- Begin Sections-->
-<div class="container section" data-aos="fade-up" style="margin-top: 3em; min-height: 300px">
+<div class="container section" data-aos="fade-up" style="margin-top: 3em">
     <!-- Verifique se há margens, paddings, ou outros estilos aplicados aqui -->
     <div class="col-sm-12 col-md-12 col-lg-12">
 
@@ -53,38 +53,25 @@
 
         </div>
 
-        <?php echo $this->include("Conta/sidebar") ?>
 
-        <div class="row" style="margin-top: 2em;">
-            <div class="col-md-12 col-xs-12">
-                <h2 class="section-title pull-left"> <?php echo esc($titulo); ?></h2>
-            </div>
+        <div class="product-content product-wrap clearfix product-deatil">
+            <div class="row">
 
-            <div class="col-md-6">
-
-                <?php echo form_open('conta/processaautenticar') ?>
-
-                <div class="panel panel-info">
-                    <div class="panel-body">
-                        <div>
-                            <label for="">Insira sua senha: </label>
-                            <input type="password" class="form-control" name="password">
-                        </div>
-                    </div>
-                    <div class="panel-footer">
-                        <button type="submit" class="btn btn-primary">Autenticar</button>
-                        <a href="<?php echo site_url('conta/show') ?>" class="btn btn-default"> Cancelar </a>
-                    </div>
+                <div class="col-md-12 col-xs-12">
+                    <h2 class="section-title pull-left"> <?php echo esc($titulo); ?></h2>
                 </div>
 
-                <?php echo form_close(); ?>
+                <?php foreach ($bairros as $bairro): ?>
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading fonte-panel-food" style="background: #990100; color: #ffffff"><?php echo esc($bairro->nome) ?> - <?php echo esc($bairro->cidade) ?></div>
+                            <div class="panel-body fonte-food">Taxa de entrega: R$ <?php echo esc(number_format($bairro->valor_entrega, 2)) ?></div>
+                        </div>
+                    </div>
+                <?php endforeach ?>
 
             </div>
         </div>
-
-
-
-
     </div>
 </div>
 
@@ -98,19 +85,27 @@
 <?php echo $this->section('scripts'); ?>
 <!-- envia script -->
 <script>
-    function openNav() {
-        document.getElementById("mySidebar").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-    }
+    $(document).ready(function() {
+        var especificacao_id;
 
-    function closeNav() {
-        document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    }
+        if (!especificacao_id) {
+            $("#btn-adiciona").prop("disabled", true);
+            $("#btn-adiciona").prop("value", "Selecione uma medida");
+        }
+
+        $(".especificacao").on('click', function() {
+            especificacao_id = $(this).attr('data-especificacao');
+            $("#especificacao_id").val(especificacao_id);
+
+            $("#btn-adiciona").prop("disabled", false);
+            $("#btn-adiciona").prop("value", "Adicionar ao carrinho");
+        });
+
+        $(".extra").on('click', function() {
+            var extra_id = $(this).attr('data-extra');
+            $("#extra_id").val(extra_id);
+        });
+    })
 </script>
-
-
-<script src="<?php echo site_url('admin/vendors/mask/app.js'); ?>"></script>
-<script src="<?php echo site_url('admin/vendors/mask/jquery.mask.min.js'); ?>"></script>
 
 <?php echo $this->endSection(); ?>

@@ -30,7 +30,7 @@ class Produtos extends BaseController
     public function index()
     {
         $data = [
-            'titulo' => 'Listando aos produtos',
+            'titulo' => 'Listando os produtos',
             'produtos' => $this->produtoModel->select('produtos.*, categorias.nome AS categoria')
                 ->join('categorias', 'categorias.id = produtos.categoria_id')
                 ->withDeleted(true)->paginate(8),

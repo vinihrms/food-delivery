@@ -10,7 +10,7 @@ class Pedido extends Entity
     protected $dates   = ['criado_em', 'atualizado_em', 'deletado_em'];
     protected $casts   = [];
 
-    public function exbieSituacaoPedido() {
+    public function exibeSituacaoPedido() {
         switch ($this->situacao) {
             case 0:
                 echo "<span class='glyphicon glyphicon-thumbs-up' aria-hidden='true'></span>&nbsp; Pedido realizado";

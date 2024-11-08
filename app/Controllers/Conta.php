@@ -11,14 +11,29 @@ class Conta extends BaseController
 {
     private $usuario;
     private $usuarioModel;
+    private $pedidoModel;
 
     public function __construct()
     {
         $this->usuario = service('autenticacao')->pegaUsuarioLogado();
         $this->usuarioModel = new \App\Models\UsuarioModel();
+        $this->pedidoModel = new \App\Models\PedidoModel();
     }
 
-    public function index() {}
+    public function index() {
+        $data = [
+            'titulo' => 'Meus pedidos',
+        ];
+
+        $pedidos = $this->pedidoModel->orderBy('criado_em', 'DESC')->where('usuario_id', $this->usuario->id)->findAll();
+
+        if ($pedidos != null){
+            $data['pedidos'] = $pedidos;
+        }
+
+        return view('Conta/index', $data);
+
+    }
 
     public function show()
     {

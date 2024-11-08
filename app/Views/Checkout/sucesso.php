@@ -41,6 +41,9 @@
                 <div class="alert alert-warning" role="alert"> <?php echo session('fraude'); ?></div>
             <?php endif ?>
 
+            <?php if (session()->has('aviso')): ?>
+                <div class="alert alert-warning" role="alert"> <?php echo session('aviso'); ?></div>
+            <?php endif ?>
             <!-- errors de CSRF ACAO NAO PERMITIDA -->
             <?php if (session()->has('error')): ?>
                 <div class="alert alert-danger" role="alert">
@@ -62,11 +65,10 @@
                 <?php endif ?>
 
                 <div class="col-md-12 col-xs-12">
-                <h4> No momento, o seu pedido está com status de: <?php echo $pedido->exbieSituacaoPedido(); ?></h4>
-
+                    <h4> No momento, o seu pedido está com status de: <?php echo $pedido->exibeSituacaoPedido(); ?></h4>
                 </div>
 
-                <?php if ($pedido->situacao !=3 ): ?>
+                <?php if ($pedido->situacao != 3): ?>
                     <div class="col-md-12 col-xs-12">
                         <h5> Quando ocorrer uma mudança no status do seu pedido, nós te notificaremos por e-mail</h5>
                     </div>

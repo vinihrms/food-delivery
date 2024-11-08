@@ -18,7 +18,7 @@
             <h4 class="card-title"><?php echo $titulo; ?></h4>
 
             <div class="ui-widget">
-                <input placeholder="Pesquise por um bairro de Corbélia" id="query" name="query" class="form-control bg-light mb-5">
+                <input placeholder="Pesquise por um bairro" id="query" name="query" class="form-control bg-light mb-5">
             </div>
 
             <a href="<?php echo site_url("admin/bairros/criar"); ?>"

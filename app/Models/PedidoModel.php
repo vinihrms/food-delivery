@@ -22,16 +22,28 @@ class PedidoModel extends Model
     protected $createdField  = 'criado_em';
     protected $updatedField  = 'atualizado_em';
     protected $deletedField  = 'deletado_em';
+    
     // Validation
 
-    public function geraCodigoPedido() {
-        do{
-            
+    public function geraCodigoPedido()
+    {
+        do {
+
             $codigoPedido = random_string('numeric', 8);
             $this->where('codigo', $codigoPedido);
-
-        } while($this->countAllResults() > 1);
+        } while ($this->countAllResults() > 1);
 
         return $codigoPedido;
+    }
+
+    public function listaTodosOsPedidos()
+    {
+        return $this->select([
+            'pedidos.*',
+            'usuarios.nome AS cliente',
+
+        ])->join('usuarios', 'usuarios.id = pedidos.usuario_id')
+            ->orderBy('pedidos.criado_em', 'DESC')
+            ->paginate(10);
     }
 }

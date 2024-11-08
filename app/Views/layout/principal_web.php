@@ -59,6 +59,19 @@
             font-family: 'Montserrat-bold';
         }
 
+        .fonte-food {
+            color: #990100 !important;
+            font-family: 'Montserrat-bold';
+        }
+        .fonte-panel-food {
+            font-family: 'Montserrat-bold';
+        }
+        .panel-food {
+            background-color: #990100 !important;
+            font-family: 'Montserrat-bold' !important;
+        }
+
+
         .btn-food:hover {
             color: #fff;
             background-color: #660000;
@@ -239,7 +252,14 @@
                             <div class="top_addr">
                                 <span><i class="fa fa-map-marker" aria-hidden="true"></i> CORBÉLIA, PARANÁ, BRASIL - 85420-000</span>
                                 <span><i class="fa fa-phone" aria-hidden="true"></i> (99) 99999-9999</span>
-                                <span><i class="fa fa-clock-o" aria-hidden="true"></i> 19:00 - 23:00</span>
+
+                                <?php $expedienteHoje = expedienteHoje(); ?>
+
+                                <?php if($expedienteHoje->situacao == false): ?>
+                                    <span><i class="fa fa-lock" aria-hidden="true"></i> Hoje estamos fechados</span>
+                                <?php else: ?>
+                                    <span><i class="fa fa-clock-o" aria-hidden="true"></i><?php echo esc($expedienteHoje->abertura)?> - <?php echo esc($expedienteHoje->fechamento) ?></span>
+                                <?php endif ?>
                                 <div class="pull-right search-block">
                                     <i class="fa fa-search" id="search" aria-hidden="true"></i>
                                 </div>
@@ -273,6 +293,7 @@
                                             <li><a class="page-scroll" href="/">Home</a></li>
                                             <li><a class="page-scroll" href="#about_us">Sobre</a></li>
                                             <li><a class="page-scroll" href="#menu">Cardápio</a></li>
+                                            <li><a class="page-scroll" href="<?php echo site_url('bairros') ?>">Bairros atendidos</a></li>
                                             <li><a class="page-scroll" href="#gallery">Galeria</a></li>
                                             <li><a class="page-scroll" href="#footer">Contato</a></li>
 
@@ -329,68 +350,33 @@
                     <div class="container">
                         <div class="footer_content">
                             <div class="row">
-                                <div class="col-sm-6 col-md-4">
+                                <div class="col-sm-6 col-md-3">
                                     <h4 class="footer_ttl footer_ttl_padd">Sobre nós</h4>
                                     <p class="footer_txt">Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries but also the leap into electronic typesetting. </p>
                                 </div>
-                                <div class="col-sm-6 col-md-5">
-                                    <h4 class="footer_ttl footer_ttl_padd">expedientes</h4>
+                                <div class="col-sm-6 col-md-6">
+
+                                    <?php $expedientes = expedientes(); ?>
+
+                                    <h4 class="footer_ttl footer_ttl_padd">Nosso expediente</h4>
                                     <div class="footer_border">
-                                        <div class="week_row clearfix">
-                                            <div class="week_day">Dia</div>
-                                            <div class="week_time text-right">Fechado</div>
-                                        </div>
-                                        <div class="week_row clearfix">
-                                            <div class="week_day">Dia</div>
-                                            <div class="week_time">
-                                                <span class="week_time_start">19:00</span>
-                                                <span class="week_time_node">-</span>
-                                                <span class="week_time_end">00:00</span>
-                                            </div>
-                                        </div>
-                                        <div class="week_row clearfix">
-                                            <div class="week_day">Dia</div>
-                                            <div class="week_time">
-                                                <span class="week_time_start">19:00</span>
-                                                <span class="week_time_node">-</span>
-                                                <span class="week_time_end">00:00</span>
-                                            </div>
 
-                                        </div>
-                                        <div class="week_row clearfix">
-                                            <div class="week_day">Dia</div>
-                                            <div class="week_time">
-                                                <span class="week_time_start">19:00</span>
-                                                <span class="week_time_node">-</span>
-                                                <span class="week_time_end">00:00</span>
+                                        <?php foreach ($expedientes as $dia): ?>
+                                            <div class="week_row clearfix">
+                                                <div class="week_day"><?php echo esc($dia->dia_descricao) ?></div>
+                                                <?php if ($dia->situacao == false): ?>
+                                                    <div class="week_time text-right">Fechado</div>
+                                                <?php else: ?>
+                                                    <div class="week_time text-right">Aberto</div>
+                                                    <div class="week_time">
+                                                        <span class="week_time_start"><?php echo esc($dia->abertura) ?></span>
+                                                        <span class="week_time_node">-</span>
+                                                        <span class="week_time_end"><?php echo esc($dia->fechamento) ?></span>
+                                                    </div>
+                                                <?php endif ?>
                                             </div>
+                                        <?php endforeach ?>
 
-                                        </div>
-                                        <div class="week_row clearfix">
-                                            <div class="week_day">Dia</div>
-                                            <div class="week_time">
-                                                <span class="week_time_start">19:00</span>
-                                                <span class="week_time_node">-</span>
-                                                <span class="week_time_end">00:00</span>
-                                            </div>
-
-                                        </div>
-                                        <div class="week_row clearfix">
-                                            <div class="week_day">Dia</div>
-                                            <div class="week_time">
-                                                <span class="week_time_start">19:00</span>
-                                                <span class="week_time_node">-</span>
-                                                <span class="week_time_end">01:00</span>
-                                            </div>
-                                        </div>
-                                        <div class="week_row clearfix">
-                                            <div class="week_day">Dia</div>
-                                            <div class="week_time">
-                                                <span class="week_time_start">19:00</span>
-                                                <span class="week_time_node">-</span>
-                                                <span class="week_time_end">01:00</span>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-3">
