@@ -22,7 +22,7 @@ class PedidoModel extends Model
     protected $createdField  = 'criado_em';
     protected $updatedField  = 'atualizado_em';
     protected $deletedField  = 'deletado_em';
-    
+
     // Validation
 
     public function geraCodigoPedido()
@@ -45,5 +45,25 @@ class PedidoModel extends Model
         ])->join('usuarios', 'usuarios.id = pedidos.usuario_id')
             ->orderBy('pedidos.criado_em', 'DESC')
             ->paginate(10);
+    }
+
+    public function buscaPedidoOu404(string $codigoPedido)
+    {
+
+        if (! $codigoPedido) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Não encontramos o pedido $codigoPedido");
+        }
+
+        $pedido = $this->select(['pedidos.*', 'usuarios.nome', 'usuarios.email','entregadores.nome AS entregador'])
+            ->join('usuarios', 'usuarios.id = pedidos.usuario_id')
+            ->join('entregadores', 'entregadores.id = pedidos.entregador_id', 'LEFT')
+            ->where('pedidos.codigo', $codigoPedido)
+            ->first();
+
+        if (! $pedido) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Não encontramos o pedido $codigoPedido");
+        }
+
+        return $pedido;
     }
 }
