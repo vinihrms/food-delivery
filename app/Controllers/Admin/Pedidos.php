@@ -46,15 +46,21 @@ class Pedidos extends BaseController
         $pedido = $this->pedidoModel->buscaPedidoOu404($codigoPedido);
 
         if($pedido->situacao < 2){
-            return redirect->back()->with('info', 'Apenas pedidos')
+            return redirect()->back()->with('info', 'Apenas pedidos entregues ou cancelados podem ser excluídos.');
         }
+
+        if($this->request->getMethod() == 'post'){
+            $this->pedidoModel->delete($pedido->id);
+        }
+
+        return redirect()->to(site_url('admin/pedidos'))->with('sucesso', 'Pedido excluído com suceso.');
 
         $data = [
             'titulo' => "Excluindo o pedido $pedido->codigo",
             'pedido' => $pedido,
         ];
 
-        return view('Admin/Pedidos/show', $data);
+        return view('Admin/Pedidos/excluir', $data);
     }
 
     public function editar($codigoPedido = null)

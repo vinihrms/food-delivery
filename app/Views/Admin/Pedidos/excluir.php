@@ -27,10 +27,10 @@
             <?php endif;?>
 
 
-            <?php echo form_open("admin/bairros/excluir/$bairro->id"); ?>
+            <?php echo form_open("admin/pedidos/excluir/$pedido->codigo"); ?>
 
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Atenção!</strong> Tem certeza da exclusão do bairro <strong> <?php echo esc($bairro->nome); ?>? </strong>
+                <strong>Atenção!</strong> Tem certeza da exclusão do pedido <strong> <?php echo esc($pedido->codigo); ?>? </strong>
                 </button>
             </div>
 
@@ -39,7 +39,7 @@
                 Excluir
             </button>
 
-            <a href="<?php echo site_url("admin/bairros/show/$bairro->id"); ?>"
+            <a href="<?php echo site_url("admin/pedidos/show/$pedido->codigo"); ?>"
                 class="btn btn-light btn-sm btn-icon-tex btn-icon-prepend">
                 <i class="mdi mdi-keyboard-backspace btn-icon-prepend"></i>
                 Voltar
