@@ -66,4 +66,17 @@ class PedidoModel extends Model
 
         return $pedido;
     }
+
+    public function procurar($term)
+    {
+        if ($term === null) {
+            return [];
+        };
+
+        return $this->select('codigo')
+            ->like('codigo', $term)
+            ->withDeleted(true)
+            ->get()
+            ->getResult();
+    }
 }

@@ -100,8 +100,7 @@
                     $(this).val("");
                     return false
                 } else {
-                    window.location.href = '<?php echo site_url('admin/pedidos/show/'); ?>' + ui.item
-                        .id;
+                    window.location.href = '<?php echo site_url('admin/pedidos/show/'); ?>' + ui.item.value;
                 }
             }
         });

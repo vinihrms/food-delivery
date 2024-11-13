@@ -109,38 +109,66 @@ class Pedidos extends BaseController
             }
 
             if ($pedidoPost['situacao'] == 3) {
-                $pedidoPost['entregador_id'] == null;
+                $pedidoPost['entregador_id'] = null;
             }
 
             $situacaoPedidoAnterior = $pedido->situacao;
 
             $pedido->fill($pedidoPost);
 
-            if(!$pedido->hasChanged()){
+            if (!$pedido->hasChanged()) {
                 return redirect()->back()->with('info', 'Não há novas informações para atualizar');
             }
 
-            if($this->pedidoModel->save($pedido)){
+            if ($this->pedidoModel->save($pedido)) {
 
-                if($pedido->situacao == 1){
+                if ($pedido->situacao == 1) {
                     $entregador = $this->entregadorModel->find($pedido->entregador_id);
-
                     $pedido->entregador = $entregador;
-
                     $this->enviaEmailPedidoSaiuEntrega($pedido);
-                }   
+                }
+
+                if ($pedido->situacao == 2) {
+                    $this->enviaEmailPedidoFoiEntregue($pedido);
+                    $this->insereProdutosDoPedido($pedido); //funcao que popula o pedidos_produtos para estatisticas
+                }
+
+                if ($pedido->situacao == 3) {
+                    $this->enviaEmailPedidoFoiCancelado($pedido);
+
+                    if ($situacaoPedidoAnterior == 1) {
+                        session()->setFlashdata('atencao', 'Administrador, este pedido está em rota de entrega. Por favor, entre em contato com o entregador para que ele retorne para a loja.');
+                    }
+                }
 
                 return redirect()->to(site_url("admin/pedidos/show/$pedido->codigo"))->with('sucesso', 'Pedido atualizado com sucesso');
-
-            } else{
+            } else {
                 return redirect()->back()->with('errors_model', $this->pedidoModel->errors())
-                                ->with('atencao', 'Por favor, verifique os errors abaixo:');
+                    ->with('atencao', 'Por favor, verifique os errors abaixo:');
             }
-
-
         } else {
             return redirect()->back();
         }
+    }
+
+    public function procurar()
+    {
+
+        if (!$this->request->isAJAX()) {
+            exit('Página não encontrada.');
+        };
+
+        $pedidos = $this->pedidoModel->procurar($this->request->getGet('term'));
+
+        $retorno = [];
+
+        foreach ($pedidos as $pedido) {
+            $data['value'] = $pedido->codigo;
+
+            $retorno[] = $data;
+        };
+
+        return $this->response->setJSON($retorno);
     }
 
     private function enviaEmailPedidoSaiuEntrega(object $pedido)
@@ -149,10 +177,56 @@ class Pedidos extends BaseController
         $email->setFrom('no-reply@fooddelivery.com', 'Food Delivery');
         $email->setTo($pedido->email);
         $email->setSubject("Pedido $pedido->codigo saiu para a entrega");
-        
+
         $mensagem = view('Admin/Pedidos/pedido_saiu_entrega_email', ['pedido' => $pedido]);
         $email->setMessage($mensagem);
-        
+
         $email->send();
+    }
+
+    private function enviaEmailPedidoFoiEntregue(object $pedido)
+    {
+        $email = service('email');
+        $email->setFrom('no-reply@fooddelivery.com', 'Food Delivery');
+        $email->setTo($pedido->email);
+        $email->setSubject("Pedido $pedido->codigo foi entregue");
+
+        $mensagem = view('Admin/Pedidos/pedido_foi_entregue_email', ['pedido' => $pedido]);
+        $email->setMessage($mensagem);
+
+        $email->send();
+    }
+
+    private function enviaEmailPedidoFoiCancelado(object $pedido)
+    {
+        $email = service('email');
+        $email->setFrom('no-reply@fooddelivery.com', 'Food Delivery');
+        $email->setTo($pedido->email);
+        $email->setSubject("Pedido $pedido->codigo foi cancelado");
+
+        $mensagem = view('Admin/Pedidos/pedido_foi_cancelado_email', ['pedido' => $pedido]);
+        $email->setMessage($mensagem);
+
+        $email->send();
+    }
+
+    private function insereProdutosDoPedido(object $pedido)
+    {
+
+        $pedidoProdutoModel = new \App\Models\PedidoProdutoModel();
+
+        $produtos = unserialize($pedido->produtos);
+
+        $produtosPedido = []; //recebe o push
+
+        foreach ($produtos as $produto) {
+            array_push($produtosPedido, [
+                'pedido_id' => $pedido->id,
+                'produto' => $produto['nome'],
+                'quantidade' => $produto['quantidade'],
+            ]);
+        }
+
+        $pedidoProdutoModel->insertBatch($produtosPedido);
     }
 }
