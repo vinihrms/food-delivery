@@ -4,10 +4,43 @@ namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 
-class ExpedienteSeeder extends Seeder
+class Main extends Seeder
 {
     public function run()
     {
+        //USUARIO ADMINISTRADOR
+        $admin = [
+            [
+                'id'              => 1,
+                'nome'            => 'admin',
+                'email'           => 'admin@admin.com',
+                'cpf'             => '000.000.000-00',
+                'telefone'        => '(00) 00000-0000',
+                'is_admin'        => 1,
+                'ativo'           => 1,
+                'password_hash'   => '$2y$10$J9.NIxV5UGpGcond7IGeqOBDNdHklslCKaBPsEVNdRFFyWOq5UjtC',
+                'ativacao_hash'   => NULL,
+                'reset_hash'      => NULL,
+                'reset_expira_em' => NULL,
+                'criado_em'       => '2024-03-11 11:28:24',
+                'atualizado_em'   => '2024-04-04 20:30:05',
+                'deletado_em'     => NULL
+            ]
+        ];
+
+        $this->db->table('usuarios')->insertBatch($admin);
+
+
+        //FORMA DE PAGAMENTO DINHEIRO
+        $formaModel = new \App\Models\FormaDePagamentoModel();
+        $forma = [
+            'nome' => 'Dinheiro',
+            'ativo' => true
+        ];
+
+        $formaModel->skipValidation(true)->insert($forma);
+
+        //EXPEDIENTES - BASE
         $expedienteModel = new \App\Models\ExpedienteModel();
 
         $expedientes = [
