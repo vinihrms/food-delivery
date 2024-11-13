@@ -126,6 +126,8 @@ class Pedidos extends BaseController
                     $entregador = $this->entregadorModel->find($pedido->entregador_id);
 
                     $pedido->entregador = $entregador;
+
+                    $this->enviaEmailPedidoSaiuEntrega($pedido);
                 }   
 
                 return redirect()->to(site_url("admin/pedidos/show/$pedido->codigo"))->with('sucesso', 'Pedido atualizado com sucesso');
@@ -146,7 +148,7 @@ class Pedidos extends BaseController
         $email = service('email');
         $email->setFrom('no-reply@fooddelivery.com', 'Food Delivery');
         $email->setTo($pedido->email);
-        $email->setSubject("Pedido $pedido->codigo saiu para a entrega?");
+        $email->setSubject("Pedido $pedido->codigo saiu para a entrega");
         
         $mensagem = view('Admin/Pedidos/pedido_saiu_entrega_email', ['pedido' => $pedido]);
         $email->setMessage($mensagem);

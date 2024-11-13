@@ -110,7 +110,10 @@ class Password extends BaseController
 
         $email->setSubject('Redefina sua senha');
 
-        $mensagem = view('Password/reset_email', ['token' => $usuario->reset_token]);
+        $mensagem = view('Password/reset_email', [
+            'token' => $usuario->reset_token,
+            'nome' => $usuario->nome
+        ]);
 
         $email->setMessage($mensagem);
 

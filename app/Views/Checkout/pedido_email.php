@@ -138,12 +138,12 @@
         }
 
         .button--red {
-            background-color: #FF6136;
-            border-top: 10px solid #FF6136;
-            border-right: 18px solid #FF6136;
-            border-bottom: 10px solid #FF6136;
-            border-left: 18px solid #FF6136;
-        }
+    background-color: #990100;
+    border-top: 10px solid #990100;
+    border-right: 18px solid #990100;
+    border-bottom: 10px solid #990100;
+    border-left: 18px solid #990100;
+}
 
         @media only screen and (max-width: 500px) {
             .button {

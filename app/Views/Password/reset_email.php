@@ -138,11 +138,11 @@
         }
 
         .button--red {
-            background-color: #FF6136;
-            border-top: 10px solid #FF6136;
-            border-right: 18px solid #FF6136;
-            border-bottom: 10px solid #FF6136;
-            border-left: 18px solid #FF6136;
+            background-color: #990100;
+            border-top: 10px solid #990100;
+            border-right: 18px solid #990100;
+            border-bottom: 10px solid #990100;
+            border-left: 18px solid #990100;
         }
 
         @media only screen and (max-width: 500px) {
@@ -476,7 +476,7 @@
                                 <tr>
                                     <td class="content-cell">
                                         <div class="f-fallback">
-                                            <h1>Olá,</h1>
+                                            <h1>Olá <?php echo esc($nome) ?></h1>
                                             <p>Voce recentemente solicitou uma redefinição para a sua senha do Food Delivery. Clique no botão abaixo para redefini-la. <strong>Este link é válido por apenas 3 horas...</strong></p>
                                             <!-- Action -->
                                             <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
@@ -487,7 +487,7 @@
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                                             <tr>
                                                                 <td align="center">
-                                                                <a href="<?php echo site_url('password/reset/'. $token); ?>"> Redefinir sua senha </a>
+                                                                    <a href="<?php echo site_url('password/reset/' . $token); ?>" class="button button--red"> Redefinir sua senha </a>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -503,7 +503,7 @@
                                                 <tr>
                                                     <td>
                                                         <p class="f-fallback sub">Se você estiver obtendo problemas com o botão, copie e cole o link abaixo no navegador.</p>
-                                                        <p class="f-fallback sub"><?php echo site_url('password/reset/'. $token); ?></p>
+                                                        <p class="f-fallback sub"><?php echo site_url('password/reset/' . $token); ?></p>
                                                     </td>
                                                 </tr>
                                             </table>

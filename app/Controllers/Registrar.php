@@ -85,7 +85,10 @@ class Registrar extends BaseController
         $email->setTo($usuario->email);
         $email->setSubject('Ativação de conta');
         
-        $mensagem = view('Registrar/ativacao_email', ['token' => $usuario->token]);
+        $mensagem = view('Registrar/ativacao_email', [
+            'token' => $usuario->token,
+            'nome' => $usuario->nome
+        ]);
         $email->setMessage($mensagem);
         
         $email->send();

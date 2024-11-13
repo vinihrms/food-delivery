@@ -138,11 +138,11 @@
         }
 
         .button--red {
-            background-color: #FF6136;
-            border-top: 10px solid #FF6136;
-            border-right: 18px solid #FF6136;
-            border-bottom: 10px solid #FF6136;
-            border-left: 18px solid #FF6136;
+            background-color: #990100;
+            border-top: 10px solid #990100;
+            border-right: 18px solid #990100;
+            border-bottom: 10px solid #990100;
+            border-left: 18px solid #990100;
         }
 
         @media only screen and (max-width: 500px) {
@@ -476,11 +476,12 @@
                                 <tr>
                                     <td class="content-cell">
                                         <div class="f-fallback">
-                                            <h1>Olá, <strong><?php echo esc($pedido->nome) ?></strong></h1>
+                                            <h1>Olá <strong><?php echo esc($pedido->nome) ?></strong></h1>
                                             <p>Seu pedido saiu para a entrega! Em breve, ele será entregue no endereço informado.</p>
                                             <p>Verificamos aqui que o endereço de entrega é <?php echo esc($pedido->endereco_entrega) ?></p>
-                                            <p>Observações: <?php echo esc($pedido->obeservacoes) ?></p>
-                                            <p>O entregador <?php echo esc($pedido->entregador->nome) ?> chegará com um(a) <?php echo esc($pedido->entregador->veiculo) ?>, que tem a placa <?php echo esc($pedido->entregador->placa) ?> </p>
+                                            <p>A forma de pagamento na entrega é: <?php echo esc($pedido->forma_pagamento) ?></p>
+                                            <p>Observações: <?php echo esc($pedido->observacoes) ?></p>
+                                            <p>O entregador <?php echo esc($pedido->entregador->nome) ?> chegará com um(a) <?php echo esc($pedido->entregador->veiculo) ?>, que tem a placa <?php echo esc($pedido->entregador->placa) ?>.</p>
                                             <hr>
                                             <p>Aproveite para acompanhar os seus pedidos, clicando no botão abaixo</p>
                                             <!-- Action -->
@@ -490,7 +491,7 @@
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                                             <tr>
                                                                 <td align="center">
-                                                                    <a href="<?php echo site_url('conta'); ?>"> Acompanhar Pedidos </a>
+                                                                    <a href="<?php echo site_url('conta'); ?>" class="button button--red"> Acompanhar Pedidos </a>
                                                                 </td>
                                                             </tr>
                                                         </table>
