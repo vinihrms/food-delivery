@@ -230,7 +230,8 @@ class Checkout extends BaseController
         $email->setTo($this->usuario->email);
         $email->setSubject("Pedido $pedido->codigo realizado com sucesso");
         
-        $mensagem = view('Checkout/pedido_email', ['pedido' => $pedido->usuario]);
+        $mensagem = view('Checkout/pedido_email', ['pedido' => $pedido->usuario,'nome' => $pedido->usuario->nome
+    ]);
         $email->setMessage($mensagem);
         
         $email->send();

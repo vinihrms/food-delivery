@@ -41,6 +41,22 @@ class Pedidos extends BaseController
         return view('Admin/Pedidos/show', $data);
     }
 
+    public function excluir($codigoPedido = null)
+    {
+        $pedido = $this->pedidoModel->buscaPedidoOu404($codigoPedido);
+
+        if($pedido->situacao < 2){
+            return redirect->back()->with('info', 'Apenas pedidos')
+        }
+
+        $data = [
+            'titulo' => "Excluindo o pedido $pedido->codigo",
+            'pedido' => $pedido,
+        ];
+
+        return view('Admin/Pedidos/show', $data);
+    }
+
     public function editar($codigoPedido = null)
     {
         $pedido = $this->pedidoModel->buscaPedidoOu404($codigoPedido);

@@ -476,7 +476,7 @@
                                 <tr>
                                     <td class="content-cell">
                                         <div class="f-fallback">
-                                            <h1>Olá,</h1>
+                                            <h1>Olá <?php echo esc($nome)?></h1>
                                             <p>Agradecemos pelo seu pedido! Queremos que saiba que estamos acelerando todos os processos para que ele fique pronto o mais rápido possível.</p>
                                             <p>Nossa equipe já está finalizando todos os detalhes e, em breve, seu pedido estará pronto para sair para entrega. Assim que ele for despachado, enviaremos um e-mail para que você acompanhe o trajeto até a chegada.</p>
                                             <!-- Action -->
@@ -488,7 +488,7 @@
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                                             <tr>
                                                                 <td align="center">
-                                                                <a href="<?php echo site_url('conta'); ?>"> Acompanhe seus pedidos </a>
+                                                                <a href="<?php echo site_url('conta'); ?>" class="button button-red"> Acompanhe seus pedidos </a>
                                                                 </td>
                                                             </tr>
                                                         </table>
