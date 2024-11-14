@@ -7,6 +7,14 @@
 <?php echo $this->section('estilos'); ?>
 <!-- envia estilo -->
 <link rel="stylesheet" href="<?php echo site_url("/web/src/assets/css/produtos.css") ?>">
+<style>
+    @media only screen and (max-width: 767px) {
+    .section-title {
+        font-size: 20px !important;
+        margin-top: -4em !important; 
+    }
+}
+</style>
 
 <?php echo $this->endSection(); ?>
 
@@ -54,8 +62,8 @@
         </div>
 
 
-        <div class="product-content product-wrap clearfix product-deatil">
-            <div class="row">
+        <div class="product-content product-wrap clearfix product-deatil ">
+            <div class="row ">
 
                 <div class="col-md-12 col-xs-12">
                     <h2 class="section-title pull-left"> <?php echo esc($titulo); ?></h2>

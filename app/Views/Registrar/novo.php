@@ -10,6 +10,21 @@
 
 <link rel="stylesheet" href="<?php echo site_url("/web/src/assets/css/produtos.css") ?>">
 
+<style>
+    @media only screen and (max-width: 767px) {
+    #register {
+        min-width: 100% !important; 
+    }
+}
+
+.name{
+        font-weight: normal;
+        font-family: 'ChunkFiveEx';
+        color: #990100;
+        font-size: 32px;
+    }
+</style>
+
 <?php echo $this->endSection(); ?>
 
 <?php echo $this->section('conteudo'); ?>
@@ -55,9 +70,9 @@
 
         </div>
 
-        <div class="product-content product-wrap clearfix product-deatil center-block" style="width: 40%;">
+        <div id="register" class="product-content product-wrap clearfix product-deatil center-block" style="width: 40%;">
             <div class="row">
-                <h3 class="text-center"><?php echo $titulo ?></h3>
+                <h3 class="text-center name"><?php echo $titulo ?></h3>
                 <hr>
 
                 <?php if (session()->has('errors_model')): ?>

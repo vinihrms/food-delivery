@@ -7,7 +7,20 @@
 <?php echo $this->section('estilos'); ?>
 <!-- envia estilo -->
 <link rel="stylesheet" href="<?php echo site_url("/web/src/assets/css/produtos.css") ?>">
+<style>
 
+.name{
+        font-weight: normal;
+        font-family: 'ChunkFiveEx';
+        color: #990100;
+        font-size: 32px;
+    }
+    @media only screen and (max-width: 767px) {
+        .btn{
+        margin-top: 1em !important; 
+    }
+}
+</style>
 <?php echo $this->endSection(); ?>
 
 <?php echo $this->section('conteudo'); ?>
@@ -60,7 +73,7 @@
 
                 <?php if (!isset($carrinho)): ?>
 
-                    <h2 class="text-center"> Seu carrinho de compras está vazio</h2>
+                    <h2 class="text-center name"> Seu carrinho de compras está vazio</h2>
 
                     <div class="text-center">
                         <a href="<?php echo site_url("/") ?>" style="margin-top: 3em" class="btn btn-lg btn-food">Mais delícias</a>
@@ -68,7 +81,7 @@
 
                 <?php else: ?>
 
-                    <h3 style="margin-bottom: 2em;">Resumo do carrinho de compras</h3>
+                    <h3 class="name" style="margin-bottom: 2em;">Resumo do carrinho de compras</h3>
                     <div class="table-responsive">
 
                         <?php if (session()->has('errors_model')): ?>

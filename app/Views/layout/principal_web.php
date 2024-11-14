@@ -63,9 +63,11 @@
             color: #990100 !important;
             font-family: 'Montserrat-bold';
         }
+
         .fonte-panel-food {
             font-family: 'Montserrat-bold';
         }
+
         .panel-food {
             background-color: #990100 !important;
             font-family: 'Montserrat-bold' !important;
@@ -250,26 +252,19 @@
 
                         <div class="navbar_top hidden-xs">
                             <div class="top_addr">
-                                <span><i class="fa fa-map-marker" aria-hidden="true"></i> CORBÉLIA, PARANÁ, BRASIL - 85420-000</span>
-                                <span><i class="fa fa-phone" aria-hidden="true"></i> (99) 99999-9999</span>
+                                <span><i class="fa fa-map-marker" aria-hidden="true"></i> CIDADE, ESTADO, PAÍS - 00000-000</span>
+                                <span><i class="fa fa-phone" aria-hidden="true"></i> (00) 00000-0000</span>
 
                                 <?php $expedienteHoje = expedienteHoje(); ?>
 
-                                <?php if($expedienteHoje->situacao == false): ?>
+                                <?php if ($expedienteHoje->situacao == false): ?>
                                     <span><i class="fa fa-lock" aria-hidden="true"></i> Hoje estamos fechados</span>
                                 <?php else: ?>
-                                    <span><i class="fa fa-clock-o" aria-hidden="true"></i><?php echo esc($expedienteHoje->abertura)?> - <?php echo esc($expedienteHoje->fechamento) ?></span>
+                                    <span><i class="fa fa-clock-o" aria-hidden="true"></i><?php echo esc($expedienteHoje->abertura) ?> - <?php echo esc($expedienteHoje->fechamento) ?></span>
                                 <?php endif ?>
-                                <div class="pull-right search-block">
-                                    <i class="fa fa-search" id="search" aria-hidden="true"></i>
-                                </div>
+
                             </div>
-                            <div id="navbar_search">
-                                <form method="post">
-                                    <input type="text" name="q" class="form-control pull-left" value="" placeholder="Busque por algo">
-                                    <button type="submit" class="pull-right close" id="search_close"><i class="fa fa-close"></i></button>
-                                </form>
-                            </div>
+
                         </div>
                         <!-- /.navbar_top -->
 
@@ -290,12 +285,11 @@
                                 <div class="collapse navbar-collapse" id="navbar">
                                     <div class="navbar-right">
                                         <ul class="nav navbar-nav">
-                                            <li><a class="page-scroll" href="/">Home</a></li>
-                                            <li><a class="page-scroll" href="#about_us">Sobre</a></li>
-                                            <li><a class="page-scroll" href="#menu">Cardápio</a></li>
+                                            <li><a class="page-scroll" href="<?php echo site_url('/') ?>">Home</a></li>
+                                            <li><a class="page-scroll" href="#menu" onclick="navigateToSection('menu')">Cardápio</a></li>
                                             <li><a class="page-scroll" href="<?php echo site_url('bairros') ?>">Bairros atendidos</a></li>
-                                            <li><a class="page-scroll" href="#gallery">Galeria</a></li>
-                                            <li><a class="page-scroll" href="#footer">Contato</a></li>
+                                            <li><a class="page-scroll" href="#about_us" onclick="navigateToSection('about_us')">Sobre</a></li>
+                                            <li><a class="page-scroll" href="#footer" onclick="navigateToSection('footer')">Contato</a></li>
 
                                             <?php if (session()->has('carrinho') && count(session()->get('carrinho')) > 0): ?>
                                                 <li><a class="page-scroll" href="<?php echo site_url('/carrinho') ?>">
@@ -327,11 +321,6 @@
 
         </header>
         <!-- End header -->
-
-
-
-
-
 
         <!-- essa section renderiza os conteudos especificos da view que estender esse layout -->
         <?php echo $this->renderSection('conteudo') ?>
@@ -384,11 +373,11 @@
                                     <div class="footer_border">
                                         <div class="footer_cnt">
                                             <i class="fa fa-map-marker"></i>
-                                            <span>CORBÉLIA, PARANÁ, BRASIL - 85420-000</span>
+                                            <span>CIDADE, ESTADO, PAÍS - 00000-000</span>
                                         </div>
                                         <div class="footer_cnt">
                                             <i class="fa fa-phone"></i>
-                                            <span>(45) 99999-9999 </span>
+                                            <span>(00) 00000-0000</span>
                                         </div>
                                         <div class="footer_cnt">
                                             <i class="fa fa-envelope"></i>
@@ -461,16 +450,39 @@
             </form>
         </div>
         <ul class="rmenu_list">
-            <li><a class="page-scroll" href="#header">Home</a></li>
-            <li><a class="page-scroll" href="#about_us">Sobre</a></li>
-            <li><a class="page-scroll" href="#menu">Cardápio</a></li>
-            <li><a class="page-scroll" href="#gallery">Galeria</a></li>
-            <li><a class="page-scroll" href="#footer">Contato</a></li>
+            <li><a class="page-scroll" href="<?php echo site_url('/') ?>">Home</a></li>
+            <li><a class="page-scroll" href="#menu" onclick="navigateToSection('menu')">Cardápio</a></li>
+            <li><a class="page-scroll" href="<?php echo site_url('bairros') ?>">Bairros atendidos</a></li>
+            <li><a class="page-scroll" href="#about_us" onclick="navigateToSection('about_us')">Sobre</a></li>
+            <li><a class="page-scroll" href="#footer" onclick="navigateToSection('footer')">Contato</a></li>
+
+            <?php if (session()->has('carrinho') && count(session()->get('carrinho')) > 0): ?>
+                <li><a class="page-scroll" href="<?php echo site_url('/carrinho') ?>">
+                        <i class="fa fa-shopping-cart fa fa-2x"></i>
+                        <span style="font-size: 25px !important"> <?php echo count(session()->get('carrinho')) ?></span>
+                    </a></li>
+            <?php endif ?>
+
+            <?php if (usuario_logado()): ?>
+                <li><a class="page-scroll" href="<?php echo site_url('conta') ?>">Conta</a></li>
+                <li><a class="page-scroll" href="<?php echo site_url('login/logout') ?>">Sair</a></li>
+
+            <?php else: ?>
+                <li><a class="page-scroll" href="<?php echo site_url('login') ?>">Entrar</a></li>
+                <li><a class="page-scroll" href="<?php echo site_url('registrar') ?>">Registre-se</a></li>
+            <?php endif ?>
+
         </ul>
         <div class="right_menu_addr top_addr">
-            <span><i class="fa fa-map-marker" aria-hidden="true"></i> CORBÉLIA, PARANÁ, BRASIL - 85420-000</span>
-            <span><i class="fa fa-phone" aria-hidden="true"></i> (99) 99999-9999</span>
-            <span><i class="fa fa-clock-o" aria-hidden="true"></i> 19:00 - 23:00</span>
+            <span><i class="fa fa-map-marker" aria-hidden="true"></i> CIDADE, ESTADO, PAÍS - 00000-000</span>
+            <span><i class="fa fa-phone" aria-hidden="true"></i> (00) 00000-0000</span>
+            <?php $expedienteHoje = expedienteHoje(); ?>
+
+            <?php if ($expedienteHoje->situacao == false): ?>
+                <span><i class="fa fa-lock" aria-hidden="true"></i> Hoje estamos fechados</span>
+            <?php else: ?>
+                <span><i class="fa fa-clock-o" aria-hidden="true"></i><?php echo esc($expedienteHoje->abertura) ?> - <?php echo esc($expedienteHoje->fechamento) ?></span>
+            <?php endif ?>
         </div>
     </nav>
 
@@ -495,23 +507,36 @@
     <script src="<?php echo site_url('web/'); ?>src/assets/js/loadMoreResults.js"></script>
     <script src="<?php echo site_url('web/'); ?>src/assets/js/main.js"></script>
 
-    <!-- essa section renderiza os scripts especificos da view que estender esse layout -->
     <?php echo $this->renderSection('scripts') ?>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const section = urlParams.get('section');
+        function navigateToSection(section) {
+            const isHomePage = window.location.pathname === '<?php echo parse_url(site_url('/'), PHP_URL_PATH); ?>';
 
-            if (section) {
-                const element = document.getElementById(section);
-                if (element) {
-                    element.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+            if (isHomePage) {
+                scrollAndCleanURL(section);
+            } else {
+                window.location.href = '<?php echo site_url('/') ?>#' + section;
+            }
+        }
 
-                history.replaceState(null, null, window.location.pathname);
+        function scrollAndCleanURL(section) {
+            const element = document.querySelector(`#${section}`);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                setTimeout(() => {
+                    history.replaceState(null, null, window.location.pathname);
+                }, 100);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            const hash = window.location.hash;
+            if (hash) {
+                scrollAndCleanURL(hash.substring(1));
             }
         });
     </script>
