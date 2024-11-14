@@ -8,7 +8,19 @@
 <!-- envia estilo -->
 <link rel="stylesheet" href="<?php echo site_url("/web/src/assets/css/produtos.css") ?>">
 <script src="https://kit.fontawesome.com/cf917007ba.js" crossorigin="anonymous"></script>
+<style>
+    @media only screen and (max-width: 767px) {
+    .section-title {
+        font-size: 20px !important;
+        margin-top: -4em !important; 
+    }
+    .btn{
+        margin-top: 1em !important; 
+    }
+}
 
+
+</style>
 <?php echo $this->endSection(); ?>
 
 <?php echo $this->section('conteudo'); ?>
@@ -123,7 +135,7 @@
                     <?php endif; ?>
                     <?php echo form_open('checkout/processar', ['id => form-checkout']) ?>
                             
-                    <p style="font-size: 18px; ">Escolha a forma de pagamento na entrega</p>
+                    <p style="font-size: 18px; margin-top: 12px !important">Escolha a forma de pagamento na entrega</p>
 
                     <div class="form-row">
                         <?php foreach ($formas as $forma): ?>
@@ -171,12 +183,12 @@
                         </div>
 
                         <div class="form-group col-md-12">
-                            <input type="text" id="forma_id" name="checkout[forma_id]" placeholder="checkout[forma_id]">
-                            <input type="text" id="bairro_slug" name="checkout[bairro_slug]" placeholder="checkout[bairro_slug]">
+                            <input type="hidden" id="forma_id" name="checkout[forma_id]" placeholder="checkout[forma_id]">
+                            <input type="hidden" id="bairro_slug" name="checkout[bairro_slug]" placeholder="checkout[bairro_slug]">
                         </div>
 
                         <div class="form-group col-md-12">
-                            <input type="submit" id="btn-checkout" class="btn btn-food btn-block" value="Antes, consulte a taxa de entrega">
+                            <input type="submit" id="btn-checkout" class="btn btn-food btn-block" value="Consulte a taxa de entrega">
                         </div>
                     </div>
 
@@ -212,6 +224,8 @@
                 $("#troco").removeClass('hidden')
             } else {
                 $("#troco").addClass('hidden')
+                $('#sem_troco').prop('checked', false);
+                $('#troco_para').val('');
 
             }
 
@@ -279,6 +293,9 @@
                         $("#endereco").html(response.endereco);
 
                         $("#total").html(response.total);
+
+                        
+                        $("[name=cep]").val(cep);
 
                         $("#cep").html(response.bairro)
 

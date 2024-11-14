@@ -95,7 +95,7 @@ class Checkout extends BaseController
             . esc($consulta->logradouro) . ' - '
             . esc($consulta->uf) . ' - '
             . esc($consulta->cep);
-            
+
         $retorno['logradouro'] = $consulta->logradouro;
         $retorno['bairro_slug'] = $bairro->slug;
         $retorno['total'] = number_format($this->somaValorProdutosCarrinho() + $bairro->valor_entrega, 2);
@@ -134,6 +134,15 @@ class Checkout extends BaseController
                     ->with('atencao', 'Por favor, escolha a forma de pagamento.');
             }
 
+            if ($forma->id != 1) {  
+                if (isset($checkoutPost['troco_para']) && !empty($checkoutPost['troco_para'])) {
+                    return redirect()->back()->with('atencao', 'Não é necessário informar troco para essa forma de pagamento.');
+                }
+                if (isset($checkoutPost['sem_troco']) && $checkoutPost['sem_troco'] == 'on') {
+                    return redirect()->back()->with('atencao', 'Não é necessário informar troco para essa forma de pagamento.');
+                }
+            }
+
             $bairro = $this->bairroModel->where('slug', $checkoutPost['bairro_slug'])->where('ativo', true)->first();
 
             if ($bairro == null) {
@@ -159,43 +168,37 @@ class Checkout extends BaseController
             $pedido->codigo = $this->pedidoModel->geraCodigoPedido();
             $pedido->endereco_entrega = session()->get('endereco_entrega') . '- Número ' . $checkoutPost['numero'];
 
-            if ($forma->id == 1) {
-                if (isset($checkoutPost['sem_troco'])) {
-                    $pedido->observacoes = 'Ponto de referência: ' . $checkoutPost['referencia'] . ' - Número: ' . $checkoutPost['numero'] . '. Você informou que não precisa de troco.';
-                }
-
+            if ($forma->id != 1) {
+                $pedido->observacoes = 'Ponto de referência: ' . $checkoutPost['referencia'] . ' - Número: ' . $checkoutPost['numero'];
+            } else {
                 if (isset($checkoutPost['troco_para'])) {
-
-                    
                     $trocoPara = str_replace(',', '', $checkoutPost['troco_para']);
-
                     if ($trocoPara < 1) {
-                        return redirect()->back()->with('atencao', 'Você precisa preenhcer o campo "enviar troco para" ou marcar que não é preciso de troco.');
+                        return redirect()->back()->with('atencao', 'Você precisa preencher o campo "enviar troco para" ou marcar que não é preciso de troco.');
                     }
-
                     $pedido->observacoes = 'Ponto de referência: ' . $checkoutPost['referencia'] . ' - Número: ' . $checkoutPost['numero'] . '. Você informou que precisa de troco para: R$' . number_format($trocoPara, 2, ',', '.');
+                } else {
+                    $pedido->observacoes = 'Ponto de referência: ' . $checkoutPost['referencia'] . ' - Número: ' . $checkoutPost['numero']. '. Você informou não que precisa de troco.';
                 }
-
-                $this->pedidoModel->save($pedido);
-
-                $pedido->usuario = $this->usuario;
-                
-                $this->enviaEmailPedidoRealizado($pedido);
-
-                //LIMPAR DADOS DA SESSAO
-                session()->remove('carrinho');
-                session()->remove('endereco_entrega');
-
-                return redirect()->to("checkout/sucesso/$pedido->codigo");
-
+            }
+            
+            $this->pedidoModel->save($pedido);
+            $pedido->usuario = $this->usuario;
+            $this->enviaEmailPedidoRealizado($pedido);
+            
+            session()->remove('carrinho');
+            session()->remove('endereco_entrega');
+            
+            return redirect()->to(site_url("checkout/sucesso/$pedido->codigo"));
 
             } else {
                 return redirect()->back();
             }
         }
-    }
+    
 
-    public function sucesso($codigoPedido = null) {
+    public function sucesso($codigoPedido = null)
+    {
         $pedido = $this->buscaPedidoOu404($codigoPedido);
 
         $data = [
@@ -224,21 +227,25 @@ class Checkout extends BaseController
         return array_sum($produtosCarrinho);
     }
 
-    private function enviaEmailPedidoRealizado(object $pedido){
+    private function enviaEmailPedidoRealizado(object $pedido)
+    {
         $email = service('email');
         $email->setFrom('no-reply@fooddelivery.com', 'Food Delivery');
         $email->setTo($this->usuario->email);
         $email->setSubject("Pedido $pedido->codigo realizado com sucesso");
-        
-        $mensagem = view('Checkout/pedido_email', ['pedido' => $pedido->usuario,'nome' => $pedido->usuario->nome
-    ]);
+
+        $mensagem = view('Checkout/pedido_email', [
+            'pedido' => $pedido->usuario,
+            'nome' => $pedido->usuario->nome
+        ]);
         $email->setMessage($mensagem);
-        
+
         $email->send();
     }
 
-    private function buscaPedidoOu404(string $codigoPedido = null) {
-        if(!$codigoPedido || !$pedido = $this->pedidoModel->where('codigo', $codigoPedido)->where('usuario_id', $this->usuario->id)->first()){
+    private function buscaPedidoOu404(string $codigoPedido = null)
+    {
+        if (!$codigoPedido || !$pedido = $this->pedidoModel->where('codigo', $codigoPedido)->where('usuario_id', $this->usuario->id)->first()) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound("Não encontramos o pedido $codigoPedido");
         }
         return $pedido;

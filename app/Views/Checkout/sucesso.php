@@ -7,7 +7,21 @@
 <?php echo $this->section('estilos'); ?>
 <!-- envia estilo -->
 <link rel="stylesheet" href="<?php echo site_url("/web/src/assets/css/produtos.css") ?>">
+<style>
+    @media only screen and (max-width: 767px) {
+    .section-title {
+        font-size: 20px !important;
+    }
 
+    #titulo-sucesso {
+    margin-top: 1em; 
+    z-index: 10;
+    position: relative;
+}
+}
+
+
+</style>
 <?php echo $this->endSection(); ?>
 
 <?php echo $this->section('conteudo'); ?>
@@ -53,18 +67,17 @@
 
         </div>
 
-        <div class="product-content product-wrap clearfix product-deatil">
+
+
+    <div class="product-content product-wrap clearfix product-deatil">
             <div class="row">
-
-
-
                 <?php if ($pedido->situacao == 0): ?>
                     <div class="col-md-12 col-xs-12">
                         <h2 class="section-title pull-left"> <?php echo ($titulo); ?></h2>
                     </div>
                 <?php endif ?>
 
-                <div class="col-md-12 col-xs-12">
+                <div id="titulo-sucesso" class="col-md-12 col-xs-12">
                     <h4> No momento, o seu pedido está com status de: <?php echo $pedido->exibeSituacaoPedido(); ?></h4>
                 </div>
 
@@ -73,6 +86,7 @@
                         <h5> Quando ocorrer uma mudança no status do seu pedido, nós te notificaremos por e-mail</h5>
                     </div>
                 <?php endif ?>
+</div>
 
 
                 <div class="col-md-12">
