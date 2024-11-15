@@ -33,8 +33,8 @@
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
 
                     <a class="navbar-brand brand-logo" href="<?php echo site_url('admin/home') ?>">
-                        <img src="images/logo.svg" alt="logo" style="width: 120px; height: auto;" />
-                    </a> <a class="navbar-brand brand-logo-mini" href="<?php echo site_url('admin/home') ?>"><img src="images/logo-mini.svg"
+                        <img src="<?php echo site_url('admin/') ?>images/logo.svg" alt="logo" style="width: 120px; height: auto;" />
+                    </a> <a class="navbar-brand brand-logo-mini" href="<?php echo site_url('admin/home') ?>"><img src="<?php echo site_url('admin/') ?>images/logo-mini.svg"
                             alt="logo" /></a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
                         data-toggle="minimize">
