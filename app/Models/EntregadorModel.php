@@ -42,7 +42,7 @@ class EntregadorModel extends Model
         'veiculo'        => 'required|max_length[230]',
         'placa'        => 'required|min_length[7]|max_length[8]|is_unique[entregadores.placa]',
 
-    ];  
+    ];
     protected $validationMessages = [
         'nome' => [
             'required' => 'O nome é obrigatório.',
@@ -85,21 +85,28 @@ class EntregadorModel extends Model
 
     ];
 
-    public function procurar($term) {
-        if($term === null){
+    public function procurar($term)
+    {
+        if ($term === null) {
             return [];
         };
 
         return $this->select('id, nome')
-                ->like('nome', $term)
-                ->withDeleted(true)
-                ->get()
-                ->getResult();
+            ->like('nome', $term)
+            ->withDeleted(true)
+            ->get()
+            ->getResult();
     }
 
-    public function desfazerexclusao(int $id){
+    public function desfazerexclusao(int $id)
+    {
         return $this->protect(false)->where('id', $id)
-                                    ->set('deletado_em', null)
-                                    ->update();
+            ->set('deletado_em', null)
+            ->update();
+    }
+
+    public function recuperaTotalEntregadoresAtivos()
+    {
+        return $this->where('ativo', true)->countAllResults();
     }
 }

@@ -38,6 +38,8 @@
     </div>
 </div>
 
+<?php if($usuario->id != usuario_logado()->id): ?>
+
 <div class="form-check form-check-flat form-check-primary mb-4">
     <label for="ativo" class="form-check-label">
         <input type="hidden" value="0" name="ativo">
@@ -55,6 +57,8 @@
         Administrador 
     </label>
 </div>
+
+<?php endif; ?>
 
 
 

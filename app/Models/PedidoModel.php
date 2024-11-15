@@ -79,4 +79,18 @@ class PedidoModel extends Model
             ->get()
             ->getResult();
     }
+
+    public function valorPedidosEntregues(){
+        return $this->select('COUNT(*) AS total')
+                    ->selectSum('valor_pedido')
+                    ->where('situacao', 2)
+                    ->first();
+    }
+
+    public function valorPedidosCancelados(){
+        return $this->select('COUNT(*) AS total')
+                    ->selectSum('valor_pedido')
+                    ->where('situacao', 3)
+                    ->first();
+    }
 }

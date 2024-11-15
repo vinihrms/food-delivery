@@ -15,7 +15,7 @@ class Carrinho extends BaseController
     private $acao;
 
     private $validacao;
-    
+
     private $horaAtual;
     private $expedienteHoje;
 
@@ -31,7 +31,6 @@ class Carrinho extends BaseController
         $this->horaAtual = date('H:i');
 
         $this->acao = service('router')->methodName();
-
     }
 
     public function index()
@@ -50,17 +49,26 @@ class Carrinho extends BaseController
 
     public function adicionar()
     {
-
         if ($this->request->getMethod() === 'post') {
 
             $this->expedienteHoje = expedienteHoje();
 
-            if($this->expedienteHoje->situacao == false){
+            if ($this->expedienteHoje->situacao == false) {
                 return redirect()->back()->with('aviso', 'Hoje estamos fechados, confira nosso expediente no rodapé da página. Esperamos ver você em breve!');
             }
 
-            if($this->horaAtual > $this->expedienteHoje->fechamento || $this->horaAtual < $this->expedienteHoje->abertura){
-                return redirect()->back()->with('aviso', "Nosso horário de atendiento para o dia de hoje é das ". $this->expedienteHoje->abertura . " às ". $this->expedienteHoje->fechamento);
+            $abertura = $this->expedienteHoje->abertura; 
+            $fechamento = $this->expedienteHoje->fechamento; 
+
+            $fechamentoData = (strtotime($fechamento) < strtotime($abertura)) ?
+                date('Y-m-d', strtotime('tomorrow')) : date('Y-m-d');
+
+            $horaAtual = date('Y-m-d H:i:s');
+            $horaAberturaCompleta = date('Y-m-d ') . $abertura;
+            $horaFechamentoCompleta = $fechamentoData . ' ' . $fechamento;
+
+            if ($horaAtual < $horaAberturaCompleta || $horaAtual > $horaFechamentoCompleta) {
+                return redirect()->back()->with('aviso', "Nosso horário de atendimento para o dia de hoje é das " . $this->expedienteHoje->abertura . " às " . $this->expedienteHoje->fechamento);
             }
 
             $produtoPost = $this->request->getPost('produto');
@@ -161,12 +169,12 @@ class Carrinho extends BaseController
 
             $this->expedienteHoje = expedienteHoje();
 
-            if($this->expedienteHoje->situacao == false){
+            if ($this->expedienteHoje->situacao == false) {
                 return redirect()->back()->with('aviso', 'Hoje estamos fechados, confira nosso expediente no rodapé da página. Esperamos ver você em breve!');
             }
 
-            if($this->horaAtual > $this->expedienteHoje->fechamento || $this->horaAtual < $this->expedienteHoje->abertura){
-                return redirect()->back()->with('aviso', "Nosso horário de atendiento para o dia de hoje é das ". $this->expedienteHoje->abertura . " às ". $this->expedienteHoje->fechamento);
+            if ($this->horaAtual > $this->expedienteHoje->fechamento || $this->horaAtual < $this->expedienteHoje->abertura) {
+                return redirect()->back()->with('aviso', "Nosso horário de atendiento para o dia de hoje é das " . $this->expedienteHoje->abertura . " às " . $this->expedienteHoje->fechamento);
             }
 
             $produtoPost = $this->request->getPost();
@@ -409,7 +417,7 @@ class Carrinho extends BaseController
 
         $total = 0;
 
-        foreach ($carrinho as $produto){
+        foreach ($carrinho as $produto) {
             $total += $produto['preco'] * $produto['quantidade'];
         }
 
@@ -418,7 +426,6 @@ class Carrinho extends BaseController
         $retorno['total'] = 'R$' . esc(number_format($total, 2));
 
         return $this->response->setJSON($retorno);
-
     }
 
     private function atualizaProduto(string $acao, string $slug, int $quantidade, array $produtos)
@@ -458,5 +465,4 @@ class Carrinho extends BaseController
             return $linha['slug'] != $slug;
         });
     }
-
 }
