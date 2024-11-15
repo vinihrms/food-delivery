@@ -274,7 +274,7 @@
                                 <!-- Brand and toggle get grouped for better mobile display -->
                                 <div class="navbar-header">
                                     <a class="navbar-brand" href="/">
-                                        <img src="<?php echo site_url('web/'); ?>src/assets/img/" alt="logo" />
+                                        <img src="<?php echo site_url('web/'); ?>src/assets/img/logo.svg" alt="logo" style="max-height: 50px; filter: brightness(0) invert(1);" />
                                     </a>
                                     <a href="#cd-nav" class="cd-nav-trigger right_menu_icon">
                                         <span><i class="fa fa-bars" aria-hidden="true"></i></span>
@@ -449,15 +449,10 @@
     <nav class="cd-nav-container right_menu" id="cd-nav">
         <div class="header__open_menu">
             <a href="index-2.html" class="rmenu_logo" title="yagmurmebel.az">
-                <img src="<?php echo site_url('web/'); ?>src/assets/img/logo.png" alt="logo" />
+            <img src="<?php echo site_url('web/'); ?>src/assets/img/logo-mini.svg" alt="logo" style="max-height: 50px; filter: brightness(0) invert(1);" />
             </a>
         </div>
-        <div class="right_menu_search">
-            <form method="post">
-                <input type="text" name="q" class="form-control search_input" value="" placeholder="Busque por algo">
-                <button type="submit" class="search_icon"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
+        
         <ul class="rmenu_list">
             <li><a class="page-scroll" href="<?php echo site_url('/') ?>">Home</a></li>
             <li><a class="page-scroll" href="#menu" onclick="navigateToSection('menu')">Cardápio</a></li>
