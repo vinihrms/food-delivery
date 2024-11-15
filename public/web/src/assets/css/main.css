@@ -78,7 +78,7 @@ a:focus {
 @media only screen and (max-width: 767px) {
     .pos_rel {
         position: relative;
-        min-height: 12vh;
+        min-height: 8vh;
         display: flex;
         align-items: center;
     }

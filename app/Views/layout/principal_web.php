@@ -3,7 +3,6 @@
 
 <!-- BEGIN head -->
 
-
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
@@ -31,7 +30,6 @@
     <link href="<?php echo site_url('web/'); ?>src/assets/css/jquery.fancybox.css" type="text/css" rel="stylesheet" />
     <link href="<?php echo site_url('web/'); ?>src/assets/css/main.css" type="text/css" rel="stylesheet" />
     <link href="<?php echo site_url('web/'); ?>src/assets/css/responsive.css" type="text/css" rel="stylesheet" />
-
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo site_url('web/'); ?>src/assets/img/favicon/apple-touch-icon.png" />
@@ -72,7 +70,6 @@
             background-color: #990100 !important;
             font-family: 'Montserrat-bold' !important;
         }
-
 
         .btn-food:hover {
             color: #fff;
@@ -217,7 +214,6 @@
         <!-- essa section renderiza os conteudos especificos da view que estender esse layout -->
         <?php echo $this->renderSection('conteudo') ?>
 
-
         <!--  Begin Footer  -->
         <footer id="footer">
 
@@ -232,7 +228,10 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-3">
                                     <h4 class="footer_ttl footer_ttl_padd">Sobre nós</h4>
-                                    <p class="footer_txt">Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries but also the leap into electronic typesetting. </p>
+                                    <p class="footer_txt">
+                                        Pratos frescos, sabor autêntico e atendimento acolhedor.
+                                        Uma experiência gastronômica feita para você!
+                                    </p>
                                 </div>
                                 <div class="col-sm-6 col-md-6">
 
@@ -284,7 +283,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="copy_text">
-                                        <a target="_blank" href="/">Placeholder</a>
+                                        <p target="_blank">Acompanhe nossas redes sociais!</p>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -324,7 +323,6 @@
 
     </div>
     <!-- END body-wrapper -->
-
 
     <!-- START mobile right burger menu -->
 
