@@ -28,7 +28,9 @@
                 Cadastrar
             </a>
 
-
+            <?php if(empty($usuarios)): ?>
+                <p>Não há dados para exibir</p>
+            <?php else: ?>
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -75,6 +77,7 @@
                     <?php echo $pager->links(); ?>
                 </div>
             </div>
+            <?php endif ?>
         </div>
 
 

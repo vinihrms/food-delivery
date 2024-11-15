@@ -93,4 +93,14 @@ class PedidoModel extends Model
                     ->where('situacao', 3)
                     ->first();
     }
+
+    public function recuperaClientesMaisAsssiduos(int $quantidade){
+        return $this->select('usuarios.nome, COUNT(*) AS pedidos')
+                    ->join('usuarios', 'usuarios.id = pedidos.usuario_id')
+                    ->where('situacao', 2) //entregues
+                    ->limit($quantidade)
+                    ->groupBy('usuarios.nome')
+                    ->orderBy('pedidos', 'DESC')
+                    ->find();
+    }
 }

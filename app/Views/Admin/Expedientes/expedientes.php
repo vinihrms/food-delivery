@@ -24,7 +24,9 @@
                 </ul>
             <?php endif; ?>
 
-
+            <?php if(empty($expedientes)): ?>
+                <p>Não há dados para exibir</p>
+            <?php else: ?>
             <?php echo form_open("admin/expedientes/expedientes", ['class' => 'form-row']) ?>
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -68,6 +70,7 @@
                         Salvar
                     </button>
                 </div>
+                <?php endif ?>
 </div>
             <?php form_close() ?>
 

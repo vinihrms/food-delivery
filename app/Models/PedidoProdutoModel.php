@@ -10,22 +10,13 @@ class PedidoProdutoModel extends Model
     protected $returnType       = 'object';
     protected $allowedFields    = ['pedido_id', 'produto', 'quantidade'];
 
-    protected bool $allowEmptyInserts = false;
 
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+    public function recuperaProdutoMaisvendidos(int $quantidade)
+    {
+        return $this->select('produto, SUM(quantidade) AS quantidade')
+            ->limit($quantidade)
+            ->groupBy('produto')
+            ->orderBy('quantidade', 'DESC')
+            ->find();
+    }
 }

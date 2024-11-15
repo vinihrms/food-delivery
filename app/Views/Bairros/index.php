@@ -69,6 +69,15 @@
                     <h2 class="section-title pull-left"> <?php echo esc($titulo); ?></h2>
                 </div>
 
+                <?php if(empty($bairros)): ?>
+                <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading fonte-panel-food" style="background: #990100; color: #ffffff">Ainda não há dados para exibir</div>
+                            <div class="panel-body fonte-food">Fique atento às novidades</div>
+                        </div>
+                    </div>
+                <?php else: ?>
+                
                 <?php foreach ($bairros as $bairro): ?>
                     <div class="col-md-4">
                         <div class="panel panel-default">
@@ -77,7 +86,7 @@
                         </div>
                     </div>
                 <?php endforeach ?>
-
+                <?php endif ?>
             </div>
         </div>
     </div>

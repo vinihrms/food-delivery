@@ -90,6 +90,8 @@
                         </div>
                     <?php else: ?>
                         <div class="card-body">
+                            <h5><i class="mdi mdi-shopping"></i>&nbsp;Novos pedidos realizados</h5>
+                            <hr class="border-primary">
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
@@ -122,15 +124,99 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">Produtos mais vendidos</p>
+                <ul class="list-arrow">
+                    <?php if (!isset($produtosMaisVendidos)): ?>
+
+                    <p class="card-title text-primary">Não há dados para exibir no momento</p>
+
+                    <?php else: ?>
+
+                        <?php foreach ($produtosMaisVendidos as $produto): ?>
+
+                            <li class="mb-2">
+                                <?php echo word_limiter($produto->produto, 5) ?>
+                                <span class="badge badge-pill badge-primary float-right"><?php echo esc($produto->quantidade) ?></span>
+                            </li>
+
+                        <?php endforeach ?>
+
+                    <?php endif ?>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">Clientes mais assiduos</p>
+                <ul class="list-arrow">
+                    <?php if (!isset($clientesMaisAsssiduos)): ?>
+
+                    <p class="card-title text-success">Não há dados para exibir no momento</p>
+
+                    <?php else: ?>
+
+                        <?php foreach ($clientesMaisAsssiduos as $cliente): ?>
+
+                            <li class="mb-2">
+                                <?php echo esc($cliente->nome) ?>
+                                <span class="badge badge-pill badge-success float-right"><?php echo esc($cliente->pedidos) ?></span>
+                            </li>
+
+                        <?php endforeach ?>
+
+                    <?php endif ?>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-title">Entregadores mais assiduos</p>
+                <ul class="list-unstyled">
+                    <?php if (!isset($entregadoresMaisAssiduos)): ?>
+
+                    <p class="card-title text-warning">Não há dados para exibir no momento</p>
+
+                    <?php else: ?>
+
+                        <?php foreach ($entregadoresMaisAssiduos as $entregador): ?>
+
+                            <li class="mb-2">
+                                <img class="rounded-circle" width="40px" style="margin-right: 4px;" src="<?php echo site_url("admin/entregadores/imagem/$entregador->imagem") ?>" alt="">
+                                <?php echo esc($entregador->nome) ?>
+                                <span class="badge badge-pill badge-warning float-right"><?php echo esc($entregador->entregas) ?></span>
+                            </li>
+
+                        <?php endforeach ?>
+
+                    <?php endif ?>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php echo $this->endSection(); ?>
 
 <?php echo $this->section('scripts'); ?>
 <!-- envia script -->
 
 <script>
-    setInterval("atualiza();", 30000) //120000 ms = 2 min
+    setInterval("atualiza();", 120000) //120000 ms = 2 min
 
-    function atualiza(){
+    function atualiza() {
         $("#atualiza").toggleClass('bg-primary')
         $("#atualiza").load('<?php site_url('admin/home') ?>' + ' #atualiza');
     }

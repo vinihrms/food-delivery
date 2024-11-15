@@ -109,4 +109,14 @@ class EntregadorModel extends Model
     {
         return $this->where('ativo', true)->countAllResults();
     }
+
+    public function recuperaEntregadoresMaisAssiduos(int $quantidade){
+        return $this->select('entregadores.nome, entregadores.imagem, COUNT(*) AS entregas')
+                    ->join('pedidos', 'pedidos.entregador_id = entregadores.id')
+                    ->where('pedidos.situacao', 2)
+                    ->limit($quantidade)
+                    ->groupBy('entregadores.nome, entregadores.imagem')
+                    ->orderBy('entregas', 'DESC')
+                    ->find();
+    }
 }
