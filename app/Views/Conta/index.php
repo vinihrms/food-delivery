@@ -61,7 +61,7 @@
             </div>
 
             <div class="col-md-12">
-                <?php if (!isset($pedidos)): ?>
+                <?php if (empty($pedidos)): ?>
                     <h4>Nessa área aparecerá o seu histórico de pedidos realizados!</h4>
                 <?php else: ?>
 

@@ -15,13 +15,21 @@
 <!--    About Us    -->
 <div class="container section" id="menu" style="margin-top: 3em">
 
-        <div class="title-block">
-            <h1 class="section-title">Conheça nosso cardápio</h1>
-        </div>
+    <div class="title-block">
+        <h1 class="section-title">Conheça nosso cardápio</h1>
+    </div>
 
-        <!--    Menus filter    -->
-        <div class="menu_filter text-center">
-            <ul class="list-unstyled list-inline d-inline-block">
+    <!--    Menus filter    -->
+    <div class="menu_filter text-center">
+        <ul class="list-unstyled list-inline d-inline-block">
+
+            <?php if (empty($categorias)): ?>
+
+                <li class="item active">
+                    <a href="javascript:;" class="filter-button">Ainda não há categorias para exibir</a>
+                </li>
+
+            <?php else: ?>
 
                 <li id="todos" class="item active">
                     <a href="javascript:;" class="filter-button" data-filter="todos">Todos</a>
@@ -35,13 +43,22 @@
 
                 <?php endforeach ?>
 
-            </ul>
-        </div>
 
-        <!--    Menus items     -->
-        <div id="menu_items">
+            <?php endif ?>
 
-            <div class="row">
+        </ul>
+    </div>
+
+    <!--    Menus items     -->
+    <div id="menu_items">
+
+        <div class="row">
+            
+            <?php if(empty($produtos)): ?>
+
+                <h2 class="section-title">Ainda não há produtos para exibir. Fique atento às novidades</h2>
+
+            <?php else: ?>
 
                 <?php foreach ($produtos as $produto): ?>
 
@@ -63,10 +80,12 @@
 
                 <?php endforeach ?>
 
-            </div>
-
+            <?php endif ?>
 
         </div>
+
+
+    </div>
 
 </div>
 
