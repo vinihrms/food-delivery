@@ -287,7 +287,9 @@
                                         <ul class="nav navbar-nav">
                                             <li><a class="page-scroll" href="<?php echo site_url('/') ?>">Home</a></li>
                                             <li><a class="page-scroll" href="#menu" onclick="navigateToSection('menu')">Cardápio</a></li>
-                                            <li><a class="page-scroll" href="<?php echo site_url('bairros') ?>">Bairros atendidos</a></li>
+                                            <li class="<?= (uri_string() === 'bairros') ? 'active' : '' ?>">
+                                                <a class="page-scroll" href="<?php echo site_url('bairros') ?>">Bairros atendidos</a>
+                                            </li>
                                             <li><a class="page-scroll" href="#about_us" onclick="navigateToSection('about_us')">Sobre</a></li>
                                             <li><a class="page-scroll" href="#footer" onclick="navigateToSection('footer')">Contato</a></li>
 
@@ -299,12 +301,19 @@
                                             <?php endif ?>
 
                                             <?php if (usuario_logado()): ?>
-                                                <li><a class="page-scroll" href="<?php echo site_url('conta') ?>">Conta</a></li>
-                                                <li><a class="page-scroll" href="<?php echo site_url('login/logout') ?>">Sair</a></li>
-
+                                                <li class="<?= (uri_string() === 'conta') ? 'active' : '' ?>">
+                                                    <a class="page-scroll" href="<?php echo site_url('conta') ?>">Conta</a>
+                                                </li>
+                                                <li>
+                                                    <a class="page-scroll" href="<?php echo site_url('login/logout') ?>">Sair</a>
+                                                </li>
                                             <?php else: ?>
-                                                <li><a class="page-scroll" href="<?php echo site_url('login') ?>">Entrar</a></li>
-                                                <li><a class="page-scroll" href="<?php echo site_url('registrar') ?>">Registre-se</a></li>
+                                                <li class="<?= (uri_string() === 'login') ? 'active' : '' ?>">
+                                                    <a class="page-scroll" href="<?php echo site_url('login') ?>">Entrar</a>
+                                                </li>
+                                                <li class="<?= (uri_string() === 'registrar') ? 'active' : '' ?>">
+                                                    <a class="page-scroll" href="<?php echo site_url('registrar') ?>">Registre-se</a>
+                                                </li>
                                             <?php endif ?>
                                         </ul>
                                     </div>
