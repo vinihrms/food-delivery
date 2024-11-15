@@ -12,7 +12,7 @@ class Main extends Seeder
         $admin = [
             [
                 'id'              => 1,
-                'nome'            => 'admin',
+                'nome'            => 'Admin',
                 'email'           => 'admin@admin.com',
                 'cpf'             => '000.000.000-00',
                 'telefone'        => '(00) 00000-0000',
