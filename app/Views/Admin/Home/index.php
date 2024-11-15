@@ -155,7 +155,7 @@
     <div class="col-md-4 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <p class="card-title">Clientes mais assiduos</p>
+                <p class="card-title">Clientes mais assíduos</p>
                 <ul class="list-arrow">
                     <?php if (!isset($clientesMaisAsssiduos)): ?>
 
