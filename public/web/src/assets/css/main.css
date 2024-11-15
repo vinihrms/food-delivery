@@ -70,9 +70,18 @@ a:focus {
 
 .pos_rel {
     position: relative;
-    min-height: 100vh;
+    min-height: 20vh;
     display: flex;
     align-items: center;
+}
+
+@media only screen and (max-width: 767px) {
+    .pos_rel {
+        position: relative;
+        min-height: 12vh;
+        display: flex;
+        align-items: center;
+    }
 }
 
 .pos_rel2 {
@@ -1648,8 +1657,14 @@ a:focus {
 /*----------------------------------------*/
 
 #googleMap {
-    height: 500px;
+    height: 200px;
     margin-bottom: 180px;
+}
+
+@media only screen and (max-width: 767px) {
+    #googleMap {
+        display: none;
+    }
 }
 
 
