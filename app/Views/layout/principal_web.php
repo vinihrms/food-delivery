@@ -3,7 +3,6 @@
 
 <!-- BEGIN head -->
 
-
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
@@ -31,7 +30,6 @@
     <link href="<?php echo site_url('web/'); ?>src/assets/css/jquery.fancybox.css" type="text/css" rel="stylesheet" />
     <link href="<?php echo site_url('web/'); ?>src/assets/css/main.css" type="text/css" rel="stylesheet" />
     <link href="<?php echo site_url('web/'); ?>src/assets/css/responsive.css" type="text/css" rel="stylesheet" />
-
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo site_url('web/'); ?>src/assets/img/favicon/apple-touch-icon.png" />
@@ -73,7 +71,6 @@
             font-family: 'Montserrat-bold' !important;
         }
 
-
         .btn-food:hover {
             color: #fff;
             background-color: #660000;
@@ -91,6 +88,23 @@
         .show>.btn-food.dropdown-toggle:focus {
             box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5);
         }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            background-color: #25D366;
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-button img {
+            width: 40px;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
     </style>
 
 </head>
@@ -99,6 +113,11 @@
 <!-- BEGIN body -->
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+    <!-- BOTAO WHATSAPP-->
+    <a href="https://wa.me/numero" target="_blank" class="whatsapp-button">
+        <img src="<?php echo site_url('web/src/assets/img/wpp.svg') ?>" alt="WhatsApp" />
+    </a>
 
     <!-- BEGIN  Loading Section -->
     <div class="loading-overlay">
@@ -121,123 +140,6 @@
             <!-- BEGIN carousel -->
             <div id="main-carousel" class="carousel slide" data-ride="carousel">
                 <div class="container pos_rel">
-
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#main-carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#main-carousel" data-slide-to="1"></li>
-                        <li data-target="#main-carousel" data-slide-to="2"></li>
-                        <li data-target="#main-carousel" data-slide-to="3"></li>
-                        <li data-target="#main-carousel" data-slide-to="4"></li>
-                    </ol>
-
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#main-carousel" role="button" data-slide="prev">
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                    </a>
-                    <a class="right carousel-control" href="#main-carousel" role="button" data-slide="next">
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </a>
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-
-                        <!-- Carousel items   -->
-                        <div class="item active">
-                            <div class="carousel-caption">
-                                <div class="fadeUp item_img">
-                                    <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/pizza.png" alt="sample" />
-                                    <div class="item_badge">
-                                        <span class="badge_btext">20%</span>
-                                        <span class="badge_stext">OFF</span>
-                                    </div>
-                                </div>
-                                <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Produto</h4>
-                                    <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="carousel-caption">
-                                <div class="fadeUp item_img">
-                                    <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/tortilla.png" alt="sample" />
-                                    <div class="item_badge">
-                                        <span class="badge_btext">20%</span>
-                                        <span class="badge_stext">OFF</span>
-                                    </div>
-                                </div>
-                                <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Produto</h4>
-                                    <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="carousel-caption">
-                                <div class="fadeUp item_img">
-                                    <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/burger.png" alt="sample" />
-                                    <div class="item_badge">
-                                        <span class="badge_btext">20%</span>
-                                        <span class="badge_stext">OFF</span>
-                                    </div>
-                                </div>
-                                <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Produto</h4>
-                                    <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="carousel-caption">
-                                <div class="fadeUp item_img">
-                                    <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/pizza.png" alt="sample" />
-                                    <div class="item_badge">
-                                        <span class="badge_btext">20%</span>
-                                        <span class="badge_stext">OFF</span>
-                                    </div>
-                                </div>
-                                <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Produto</h4>
-                                    <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="item">
-                            <div class="carousel-caption">
-                                <div class="fadeUp item_img">
-                                    <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/burger.png" alt="sample" />
-                                    <div class="item_badge">
-                                        <span class="badge_btext">20%</span>
-                                        <span class="badge_stext">OFF</span>
-                                    </div>
-                                </div>
-                                <div class="fadeUp fade-slow item_details">
-                                    <h4 class="item_name">Delicious Food</h4>
-                                    <p class="item_info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <div class="item_link_box">
-                                        <a href="#reservation" class="item_link page-scroll">Faça seu pedido</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
                 <!-- /.container -->
@@ -274,7 +176,7 @@
                                 <!-- Brand and toggle get grouped for better mobile display -->
                                 <div class="navbar-header">
                                     <a class="navbar-brand" href="/">
-                                        <img src="<?php echo site_url('web/'); ?>src/assets/img/" alt="logo" />
+                                        <img src="<?php echo site_url('web/'); ?>src/assets/img/logo.svg" alt="logo" style="max-height: 50px; filter: brightness(0) invert(1);" />
                                     </a>
                                     <a href="#cd-nav" class="cd-nav-trigger right_menu_icon">
                                         <span><i class="fa fa-bars" aria-hidden="true"></i></span>
@@ -287,7 +189,9 @@
                                         <ul class="nav navbar-nav">
                                             <li><a class="page-scroll" href="<?php echo site_url('/') ?>">Home</a></li>
                                             <li><a class="page-scroll" href="#menu" onclick="navigateToSection('menu')">Cardápio</a></li>
-                                            <li><a class="page-scroll" href="<?php echo site_url('bairros') ?>">Bairros atendidos</a></li>
+                                            <li class="<?= (uri_string() === 'bairros') ? 'active' : '' ?>">
+                                                <a class="page-scroll" href="<?php echo site_url('bairros') ?>">Bairros atendidos</a>
+                                            </li>
                                             <li><a class="page-scroll" href="#about_us" onclick="navigateToSection('about_us')">Sobre</a></li>
                                             <li><a class="page-scroll" href="#footer" onclick="navigateToSection('footer')">Contato</a></li>
 
@@ -299,12 +203,19 @@
                                             <?php endif ?>
 
                                             <?php if (usuario_logado()): ?>
-                                                <li><a class="page-scroll" href="<?php echo site_url('conta') ?>">Conta</a></li>
-                                                <li><a class="page-scroll" href="<?php echo site_url('login/logout') ?>">Sair</a></li>
-
+                                                <li class="<?= (uri_string() === 'conta') ? 'active' : '' ?>">
+                                                    <a class="page-scroll" href="<?php echo site_url('conta') ?>">Conta</a>
+                                                </li>
+                                                <li>
+                                                    <a class="page-scroll" href="<?php echo site_url('login/logout') ?>">Sair</a>
+                                                </li>
                                             <?php else: ?>
-                                                <li><a class="page-scroll" href="<?php echo site_url('login') ?>">Entrar</a></li>
-                                                <li><a class="page-scroll" href="<?php echo site_url('registrar') ?>">Registre-se</a></li>
+                                                <li class="<?= (uri_string() === 'login') ? 'active' : '' ?>">
+                                                    <a class="page-scroll" href="<?php echo site_url('login') ?>">Entrar</a>
+                                                </li>
+                                                <li class="<?= (uri_string() === 'registrar') ? 'active' : '' ?>">
+                                                    <a class="page-scroll" href="<?php echo site_url('registrar') ?>">Registre-se</a>
+                                                </li>
                                             <?php endif ?>
                                         </ul>
                                     </div>
@@ -325,8 +236,6 @@
         <!-- essa section renderiza os conteudos especificos da view que estender esse layout -->
         <?php echo $this->renderSection('conteudo') ?>
 
-
-
         <!--  Begin Footer  -->
         <footer id="footer">
 
@@ -341,7 +250,10 @@
                             <div class="row">
                                 <div class="col-sm-6 col-md-3">
                                     <h4 class="footer_ttl footer_ttl_padd">Sobre nós</h4>
-                                    <p class="footer_txt">Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries but also the leap into electronic typesetting. </p>
+                                    <p class="footer_txt">
+                                        Pratos frescos, sabor autêntico e atendimento acolhedor.
+                                        Uma experiência gastronômica feita para você!
+                                    </p>
                                 </div>
                                 <div class="col-sm-6 col-md-6">
 
@@ -393,7 +305,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="copy_text">
-                                        <a target="_blank" href="/">Placeholder</a>
+                                        <p target="_blank">Acompanhe nossas redes sociais!</p>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -434,21 +346,15 @@
     </div>
     <!-- END body-wrapper -->
 
-
     <!-- START mobile right burger menu -->
 
     <nav class="cd-nav-container right_menu" id="cd-nav">
         <div class="header__open_menu">
             <a href="index-2.html" class="rmenu_logo" title="yagmurmebel.az">
-                <img src="<?php echo site_url('web/'); ?>src/assets/img/logo.png" alt="logo" />
+                <img src="<?php echo site_url('web/'); ?>src/assets/img/logo-mini.svg" alt="logo" style="max-height: 50px; filter: brightness(0) invert(1);" />
             </a>
         </div>
-        <div class="right_menu_search">
-            <form method="post">
-                <input type="text" name="q" class="form-control search_input" value="" placeholder="Busque por algo">
-                <button type="submit" class="search_icon"><i class="fa fa-search"></i></button>
-            </form>
-        </div>
+
         <ul class="rmenu_list">
             <li><a class="page-scroll" href="<?php echo site_url('/') ?>">Home</a></li>
             <li><a class="page-scroll" href="#menu" onclick="navigateToSection('menu')">Cardápio</a></li>

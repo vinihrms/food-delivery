@@ -95,13 +95,18 @@
         <div class="col-sm-6 d-flex align-items-center padd_lr0" data-aos="fade-up">
             <div class="content">
                 <h1 class="section-title title_sty1">Sobre nós</h1>
-                <p class="short">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="short">
+                    Oferecemos uma experiência gastronômica única,
+                    com pratos preparados com ingredientes frescos e de qualidade.
+                    Nosso objetivo é criar momentos especiais ao redor da mesa,
+                    proporcionando sabores autênticos e um atendimento acolhedor.
+                    Venha saborear o melhor conosco!
+                </p>
             </div>
         </div>
         <div class="col-sm-6 img text-center padd_lr0" data-aos="fade-down">
             <div class="border_on">
-                <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/about-us.jpg" alt="sample" class="about_img" />
+            <img src="<?php echo site_url('web/'); ?>src/assets/img/photos/kanye_chefe.jpg" alt="sample" class="about_img" style="width: 600px; height: auto;" />
             </div>
         </div>
     </div>

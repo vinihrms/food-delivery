@@ -23,7 +23,6 @@
     <!-- essa section renderiza os estilos especificos da view que estender esse layout -->
     <?php echo $this->renderSection('estilos') ?>
 
-
 </head>
 
 <body>
@@ -33,8 +32,9 @@
             <div class="navbar-brand-wrapper d-flex justify-content-center">
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
 
-                    <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.svg" alt="logo" /></a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg"
+                    <a class="navbar-brand brand-logo" href="<?php echo site_url('admin/home') ?>">
+                        <img src="<?php echo site_url('admin/') ?>images/logo.svg" alt="logo" style="width: 120px; height: auto;" />
+                    </a> <a class="navbar-brand brand-logo-mini" href="<?php echo site_url('admin/home') ?>"><img src="<?php echo site_url('admin/') ?>images/logo-mini.svg"
                             alt="logo" /></a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
                         data-toggle="minimize">
@@ -46,11 +46,11 @@
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                        <span class="nav-profile-name">Olá,&nbsp;<?php echo usuario_logado()->nome ?></span>
+                            <span class="nav-profile-name">Olá,&nbsp;<?php echo usuario_logado()->nome ?></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
-                            <a href="<?php echo site_url("admin/usuarios/show/".usuario_logado()->id); ?>" class="dropdown-item">
+                            <a href="<?php echo site_url("admin/usuarios/show/" . usuario_logado()->id); ?>" class="dropdown-item">
                                 <i class="mdi mdi-settings text-primary"></i>
                                 Meus dados
                             </a>
@@ -73,73 +73,80 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/home')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/home') ?>">
                             <i class="mdi mdi-home menu-icon"></i>
                             <span class="menu-title">Home</span>
                         </a>
                     </li>
-                    
+
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/pedidos')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/pedidos') ?>">
                             <i class="mdi mdi-shopping menu-icon"></i>
                             <span class="menu-title">Pedidos</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/categorias')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/categorias') ?>">
                             <i class="mdi mdi-format-list-bulleted-type menu-icon"></i>
                             <span class="menu-title">Categorias</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/extras')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/extras') ?>">
                             <i class="mdi mdi-plus-box menu-icon"></i>
                             <span class="menu-title">Extras</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/medidas')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/medidas') ?>">
                             <i class="mdi mdi-ruler menu-icon"></i>
                             <span class="menu-title">Medidas</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/produtos')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/produtos') ?>">
                             <i class="mdi mdi-food menu-icon"></i>
                             <span class="menu-title">Produtos</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/formas')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/formas') ?>">
                             <i class="mdi mdi-credit-card-multiple menu-icon"></i>
                             <span class="menu-title">Formas de Pagamento</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/entregadores')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/entregadores') ?>">
                             <i class="mdi mdi-motorbike menu-icon"></i>
                             <span class="menu-title">Entregadores</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/bairros')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/bairros') ?>">
                             <i class="mdi mdi-map-marker menu-icon"></i>
                             <span class="menu-title">Bairros</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/expedientes')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/expedientes') ?>">
                             <i class="mdi mdi-calendar-clock menu-icon"></i>
                             <span class="menu-title">Expedientes</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('admin/usuarios')?>">
+                        <a class="nav-link" href="<?php echo site_url('admin/usuarios') ?>">
                             <i class="mdi mdi-account menu-icon"></i>
                             <span class="menu-title">Usuários</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo site_url('') ?>">
+                            <i class="mdi mdi-cart-outline menu-icon"></i>
+                            <span class="menu-title">Área pública</span>
                         </a>
                     </li>
                 </ul>
@@ -148,74 +155,42 @@
             <div class="main-panel">
                 <div class="content-wrapper">
 
-
-                    <?php if(session()->has('sucesso')): ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Perfeito!</strong> <?php echo session('sucesso'); ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <?php if (session()->has('sucesso')): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Perfeito!</strong> <?php echo session('sucesso'); ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     <?php endif ?>
 
-                    <?php if(session()->has('info')): ?>
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        <strong>Informação!</strong> <?php echo session('info'); ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <?php if (session()->has('info')): ?>
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <strong>Informação!</strong> <?php echo session('info'); ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     <?php endif ?>
 
-                    <?php if(session()->has('atencao')): ?>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Atenção!</strong> <?php echo session('atencao'); ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    <?php if (session()->has('atencao')): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Atenção!</strong> <?php echo session('atencao'); ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     <?php endif ?>
 
                     <!-- errors de CSRF ACAO NAO PERMITIDA -->
-                    <?php if(session()->has('error')): ?>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong>Erro!</strong> <?php echo session('error'); ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <?php endif ?>
-
-                    <!-- TODO: WELLCOME
-                    <div class="row">
-                        <div class="col-md-12 grid-margin">
-                            <div class="d-flex justify-content-between flex-wrap">
-                                <div class="d-flex align-items-end flex-wrap">
-                                    <div class="mr-md-3 mr-xl-5">
-                                        <h2>Welcome back,</h2>
-                                        <p class="mb-md-0">Your analytics dashboard template.</p>
-                                    </div>
-                                    <div class="d-flex">
-                                        <i class="mdi mdi-home text-muted hover-cursor"></i>
-                                        <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard&nbsp;/&nbsp;</p>
-                                        <p class="text-primary mb-0 hover-cursor">Analytics</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-end flex-wrap">
-                                    <button type="button" class="btn btn-light bg-white btn-icon mr-3 d-none d-md-block ">
-                                        <i class="mdi mdi-download text-muted"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
-                                        <i class="mdi mdi-clock-outline text-muted"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-light bg-white btn-icon mr-3 mt-2 mt-xl-0">
-                                        <i class="mdi mdi-plus text-muted"></i>
-                                    </button>
-                                    <button class="btn btn-primary mt-2 mt-xl-0">Generate report</button>
-                                </div>
-                            </div>
+                    <?php if (session()->has('error')): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Erro!</strong> <?php echo session('error'); ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                    </div> -->
+                    <?php endif ?>
 
                     <!-- essa section renderiza os conteudos especificos da view que estender esse layout -->
                     <?php echo $this->renderSection('conteudo') ?>
@@ -225,11 +200,11 @@
                 <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
-                            bootstrapdash.com 2020</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
-                                href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard template</a>
-                            from Bootstrapdash.com</span>
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"></span> <!-- só pra deixar a hora no outro canto -->
+                        <span id="real-time-clock" class="text-muted float-none float-sm-right d-block mt-1 mt-sm-0 text-center" style="font-size: 14px; font-weight: 400; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="mdi mdi-clock-outline"></i>
+                            <!-- a data e hora serão exibidas aqui -->
+                        </span>
                     </div>
                 </footer>
                 <!-- partial -->
@@ -261,6 +236,25 @@
     <!-- End custom js for this page-->
     <script src="<?php echo site_url("admin/"); ?>js/jquery.cookie.js" type="text/javascript"></script>
 
+    <script>
+        function updateClock() {
+            const clockElement = document.getElementById('real-time-clock');
+            const now = new Date();
+
+            const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+
+            const formattedDate = `${daysOfWeek[now.getDay()]}, ${now.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}`;
+            const formattedTime = now.toLocaleTimeString('pt-BR', {
+                hour12: false
+            });
+
+            clockElement.innerHTML = `<i class="mdi mdi-clock-outline"></i> ${formattedDate} - ${formattedTime}`;
+        }
+
+        setInterval(updateClock, 1000);
+
+        updateClock();
+    </script>
 
     <!-- essa section renderiza os scripts especificos da view que estender esse layout -->
     <?php echo $this->renderSection('scripts') ?>
