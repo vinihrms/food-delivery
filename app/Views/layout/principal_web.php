@@ -88,6 +88,23 @@
         .show>.btn-food.dropdown-toggle:focus {
             box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5);
         }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            background-color: #25D366;
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-button img {
+            width: 40px;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
     </style>
 
 </head>
@@ -96,6 +113,11 @@
 <!-- BEGIN body -->
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+    <!-- BOTAO WHATSAPP-->
+    <a href="https://wa.me/numero" target="_blank" class="whatsapp-button">
+        <img src="<?php echo site_url('web/src/assets/img/wpp.svg') ?>" alt="WhatsApp" />
+    </a>
 
     <!-- BEGIN  Loading Section -->
     <div class="loading-overlay">
@@ -329,10 +351,10 @@
     <nav class="cd-nav-container right_menu" id="cd-nav">
         <div class="header__open_menu">
             <a href="index-2.html" class="rmenu_logo" title="yagmurmebel.az">
-            <img src="<?php echo site_url('web/'); ?>src/assets/img/logo-mini.svg" alt="logo" style="max-height: 50px; filter: brightness(0) invert(1);" />
+                <img src="<?php echo site_url('web/'); ?>src/assets/img/logo-mini.svg" alt="logo" style="max-height: 50px; filter: brightness(0) invert(1);" />
             </a>
         </div>
-        
+
         <ul class="rmenu_list">
             <li><a class="page-scroll" href="<?php echo site_url('/') ?>">Home</a></li>
             <li><a class="page-scroll" href="#menu" onclick="navigateToSection('menu')">Cardápio</a></li>
