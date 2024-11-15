@@ -220,6 +220,7 @@
                         /* cep valido */
                         $("#cep").html('')
 
+                        $("[name=cep]").val(cep);
 
                         $("#valor_entrega").html(response.valor_entrega);
 
