@@ -166,7 +166,7 @@ class Checkout extends BaseController
             $pedido->valor_entrega = number_format($bairro->valor_entrega, 2);
             $pedido->valor_pedido = number_format($pedido->valor_produtos + $pedido->valor_entrega, 2);
             $pedido->codigo = $this->pedidoModel->geraCodigoPedido();
-            $pedido->endereco_entrega = session()->get('endereco_entrega') . '- Número ' . $checkoutPost['numero'];
+            $pedido->endereco_entrega = session()->get('endereco_entrega') . ' - Número: ' . $checkoutPost['numero'];
 
             if ($forma->id != 1) {
                 $pedido->observacoes = 'Ponto de referência: ' . $checkoutPost['referencia'] . ' - Número: ' . $checkoutPost['numero'];

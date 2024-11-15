@@ -217,7 +217,6 @@
     setInterval("atualiza();", 120000) //120000 ms = 2 min
 
     function atualiza() {
-        $("#atualiza").toggleClass('bg-primary')
         $("#atualiza").load('<?php site_url('admin/home') ?>' + ' #atualiza');
     }
 </script>
