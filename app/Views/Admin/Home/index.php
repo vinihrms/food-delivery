@@ -84,7 +84,7 @@
                 </div>
             <?php else: ?>
                 <div id="atualiza">
-                    <?php if (!isset($novosPedidos)): ?>
+                    <?php if (empty($novosPedidos)): ?>
                         <div class="card-body">
                             <h5>Não há novos pedidos no momento</h5>
                         </div>
@@ -130,7 +130,7 @@
             <div class="card-body">
                 <p class="card-title">Produtos mais vendidos</p>
                 <ul class="list-arrow">
-                    <?php if (!isset($produtosMaisVendidos)): ?>
+                    <?php if (empty($produtosMaisVendidos)): ?>
 
                     <p class="card-title text-primary">Não há dados para exibir no momento</p>
 
@@ -157,7 +157,7 @@
             <div class="card-body">
                 <p class="card-title">Clientes mais assíduos</p>
                 <ul class="list-arrow">
-                    <?php if (!isset($clientesMaisAsssiduos)): ?>
+                    <?php if (empty($clientesMaisAsssiduos)): ?>
 
                     <p class="card-title text-success">Não há dados para exibir no momento</p>
 
@@ -182,11 +182,11 @@
     <div class="col-md-4 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <p class="card-title">Entregadores mais assiduos</p>
+                <p class="card-title">Entregadores mais assíduos</p>
                 <ul class="list-unstyled">
-                    <?php if (!isset($entregadoresMaisAssiduos)): ?>
+                    <?php if(empty($entregadoresMaisAssiduos)): ?>
 
-                    <p class="card-title text-warning">Não há dados para exibir no momento</p>
+                        <p class="card-title text-warning">Não há dados para exibir no momento</p>
 
                     <?php else: ?>
 
