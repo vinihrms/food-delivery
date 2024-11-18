@@ -116,7 +116,7 @@
                                     <input type="radio" style="margin-top: 2px" class="especificacao" data-especificacao="<?php echo $especificacao->especificacao_id ?>"
                                         name="produto[preco]" value="<?php echo $especificacao->preco; ?>">
                                     <?php echo esc($especificacao->nome) ?>
-                                    <?php echo esc(number_format($especificacao->preco, 2)) ?>
+                                    R$ <?php echo esc(number_format($especificacao->preco, 2)) ?>
                                 </label>
                             </div>
                         <?php endforeach ?>
