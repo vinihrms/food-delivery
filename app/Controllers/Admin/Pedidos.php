@@ -121,7 +121,7 @@ class Pedidos extends BaseController
 
             //FIXME: arrumar isso se tiver retirada na loja
             if ($pedido->situacao == 0) {
-                if (($pedidoPost['entregador_id'] == 2)) {
+                if (($pedidoPost['situacao'] == 2)) {
                     return redirect()->back()->with('atencao', 'O pedido não pode ser entregue, pois não saiu para a entrega');
                 }
             }
