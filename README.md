@@ -72,7 +72,7 @@ Este projeto é resultado de um trabalho acadêmico e, portanto, contribuições
 
 Se você tiver dúvidas ou encontrar problemas, sinta-se à vontade para abrir uma issue neste repositório ou entre em contato com os desenvolvedores.
 
-##Referências
+## Referências
 
 -W3Schools. Disponível em: https://www.w3schools.com/. Acesso em: 6 nov. 2024.
 -MySQL. Disponível em: https://www.mysql.com/. Acesso em: 6 nov. 2024.
