@@ -32,7 +32,7 @@
     <link href="<?php echo site_url('web/'); ?>src/assets/css/responsive.css" type="text/css" rel="stylesheet" />
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo site_url('web/'); ?>src/assets/img/favicon/apple-touch-icon.png" />
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="<?php echo site_url('web/'); ?>src/assets/img/favicon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="256x256" href="<?php echo site_url('web/'); ?>src/assets/img/favicon/android-chrome-256x256.png">
     <link rel="icon" type="image/png" sizes="192x192" href="<?php echo site_url('web/'); ?>src/assets/img/favicon/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo site_url('web/'); ?>src/assets/img/favicon/favicon-32x32.png" />
@@ -41,7 +41,7 @@
     <link rel="manifest" href="<?php echo site_url('web/'); ?>src/assets/img/site.html" />
     <link rel="mask-icon" href="<?php echo site_url('web/'); ?>src/assets/img/favicon/safari-pinned-tab.svg" color="#5bbad5" />
     <meta name="msapplication-TileColor" content="#990100" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" /> -->
 
     <!-- essa section renderiza os estilos especificos da view que estender esse layout -->
     <?php echo $this->renderSection('estilos') ?>
