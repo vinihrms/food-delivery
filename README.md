@@ -38,7 +38,7 @@ O sistema consiste em uma plataforma de food delivery desenvolvida em PHP utiliz
 
 ## Requisitos do Sistema
 
-- XAMPP (ou equivalente) com Apache e MySQL em execução para testes em localhost.
+- Servior local com Apache e MySQL em execução para testes em localhost.
 - PHP 7.0 ou superior
 - MySQL 5.6 ou superior
 - Navegador Web moderno (Chrome, Firefox, etc.)
@@ -46,26 +46,18 @@ O sistema consiste em uma plataforma de food delivery desenvolvida em PHP utiliz
 
 ## Instalação e Configuração
 
-1. Clone este repositório na pasta `htdocs` do seu XAMPP.
-2. Certifique-se de que o XAMPP com Apache e MySQL está em execução.
-3. Importe o arquivo de banco de dados fornecido (`database.sql`) para criar a estrutura do banco de dados.
-4. Renomeie o arquivo `.env.example` para `.env` e atualize as variáveis de ambiente conforme necessário.
-5. Execute o servidor PHP usando o comando `php spark serve`.
-6. Abra seu navegador e acesse `http://localhost:8080` para usar o sistema.
+1. Clone este repositório na pasta de arquivos web do seu servidor.
+2. Certifique-se de que o servidor com Apache e MySQL está em execução.
+3. Migre o banco de dados utiliando o comando `php spark migrate`.
+4. Migre os dados iniciais *obrigatórios* utiliando o comando `php spark db:seed main`.
+5. Renomeie o arquivo `.env.example` para `.env` e atualize as variáveis de ambiente conforme necessário.
+6. Execute o servidor PHP usando o comando `php spark serve`.
+7. Abra seu navegador e acesse `http://localhost:8080` para usar o sistema.
 
-## Importando o arquivo database.sql (a cada nova modificação farei o update aqui)
-
-1. Certifique-se de ter um servidor de banco de dados MySQL ou MariaDB em execução localmente.
-2. Abra seu cliente de banco de dados (por exemplo, phpMyAdmin).
-3. Crie um novo banco de dados (se ainda não tiver um).
-4. Selecione o banco de dados recém-criado na barra lateral esquerda.
-5. No menu, procure uma opção para importar arquivos SQL.
-6. Selecione o arquivo `database.sql` do seu projeto e importe-o para o banco de dados.
-7. Após a importação, as tabelas e estruturas de banco de dados necessárias devem estar disponíveis no seu banco de dados local.
 
 ### Informações de Acesso
 
-O arquivo `database.sql` já contém um usuário administrador pré-configurado para facilitar o acesso inicial ao sistema. As credenciais de acesso são:
+O main seeder já contém um usuário administrador pré-configurado para facilitar o acesso inicial ao sistema. As credenciais de acesso são:
 
 - **E-mail:** admin@admin.com
 - **Senha:** 123456
@@ -79,6 +71,25 @@ Este projeto é resultado de um trabalho acadêmico e, portanto, contribuições
 ## Suporte e Contato
 
 Se você tiver dúvidas ou encontrar problemas, sinta-se à vontade para abrir uma issue neste repositório ou entre em contato com os desenvolvedores.
+
+## Referências
+
+-W3Schools. Disponível em: https://www.w3schools.com/. Acesso em: 6 nov. 2024.
+-MySQL. Disponível em: https://www.mysql.com/. Acesso em: 6 nov. 2024.
+-phpMyAdmin. Disponível em: https://www.phpmyadmin.net/. Acesso em: 6 nov. 2024.
+-CodeIgniter. Disponível em: https://codeigniter.com/. Acesso em: 6 nov. 2024.
+-Bootstrap. Disponível em: https://getbootstrap.com/. Acesso em: 6 nov. 2024.
+-jQuery. Disponível em: https://jquery.com/download/. Acesso em: 6 nov. 2024.
+-Select2. Disponível em: https://select2.org/. Acesso em: 6 nov. 2024.
+-Astah. Disponível em: https://astah.net/downloads/. Acesso em: 6 nov. 2024.
+-Lucidchart. Disponível em: https://www.lucidchart.com/pages. Acesso em: 6 nov. 2024.
+-Visual Paradigm. Disponível em: https://www.visual-paradigm.com/. Acesso em: 6 nov. 2024.
+-Udemy. Disponível em: https://www.udemy.com/. Acesso em: 6 nov. 2024.
+-GitHub. Disponível em: https://github.com/. Acesso em: 6 nov. 2024.
+-Laragon. Disponível em: https://laragon.org/. Acesso em: 6 nov. 2024.
+-Postmark. Disponível em: https://postmarkapp.com/. Acesso em: 6 nov. 2024.
+-PlantUML. Disponível em: https://plantuml.com/. Acesso em: 6 nov. 2024.
+
 
 ## Licença
 
