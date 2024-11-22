@@ -72,6 +72,22 @@ class Dados extends Seeder
                 'criado_em' => '2024-11-21 07:52:55',
                 'atualizado_em' => '2024-11-21 07:53:24',
                 'deletado_em' => NULL
+            ],
+            [
+                'id' => 6,
+                'nome' => 'Tupac Shakur',
+                'email' => 'tupac@shakur.com',
+                'cpf' => '455.255.580-41',
+                'telefone' => '',
+                'is_admin' => 0,
+                'ativo' => 1,
+                'password_hash' => '$2y$10$eqHviXlEZfoFGOyHntZBUeskLJWMZt47xD..L7XBi2Ey003VmWISK',
+                'ativacao_hash' => NULL,
+                'reset_hash' => NULL,
+                'reset_expira_em' => NULL,
+                'criado_em' => '2024-11-21 07:52:55',
+                'atualizado_em' => '2024-11-21 07:53:24',
+                'deletado_em' => NULL
             ]
         ];
 
@@ -84,6 +100,7 @@ class Dados extends Seeder
             ['id' => 10, 'nome' => 'Sobremesas', 'slug' => 'sobremesas', 'ativo' => 1, 'criado_em' => '2024-11-18 08:22:04', 'atualizado_em' => '2024-11-18 08:22:04', 'deletado_em' => null],
             ['id' => 11, 'nome' => 'Lanches', 'slug' => 'lanches', 'ativo' => 1, 'criado_em' => '2024-11-18 08:22:13', 'atualizado_em' => '2024-11-18 08:22:13', 'deletado_em' => null],
             ['id' => 13, 'nome' => 'Pizzas', 'slug' => 'pizzas', 'ativo' => 1, 'criado_em' => '2024-11-18 09:00:01', 'atualizado_em' => '2024-11-18 09:00:01', 'deletado_em' => null],
+            ['id' => 14, 'nome' => 'Pratos', 'slug' => 'pratos', 'ativo' => 1, 'criado_em' => '2024-11-18 09:00:01', 'atualizado_em' => '2024-11-18 09:00:01', 'deletado_em' => null],
         ];
 
         $this->db->table('categorias')->insertBatch($categorias);
@@ -324,16 +341,18 @@ class Dados extends Seeder
                 'atualizado_em' => '2024-11-18 19:59:11',
                 'deletado_em' => NULL,
             ],
+            [
+                'id' => 12,
+                'nome' => '500 gramas',
+                'descricao' => '',
+                'ativo' => 1,
+                'criado_em' => '2024-11-18 19:59:11',
+                'atualizado_em' => '2024-11-18 19:59:11',
+                'deletado_em' => NULL,
+            ],
         ];
 
         $this->db->table('medidas')->insertBatch($medidas);
-
-
-
-
-
-
-
 
         $produtos = [
             ['categoria_id' => 7, 'nome' => 'Coca-Cola', 'slug' => 'coca-cola', 'ingredientes' => 'Água gaseificada, açúcar, extrato de noz de cola, cafeína, corante caramelo IV, acidulante ácido fosfórico e aroma natural.', 'ativo' => 1, 'imagem' => '1731929561_0e5bbeb3d224b7fbb10c.webp', 'criado_em' => '2024-11-18 08:30:41', 'atualizado_em' => '2024-11-18 08:32:41', 'deletado_em' => NULL],
@@ -354,6 +373,7 @@ class Dados extends Seeder
             ['categoria_id' => 10, 'nome' => 'Petit gâteau', 'slug' => 'petit-gateau', 'ingredientes' => 'Chocolate ao leite, manteiga, açúcar, ovos, farinha de trigo, essência de baunilha, sal, sorvete de creme', 'ativo' => 1, 'imagem' => '1731933199_9f69a0c0fb756ec99111.png', 'criado_em' => '2024-11-18 09:33:14', 'atualizado_em' => '2024-11-18 09:33:19', 'deletado_em' => NULL],
             ['categoria_id' => 10, 'nome' => 'Pudim', 'slug' => 'pudim', 'ingredientes' => 'Leite condensado, leite, ovos, açúcar, essência de baunilha.', 'ativo' => 1, 'imagem' => '1731933410_b93da5718298f7735149.jpg', 'criado_em' => '2024-11-18 09:36:17', 'atualizado_em' => '2024-11-18 09:36:50', 'deletado_em' => NULL],
             ['categoria_id' => 11, 'nome' => 'Hamburguer Artesanal', 'slug' => 'hamburguer-artesanal', 'ingredientes' => 'Carne moída, sal, pimenta-do-reino, pão de hambúrguer, queijo, alface, tomate em rodelas, cebola, molhos (maionese, ketchup, mostarda, barbecue), bacon, picles.', 'ativo' => 1, 'imagem' => '1731970712_9be1cb180f01ae19a27c.jpg', 'criado_em' => '2024-11-18 19:58:22', 'atualizado_em' => '2024-11-18 19:58:44', 'deletado_em' => NULL],
+            ['categoria_id' => 14, 'nome' => 'Frango à Parmegiana', 'slug' => 'frango-a-parmegiana', 'ingredientes' => 'Filé de frango, farinha de trigo, ovos, farinha de rosca, sal, pimenta-do-reino, molho de tomate, queijo muçarela, parmesão ralado.', 'ativo' => 1, 'imagem' => '1732229492_f03ac2538d1cb3dd3cfb.jpg', 'criado_em' => '2024-11-18 19:58:22', 'atualizado_em' => '2024-11-18 19:58:44', 'deletado_em' => NULL],
         ];
 
         $this->db->table('produtos')->insertBatch($produtos);
@@ -404,6 +424,7 @@ class Dados extends Seeder
             ['id' => 50, 'produto_id' => 16, 'medida_id' => 10, 'preco' => 25.00, 'customizavel' => 0],
             ['id' => 51, 'produto_id' => 17, 'medida_id' => 10, 'preco' => 15.00, 'customizavel' => 0],
             ['id' => 52, 'produto_id' => 18, 'medida_id' => 11, 'preco' => 22.00, 'customizavel' => 0],
+            ['id' => 53, 'produto_id' => 19, 'medida_id' => 12, 'preco' => 17.00, 'customizavel' => 0],
         ];
 
         $this->db->table('produtos_especificacoes')->insertBatch($produtos_especificacoes);
